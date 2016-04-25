@@ -76,12 +76,12 @@
 </li>
 </ul>
 <h3 id="密钥种种："><a href="#密钥种种：" class="headerlink" title="密钥种种："></a><strong>密钥种种：</strong></h3><ul>
-<li><p>1、window下查看是否有ssh key设置</p>
+<li><p>1、查看是否有ssh key设置，进入.ssh目录，看是否有公钥和私钥文件。</p>
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>2、生成密钥</p>
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "oulafen.email.com"</span><br></pre></td></tr></table></figure>
-<p>连续三个回车，如果不需要密码的话。<br>最终得到两个文件：<code>id_rsa</code>和<code>id_rsa.pub</code>，其中<code>id_rsa.pub</code>是公钥，远程git服务器要求添加的ssh key就是这个文件里的内容。<br>windows下默认生成目录在<code>/c/Users/xxxx_000/.ssh/</code>或者<code>/c/Users/pc/.ssh/</code>中。</p>
+<p>连续三个回车，如果不需要密码的话。<br>最终得到两个文件：<code>id_rsa</code>和<code>id_rsa.pub</code>，其中<code>id_rsa.pub</code>是公钥，远程git服务器要求添加的ssh key就是这个文件里的内容。<br>windows下默认生成目录在<code>/c/Users/xxxx_000/.ssh/</code>或者<code>/c/Users/pc/.ssh/</code>中。<br>mac下默认生成目录在<code>~/.ssh/</code></p>
 </li>
 <li><p>3、测试ssh key是否配置成功</p>
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
