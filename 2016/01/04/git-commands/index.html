@@ -102,6 +102,12 @@
 </li>
 </ul>
 <h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><ul>
+<li><p>常规的提交流程是什么？</p>
+<ul>
+<li><code>git push</code>之前进行<code>git pull</code>操作，这样一般不会有冲突，pull的位置如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .    //添加所有修改文件（不包括删除操作），若有删除的文件需执行 git add -u</span><br><span class="line">git commit -m &apos;balabala&apos;</span><br><span class="line">git pull</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
 <li><p><code>git pull</code>更新本地代码时出现冲突怎么办？</p>
 <p>使用git stash命令进行处理</p>
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git stash   #先将本地修改存储起来</span><br><span class="line">git stash list     #查看保存的信息</span><br></pre></td></tr></table></figure>
