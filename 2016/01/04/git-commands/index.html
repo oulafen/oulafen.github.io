@@ -104,7 +104,7 @@
 <h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><ul>
 <li><p>常规的提交流程是什么？</p>
 <ul>
-<li><code>git push</code>之前进行<code>git pull</code>操作，这样一般不会有冲突，pull的位置如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .    //添加所有修改文件（不包括删除操作），若有删除的文件需执行 git add -u</span><br><span class="line">git commit -m &apos;balabala&apos;</span><br><span class="line">git pull</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+<li><code>git push</code>之前进行<code>git pull</code>操作，意思就是将本地修改提交到线上之前先将线上别人已提交的修改同步到本地，这样一般不会有冲突，pull的位置如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git add .    //添加所有修改文件（不包括删除操作），若有删除的文件需执行 git add -u</span><br><span class="line">git commit -m &apos;balabala&apos;</span><br><span class="line">git pull</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 </li>
@@ -114,7 +114,7 @@
 <p><img style="width:100%" src="http://7sbpfo.com1.z0.glb.clouddn.com/gitblog-git-stash.jpg"><br>其中<code>stash@{0}</code>是刚才保存的标记。</p>
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull       #更新代码</span><br><span class="line">git stash pop  #还原暂存的内容</span><br></pre></td></tr></table></figure>
 <p>此时，系统会有类似<code>Auto-merging ...balabala...</code>的提示，意思就是系统自动合并修改的内容，但是其中有冲突，需要解决其中的冲突。<br>打开冲突的文件，会看到如下类似的内容</p>
-<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;&lt;&lt;&lt;&lt;&lt;&lt; <span class="attr">Updates</span> <span class="attr">upstream</span></span><br><span class="line">   <span class="attr">balabala</span></span><br><span class="line">=======</span><br><span class="line">   <span class="string">balabala</span></span><br><span class="line">&gt;</span></span>&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</span><br></pre></td></tr></table></figure>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updates upstream</span><br><span class="line">   balabala</span><br><span class="line">=======</span><br><span class="line">   balabala</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</span><br></pre></td></tr></table></figure>
 <p>其中<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</code> 和<code>=======</code>之间的内容就是pull下来的内容，<br><code>=======</code>和<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; stashed changes</code>之间的内容就是本地修改的内容。<br>碰到这种情况，git也不知道哪行内容是需要的，所以要自行确定需要的内容。<br>将不需要的内容删掉，然后正常的提交就可以了。</p>
 </li>
 </ul>
