@@ -114,7 +114,7 @@
 <p><img style="width:100%" src="http://7sbpfo.com1.z0.glb.clouddn.com/gitblog-git-stash.jpg"><br>其中<code>stash@{0}</code>是刚才保存的标记。</p>
 <figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull       #更新代码</span><br><span class="line">git stash pop  #还原暂存的内容</span><br></pre></td></tr></table></figure>
 <p>此时，系统会有类似<code>Auto-merging ...balabala...</code>的提示，意思就是系统自动合并修改的内容，但是其中有冲突，需要解决其中的冲突。<br>打开冲突的文件，会看到如下类似的内容</p>
-<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;&lt;&lt;&lt;&lt;&lt;&lt; <span class="attr">Updates</span> <span class="attr">upstream</span></span><br><span class="line">   <span class="attr">balabala</span></span><br><span class="line">=======</span><br><span class="line">   <span class="string">balabala</span></span><br><span class="line">&gt;</span></span>&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</span><br></pre></td></tr></table></figure>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updates upstream</span><br><span class="line">   balabala</span><br><span class="line">=======</span><br><span class="line">   balabala</span><br><span class="line">&gt;&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</span><br></pre></td></tr></table></figure>
 <p>其中<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</code> 和<code>=======</code>之间的内容就是pull下来的内容，<br><code>=======</code>和<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; stashed changes</code>之间的内容就是本地修改的内容。<br>碰到这种情况，git也不知道哪行内容是需要的，所以要自行确定需要的内容。<br>将不需要的内容删掉，然后正常的提交就可以了。</p>
 </li>
 <li><p>执行完<code>git push</code>之后，报警<code>warning: push.default is unset; its implicit value has changed in Git 2.0 from &#39;matching&#39; to &#39;simple&#39;.</code>,具体如下：</p>
@@ -210,7 +210,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>11</small></li>
+    <li><a href="/categories/blog/">blog</a><small>13</small></li>
   
   </ul>
 </div>
@@ -224,6 +224,8 @@
     <li><a href="/tags/git/">git</a><small>2</small></li>
   
     <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
     <li><a href="/tags/前端/">前端</a><small>4</small></li>
   
@@ -243,7 +245,15 @@
   <ul class="entry">
     
       <li>
+        <a href="/2016/04/27/mac-sock-screen-setting/">mac 锁屏快捷键设置</a>
+      </li>
+    
+      <li>
         <a href="/2016/04/24/mac-apache-php-mysql/">Mac中搭建Apache+PHP+Mysql环境</a>
+      </li>
+    
+      <li>
+        <a href="/2016/04/23/mac-commands/">mac 常用命令速查</a>
       </li>
     
       <li>
@@ -252,14 +262,6 @@
     
       <li>
         <a href="/2016/01/07/crop-image/">前端实现截图并预览的效果</a>
-      </li>
-    
-      <li>
-        <a href="/2016/01/06/tpl-html-reuse/">一段好用的代码，瞬间解决html复用问题</a>
-      </li>
-    
-      <li>
-        <a href="/2016/01/06/frontend-performance/">网站性能优化的那些事儿</a>
       </li>
     
   </ul>
