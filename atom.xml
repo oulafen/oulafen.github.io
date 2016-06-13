@@ -255,9 +255,9 @@
       <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="环境" scheme="http://blog.oulafen.com/tags/%E7%8E%AF%E5%A2%83/"/>
-    
       <category term="node" scheme="http://blog.oulafen.com/tags/node/"/>
+    
+      <category term="环境" scheme="http://blog.oulafen.com/tags/%E7%8E%AF%E5%A2%83/"/>
     
   </entry>
   
@@ -1196,6 +1196,30 @@
     
     
       <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://blog.oulafen.com/2015/12/29/hello-world/"/>
+    <id>http://blog.oulafen.com/2015/12/29/hello-world/</id>
+    <published>2015-12-29T07:56:00.000Z</published>
+    <updated>2016-04-22T06:26:43.000Z</updated>
+    
+    <content type="html">&lt;h4 id=&quot;终于在自己的地盘上显示了-hello-world，码农不容易，好好珍惜这一亩三分地。&quot;&gt;&lt;a href=&quot;#终于在自己的地盘上显示了-hello-world，码农不容易，好好珍惜这一亩三分地。&quot; class=&quot;headerlink&quot; title=&quot;终于在自己的地盘上显示了 hello world，码农不容易，好好珍惜这一亩三分地。&quot;&gt;&lt;/a&gt;终于在自己的地盘上显示了 hello world，码农不容易，好好珍惜这一亩三分地。&lt;/h4&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt; 
+&lt;p&gt;从03年第一次coding，到现在也有两个年头了,虽说中途静静的埋了自己一回，但如今在那坟头除草亦添了不少乐趣。。。&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      &lt;h4 id=&quot;终于在自己的地盘上显示了-hello-world，码农不容易，好好珍惜这一亩三分地。&quot;&gt;&lt;a href=&quot;#终于在自己的地盘上显示了-hello-world，码农不容易，好好珍惜这一亩三分地。&quot; class=&quot;headerlink&quot; title=&quot;终于在自己的地盘上显示了 hello world，码农不容易，好好珍惜这一亩三分地。&quot;&gt;&lt;/a&gt;终于在自己的地盘上显示了 hello world，码农不容易，好好珍惜这一亩三分地。&lt;/h4&gt;
+    
+    </summary>
+    
+      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="杂文" scheme="http://blog.oulafen.com/tags/%E6%9D%82%E6%96%87/"/>
     
   </entry>
   
