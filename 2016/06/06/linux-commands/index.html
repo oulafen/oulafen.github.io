@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   
-  <title>mac 锁屏快捷键设置 | Oulafen&#39;s blog</title>
+  <title>linux常用命令 | Oulafen&#39;s blog</title>
   <meta name="author" content="oulafen">
   
-  <meta name="description" content="这篇博客将记录如何设置mac锁屏的快捷键。">
+  <meta name="description" content="linux常用命令总结">
   
-  <meta name="keywords" content="mac锁屏快捷键">
+  <meta name="keywords" content="linux">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="mac 锁屏快捷键设置"/>
+  <meta property="og:title" content="linux常用命令"/>
   <meta property="og:site_name" content="Oulafen&#39;s blog"/>
 
   
@@ -54,25 +54,25 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2016-04-27T11:32:25.000Z"><a href="/2016/04/27/mac-sock-screen-setting/">2016-04-27</a></time>
+        <time datetime="2016-06-06T13:00:28.000Z"><a href="/2016/06/06/linux-commands/">2016-06-06</a></time>
       
       
   
-    <h1 class="title">mac 锁屏快捷键设置</h1>
+    <h1 class="title">linux常用命令</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇博客记录了如何设置mac锁屏的快捷键。<br><a id="more"></a></p>
-<p>如果用户要离开电脑一段时间，可以选择直接把笔记本直接合上。但是这样原先在跑的进程就会挂起或者结束，如果正在下载，那么下载就被暂停（有时还不能恢复），如果正在提供网络服务，那么因为网络断了，别人也连不上你的笔记本。锁屏可以解决这个问题，在Windows下用Win+L快捷键就锁屏了，但Mac OS X下一直没有默认的快捷键。</p>
-<h2 id="设置屏保"><a href="#设置屏保" class="headerlink" title="设置屏保"></a>设置屏保</h2><p>在mac中锁屏其实就是启动屏幕保护程序,所以在设置快捷键之前先来设置下屏保吧.具体操作如下:<br>找到“系统偏好设置”下的“安全性与隐私”，在“通用”页里设置“进入睡眠或开始屏幕保护程序后立即要求输入密码”。如图所示<br><img src="http://7sbpfo.com1.z0.glb.clouddn.com/mac-protect-screen.png" width="100%"></p>
-<h2 id="设置快捷键"><a href="#设置快捷键" class="headerlink" title="设置快捷键"></a>设置快捷键</h2><ul>
-<li>在“应用程序”里找到“Automator”。新建一个服务，在“实用工具”里找到“启动屏幕保护程序”，双击或者把此操作拖动到右边，并且选择“没有输入”和位于“任何应用程序”，如下图所示<br>  <img src="http://7sbpfo.com1.z0.glb.clouddn.com/mac-automator.png" width="100%"><br>  <img src="http://7sbpfo.com1.z0.glb.clouddn.com/mac-automator-sock.png" width="100%"></li>
-<li>然后按<code>cmd + s</code>保存为自己定义的名字</li>
-<li>最后在“系统偏好设置”里找到“键盘”，为刚才定义的服务配置快捷键，我设成了<code>cmd + ctrl + l</code>,如图所示<br>  <img src="http://7sbpfo.com1.z0.glb.clouddn.com/mac-automator-shortcut.png" width="100%"></li>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>该篇总结了在工作中常用到的linux命令<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
+<li>常看程序对应的进程号: <code>ps-ef|grep 进程名</code><ul>
+<li>ubuntu: <code>netstat -anp|grep pid</code></li>
 </ul>
-<p>参考: <a href="http://hints.macworld.com/article.php?story=20090831093941225" target="_blank" rel="external">Lock the screen via a keyboard shortcut</a></p>
+</li>
+<li>Linux下查看端口号所使用的进程号：<code>lsof –i:端口号</code></li>
+</ul>
+<p>未完待续</p>
 
       
     </div>
@@ -87,7 +87,7 @@
         
   
   <div class="tags">
-    <a href="/tags/mac/">mac</a>
+    <a href="/tags/linux/">linux</a>
   </div>
 
         <div class="alignright">
@@ -124,16 +124,16 @@
 
 <nav id="pagination" >
   
-  <a href="/2016/05/03/frontend-rem/" class="alignleft prev" >上一页</a>
+  <a href="/2016/06/06/node-promise/" class="alignleft prev" >上一页</a>
   
   
-  <a href="/2016/04/24/http/" class="alignright next" >下一页</a>
+  <a href="/2016/06/03/node-forever/" class="alignright next" >下一页</a>
   
   <div class="clearfix"></div>
 </nav>
 <section id="comment">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2016/04/27/mac-sock-screen-setting/" data-title="mac 锁屏快捷键设置" data-url="/2016/04/27/mac-sock-screen-setting/"></div>
+    <div class="ds-thread" data-thread-key="2016/06/06/linux-commands/" data-title="linux常用命令" data-url="/2016/06/06/linux-commands/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
