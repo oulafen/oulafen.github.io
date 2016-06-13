@@ -288,32 +288,6 @@
   </entry>
   
   <entry>
-    <title>输入网址后都发生了什么</title>
-    <link href="http://blog.oulafen.com/2016/04/24/http/"/>
-    <id>http://blog.oulafen.com/2016/04/24/http/</id>
-    <published>2016-04-24T13:52:29.000Z</published>
-    <updated>2016-05-19T03:07:14.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;输入网址后都发生了什么?&lt;br&gt;这是各大公司面试必问的题目, 没有标准答案, 角度不同答案不同, 最近在学全栈, 重新认识这个问题, 小记一二.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;通过代码来模拟浏览器&quot;&gt;&lt;a href=&quot;#通过代码来模拟浏览器&quot; class=&quot;headerlink&quot; title=&quot;通过代码来模拟浏览器&quot;&gt;&lt;/a&gt;通过代码来模拟浏览器&lt;/h2&gt;&lt;p&gt;建立连接  &lt;code&gt;telnet www.ucai.cn 80&lt;/code&gt;&lt;br&gt;发送请求:&lt;br&gt;&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;GET /index&lt;span class=&quot;selector-class&quot;&gt;.php&lt;/span&gt; HTTP/&lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host:www&lt;span class=&quot;selector-class&quot;&gt;.ucai&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cn&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HEAD /index&lt;span class=&quot;selector-class&quot;&gt;.php&lt;/span&gt; HTTP/&lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host:www&lt;span class=&quot;selector-class&quot;&gt;.ucai&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cn&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;code&gt;ps -ef | grep nginx.conf&lt;/code&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      深度解析输入网址后发生了什么
-    
-    </summary>
-    
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
-    
-    
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
-    
-  </entry>
-  
-  <entry>
     <title>Mac中搭建Apache+PHP+Mysql环境</title>
     <link href="http://blog.oulafen.com/2016/04/24/mac-apache-php-mysql/"/>
     <id>http://blog.oulafen.com/2016/04/24/mac-apache-php-mysql/</id>
@@ -407,6 +381,32 @@
     
     
       <category term="环境" scheme="http://blog.oulafen.com/tags/%E7%8E%AF%E5%A2%83/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>输入网址后都发生了什么</title>
+    <link href="http://blog.oulafen.com/2016/04/24/http/"/>
+    <id>http://blog.oulafen.com/2016/04/24/http/</id>
+    <published>2016-04-24T13:52:29.000Z</published>
+    <updated>2016-05-19T03:07:14.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;输入网址后都发生了什么?&lt;br&gt;这是各大公司面试必问的题目, 没有标准答案, 角度不同答案不同, 最近在学全栈, 重新认识这个问题, 小记一二.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;通过代码来模拟浏览器&quot;&gt;&lt;a href=&quot;#通过代码来模拟浏览器&quot; class=&quot;headerlink&quot; title=&quot;通过代码来模拟浏览器&quot;&gt;&lt;/a&gt;通过代码来模拟浏览器&lt;/h2&gt;&lt;p&gt;建立连接  &lt;code&gt;telnet www.ucai.cn 80&lt;/code&gt;&lt;br&gt;发送请求:&lt;br&gt;&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;GET /index&lt;span class=&quot;selector-class&quot;&gt;.php&lt;/span&gt; HTTP/&lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host:www&lt;span class=&quot;selector-class&quot;&gt;.ucai&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cn&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
+&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HEAD /index&lt;span class=&quot;selector-class&quot;&gt;.php&lt;/span&gt; HTTP/&lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host:www&lt;span class=&quot;selector-class&quot;&gt;.ucai&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cn&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;code&gt;ps -ef | grep nginx.conf&lt;/code&gt;&lt;/p&gt;
+</content>
+    
+    <summary type="html">
+    
+      深度解析输入网址后发生了什么
+    
+    </summary>
+    
+      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -943,9 +943,9 @@
       <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
-    
       <category term="git" scheme="http://blog.oulafen.com/tags/git/"/>
+    
+      <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
     
   </entry>
   
