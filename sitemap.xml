@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://blog.oulafen.com/tmp/linux-commands.html</loc>
+    <loc>http://blog.oulafen.com/tmp/node-promise.html</loc>
     
     <lastmod>2016-06-13T08:40:30.000Z</lastmod>
     
@@ -16,7 +16,7 @@
   </url>
   
   <url>
-    <loc>http://blog.oulafen.com/tmp/node-promise.html</loc>
+    <loc>http://blog.oulafen.com/tmp/linux-commands.html</loc>
     
     <lastmod>2016-06-13T08:40:30.000Z</lastmod>
     
@@ -114,13 +114,6 @@
   </url>
   
   <url>
-    <loc>http://blog.oulafen.com/2016/01/06/tpl-html-reuse/</loc>
-    
-    <lastmod>2016-04-22T06:26:43.000Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>http://blog.oulafen.com/2015/12/31/hexo-gitcafe-page/</loc>
     
     <lastmod>2016-04-22T06:26:43.000Z</lastmod>
@@ -128,7 +121,7 @@
   </url>
   
   <url>
-    <loc>http://blog.oulafen.com/2015/12/29/hello-world/</loc>
+    <loc>http://blog.oulafen.com/2016/01/06/tpl-html-reuse/</loc>
     
     <lastmod>2016-04-22T06:26:43.000Z</lastmod>
     
@@ -142,7 +135,7 @@
   </url>
   
   <url>
-    <loc>http://blog.oulafen.com/2015/12/31/hexo-commands/</loc>
+    <loc>http://blog.oulafen.com/2015/12/29/hello-world/</loc>
     
     <lastmod>2016-04-22T06:26:43.000Z</lastmod>
     
@@ -150,6 +143,13 @@
   
   <url>
     <loc>http://blog.oulafen.com/2016/01/07/crop-image/</loc>
+    
+    <lastmod>2016-04-22T06:26:43.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://blog.oulafen.com/2015/12/31/hexo-commands/</loc>
     
     <lastmod>2016-04-22T06:26:43.000Z</lastmod>
     
