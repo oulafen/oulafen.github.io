@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="ZE3XLdQP22" />
   
-  <title>在gitcafe中搭建自己的博客，以及在hexo中的配置 | Oulafen&#39;s blog</title>
+  <title>nodejs中的base64转码/解码 | Oulafen&#39;s blog</title>
   <meta name="author" content="oulafen">
   
-  <meta name="description" content="oulafen&#39;s coding note">
+  <meta name="description" content="nodejs中的base64转码和解码方法">
   
-  
+  <meta name="keywords" content="base64">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="在gitcafe中搭建自己的博客，以及在hexo中的配置"/>
+  <meta property="og:title" content="nodejs中的base64转码/解码"/>
   <meta property="og:site_name" content="Oulafen&#39;s blog"/>
 
   
@@ -55,32 +55,29 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-12-31T09:24:49.000Z"><a href="/2015/12/31/hexo-gitcafe-page/">2015-12-31</a></time>
+        <time datetime="2016-07-07T13:00:29.000Z"><a href="/2016/07/07/node-base64-encoding-decoding/">2016-07-07</a></time>
       
       
   
-    <h1 class="title">在gitcafe中搭建自己的博客，以及在hexo中的配置</h1>
+    <h1 class="title">nodejs中的base64转码/解码</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>使用github page建了自己的博客，可访问速度却跟不上，啥也不说了，果断在gitcafe上也迁一份博客代码吧。<br><a id="more"></a></p>
-<h2 id="创建gitcafe-page"><a href="#创建gitcafe-page" class="headerlink" title="创建gitcafe page"></a>创建gitcafe page</h2><p>首先要有个gitcafe账号是必须的啦，gitcafe官网<a href="https://gitcafe.com/" target="_blank" rel="external">戳戳戳</a></p>
-<p>gitcafe上有一篇关于page建立的帮助文档，看官网戳<a href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9#wiki" target="_blank" rel="external">这里</a><br>有几点注意的如下：</p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在nodejs中怎么将字符串转化为base64呢? 是不是也像php中的<code>base64_encode()</code>一样简单呢?<br><a id="more"></a><br>作为<code>javascript</code>的nodejs, 对于编码字符串有个更合乎逻辑的方法, 而不是设置各种不一样的全局方法.</p>
+<p>入题吧, 看如下的实现方法:</p>
+<h3 id="编码-encode-将正常的字符串转为base64串"><a href="#编码-encode-将正常的字符串转为base64串" class="headerlink" title="编码(encode)-将正常的字符串转为base64串"></a>编码(encode)-将正常的字符串转为base64串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="keyword">new</span> Buffer(<span class="string">'JavaScript'</span>);</span><br><span class="line"><span class="keyword">var</span> base_str = str.toString(<span class="string">'base64'</span>);</span><br><span class="line"><span class="comment">// base_str = SmF2YVNjcmlwdA==</span></span><br></pre></td></tr></table></figure>
+<h3 id="解码-decode-将base64串转为正常的字符串"><a href="#解码-decode-将base64串转为正常的字符串" class="headerlink" title="解码(decode)-将base64串转为正常的字符串"></a>解码(decode)-将base64串转为正常的字符串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> base_str = <span class="keyword">new</span> Buffer(<span class="string">'SmF2YVNjcmlwdA=='</span>, <span class="string">'base64'</span>)</span><br><span class="line"><span class="keyword">var</span> str = base_str.toString();</span><br><span class="line"><span class="comment">// str = JavaScript</span></span><br></pre></td></tr></table></figure>
+<p>阅读参考:</p>
 <ul>
-<li>1、创建的项目务必要与用户名相同  </li>
-<li>2、创建gitcafe-pages分支<br>项目pull到本地后的一系列操作<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$git checkout gitcafe-pages #切换到gitcafe-pages分支，然后新建一个index.html文件，里面随便写点东西即可</span><br><span class="line">$git add . </span><br><span class="line">$git commit -m 'first commit'</span><br><span class="line">$git push -u origin gitcafe-pages  #关键，将本地分支同步到线上</span><br></pre></td></tr></table></figure>
-</li>
+<li><a href="http://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html" target="_blank" rel="external">Base64 Encoding / Decoding in Node.js</a></li>
 </ul>
-<h2 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h2><p>还没入门？戳<a href="http://oulafen.gitcafe.io/2015/12/29/hexo-quick-start/" target="_blank" rel="external">这里</a></p>
-<p>在../hexo/_config.yml中，修改<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  message: ''</span><br><span class="line">  repository: git@github.com:oulafen/oulafen.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
-<p>为：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  message: ''</span><br><span class="line">  repo:</span><br><span class="line"><span class="code">    github: git@github.com:oulafen/oulafen.github.io.git,master</span></span><br><span class="line"><span class="code">    gitcafe: git@gitcafe.com:oulafen/oulafen.git,gitcafe-pages</span></span><br></pre></td></tr></table></figure></p>
-<p>注意：</p>
+<p>关于Buffer类的详细介绍参见:</p>
 <ul>
-<li>最好是配置下gitcafe和github的秘钥，git库的配置链接写成ssh的链接，不然老是输密码，手都麻了</li>
+<li><a href="http://javascript.ruanyifeng.com/nodejs/buffer.html" target="_blank" rel="external">《JavaScript 标准参考教程（alpha）》-Buffer对象</a></li>
+<li><a href="https://cnodejs.org/topic/5189ff4f63e9f8a54207f60c" target="_blank" rel="external">浅析nodejs的buffer类</a></li>
 </ul>
-<h2 id="GitCafe-将于-2016年5月31日-停止所有服务，届时在-GitCafe-的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至-Coding"><a href="#GitCafe-将于-2016年5月31日-停止所有服务，届时在-GitCafe-的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至-Coding" class="headerlink" title="GitCafe 将于 2016年5月31日 停止所有服务，届时在 GitCafe 的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至 Coding"></a>GitCafe 将于 2016年5月31日 停止所有服务，届时在 GitCafe 的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至 Coding</h2><p>更多详情请<a href="https://gitcafe.com/migration" target="_blank" rel="external">戳这里</a></p>
 
       
     </div>
@@ -95,7 +92,7 @@
         
   
   <div class="tags">
-    <a href="/tags/git/">git</a>, <a href="/tags/hexo/">hexo</a>
+    <a href="/tags/nodejs/">nodejs</a>
   </div>
 
         <div class="alignright">
@@ -132,16 +129,14 @@
 
 <nav id="pagination" >
   
-  <a href="/2016/01/04/git-commands/" class="alignleft prev" >上一页</a>
   
-  
-  <a href="/2015/12/31/hexo-commands/" class="alignright next" >下一页</a>
+  <a href="/2016/07/05/canvas-dashed-line/" class="alignright next" >下一页</a>
   
   <div class="clearfix"></div>
 </nav>
 <section id="comment">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2015/12/31/hexo-gitcafe-page/" data-title="在gitcafe中搭建自己的博客，以及在hexo中的配置" data-url="/2015/12/31/hexo-gitcafe-page/"></div>
+    <div class="ds-thread" data-thread-key="2016/07/07/node-base64-encoding-decoding/" data-title="nodejs中的base64转码/解码" data-url="/2016/07/07/node-base64-encoding-decoding/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
