@@ -69,6 +69,12 @@
 <p>入题吧, 看如下的实现方法:</p>
 <h3 id="编码-encode-将正常的字符串转为base64串"><a href="#编码-encode-将正常的字符串转为base64串" class="headerlink" title="编码(encode)-将正常的字符串转为base64串"></a>编码(encode)-将正常的字符串转为base64串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="keyword">new</span> Buffer(<span class="string">'JavaScript'</span>);</span><br><span class="line"><span class="keyword">var</span> base_str = str.toString(<span class="string">'base64'</span>);</span><br><span class="line"><span class="comment">// base_str = SmF2YVNjcmlwdA==</span></span><br></pre></td></tr></table></figure>
 <h3 id="解码-decode-将base64串转为正常的字符串"><a href="#解码-decode-将base64串转为正常的字符串" class="headerlink" title="解码(decode)-将base64串转为正常的字符串"></a>解码(decode)-将base64串转为正常的字符串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> base_str = <span class="keyword">new</span> Buffer(<span class="string">'SmF2YVNjcmlwdA=='</span>, <span class="string">'base64'</span>)</span><br><span class="line"><span class="keyword">var</span> str = base_str.toString();</span><br><span class="line"><span class="comment">// str = JavaScript</span></span><br></pre></td></tr></table></figure>
+<h2 id="关于Buffer的种种"><a href="#关于Buffer的种种" class="headerlink" title="关于Buffer的种种"></a>关于<code>Buffer</code>的种种</h2><ul>
+<li>什么时候该用buffer，什么时候不该用<br>  有测试证明: 我们在保存字符串的时候，该用string还是要用string，就算大字符串拼接string的速度也不会比buffer慢。<br>  那什么时候我们又需要用buffer呢？没办法的时候，当我们保存非utf-8字符串，2进制等等其他格式的时候，我们就必须得使用了。</li>
+<li>buffer不得不提的8KB<br>  buffer著名的8KB载体，举个例子好比，node把一幢大房子分成很多小房间，每个房间能容纳8个人，为了保证房间的充分使用，只有当一个房间塞满8个人后才会去开新的房间，但是当一次性有多个人来入住，node会保证要把这些人放到一个房间中，比如当前房间A有4个人住，但是一下子来了5个人，所以node不得不新开一间房间B，把这5个人安顿下来，此时又来了4个人，发现5个人的B房间也容纳不下了，只能再开一间房间C了，这样所有人都安顿下来了。但是之前的两间房A和B都各自浪费了4个和3个位置，而房间C就成为了当前的房间。<br>  具体点说就是当我们实例化一个新的Buffer类，会根据实例化时的大小去申请内存空间，如果需要的空间小于8KB，则会多一次判定，判定当前的8KB载体剩余容量是否够新的buffer实例，如果够用，则将新的buffer实例保存在当前的8KB载体中，并且更新剩余的空间。</li>
+<li>独享的空间<br>  如果你想创建一个独享的空间，独立的对这块内存空间进行读写，有两种办法，1是实例化一个超过8KB长度的buffer，另外一个就是使用slowbuffer类。</li>
+<li>清空buffer<br>  刷掉一块buffer上的数据最快的办法是buffer.fill</li>
+</ul>
 <p>阅读参考:</p>
 <ul>
 <li><a href="http://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html" target="_blank" rel="external">Base64 Encoding / Decoding in Node.js</a></li>
@@ -129,6 +135,8 @@
 
 <nav id="pagination" >
   
+  <a href="/2016/08/24/validate-summary/" class="alignleft prev" >上一页</a>
+  
   
   <a href="/2016/07/05/canvas-dashed-line/" class="alignright next" >下一页</a>
   
@@ -160,7 +168,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>20</small></li>
+    <li><a href="/categories/blog/">blog</a><small>22</small></li>
   
   </ul>
 </div>
@@ -170,8 +178,6 @@
 <div class="widget tag">
   <h3 class="title">标签</h3>
   <ul class="entry">
-  
-    <li><a href="/tags/base64/">base64</a><small>0</small></li>
   
     <li><a href="/tags/git/">git</a><small>2</small></li>
   
@@ -183,11 +189,15 @@
   
     <li><a href="/tags/nodejs/">nodejs</a><small>1</small></li>
   
-    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+    <li><a href="/tags/前端/">前端</a><small>9</small></li>
+  
+    <li><a href="/tags/客户端判断/">客户端判断</a><small>0</small></li>
   
     <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
   
     <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
   
     <li><a href="/tags/环境/">环境</a><small>2</small></li>
   
@@ -201,6 +211,14 @@
   <ul class="entry">
     
       <li>
+        <a href="/2016/08/25/judge-password-strength/">判断密码强度</a>
+      </li>
+    
+      <li>
+        <a href="/2016/08/24/validate-summary/">js和node中的正则验证总结</a>
+      </li>
+    
+      <li>
         <a href="/2016/07/07/node-base64-encoding-decoding/">nodejs中的base64转码/解码</a>
       </li>
     
@@ -210,14 +228,6 @@
     
       <li>
         <a href="/2016/06/03/node-forever/">nodejs之不可或缺的forever模块</a>
-      </li>
-    
-      <li>
-        <a href="/2016/06/03/node-centos/">centos服务器nodejs相关环境搭建</a>
-      </li>
-    
-      <li>
-        <a href="/2016/05/03/frontend-mobile-h5-skills/">移动端h5技巧总结</a>
       </li>
     
   </ul>
