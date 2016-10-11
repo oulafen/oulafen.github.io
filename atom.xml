@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.oulafen.com/"/>
-  <updated>2016-08-24T08:33:28.000Z</updated>
+  <updated>2016-10-11T14:18:57.000Z</updated>
   <id>http://blog.oulafen.com/</id>
   
   <author>
@@ -14,6 +14,74 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>vue.js-快速构建webpack项目模板</title>
+    <link href="http://blog.oulafen.com/2016/10/11/vue-webpack/"/>
+    <id>http://blog.oulafen.com/2016/10/11/vue-webpack/</id>
+    <published>2016-10-11T12:58:29.000Z</published>
+    <updated>2016-10-11T14:18:57.000Z</updated>
+    
+    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;官方基于webpack提供了两种项目模板，分别是vue-webpack-simple模板和vue-webpack模板，今天我们将介绍官方提供的这两种项目模板，并用vue-webpack-simple模板创建一个简单的示例。&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&quot;正文&quot;&gt;&lt;a href=&quot;#正文&quot; class=&quot;headerlink&quot; title=&quot;正文&quot;&gt;&lt;/a&gt;正文&lt;/h2&gt;&lt;h3 id=&quot;环境准备：&quot;&gt;&lt;a href=&quot;#环境准备：&quot; class=&quot;headerlink&quot; title=&quot;环境准备：&quot;&gt;&lt;/a&gt;环境准备：&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;node环境 和 基于shell的命令行工具，如windows下的git bash, mac 和 linux下的terminal，以下统称为终端。&lt;/li&gt;
+&lt;li&gt;npm包管理工具，最好在3.x以上，npm 3.x提供了更有效的包依赖管理。&lt;/li&gt;
+&lt;li&gt;安装&lt;code&gt;vue-li&lt;/code&gt;, 命令如下：&lt;figure class=&quot;highlight stata&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm install -&lt;span class=&quot;keyword&quot;&gt;g&lt;/span&gt; vue-&lt;span class=&quot;keyword&quot;&gt;cli&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;安装完vue cli后，我们就可以基于vue-webpack-simple模板和vue-webpack模板创建项目了。&lt;/p&gt;
+&lt;h3 id=&quot;使用vue-webpack-simple模板&quot;&gt;&lt;a href=&quot;#使用vue-webpack-simple模板&quot; class=&quot;headerlink&quot; title=&quot;使用vue-webpack-simple模板&quot;&gt;&lt;/a&gt;使用vue-webpack-simple模板&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;在终端中运行如下命令，其中&lt;code&gt;webpack-simple&lt;/code&gt;是项目模板的名称，&lt;code&gt;my-webpack-simple-demo&lt;/code&gt;是你要生成的项目名称。&lt;/p&gt;
+&lt;figure class=&quot;highlight applescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;vue init webpack-simple &lt;span class=&quot;keyword&quot;&gt;my&lt;/span&gt;-webpack-simple-demo&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;执行完成之后，生成的文件目录结构：&lt;/p&gt;
+&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;├─&lt;span class=&quot;selector-class&quot;&gt;.babelrc&lt;/span&gt;        &lt;span class=&quot;comment&quot;&gt;// babel配置文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├─&lt;span class=&quot;selector-class&quot;&gt;.gitignore&lt;/span&gt;    &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├─index&lt;span class=&quot;selector-class&quot;&gt;.html&lt;/span&gt;        &lt;span class=&quot;comment&quot;&gt;// 主页&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├─package&lt;span class=&quot;selector-class&quot;&gt;.json&lt;/span&gt;      &lt;span class=&quot;comment&quot;&gt;// 项目配置文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├─README&lt;span class=&quot;selector-class&quot;&gt;.md&lt;/span&gt;  &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├─webpack&lt;span class=&quot;selector-class&quot;&gt;.config&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.js&lt;/span&gt; &lt;span class=&quot;comment&quot;&gt;// webpack配置文件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├─dist          &lt;span class=&quot;comment&quot;&gt;// 发布目录&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   ├─&lt;span class=&quot;selector-class&quot;&gt;.gitkeep&lt;/span&gt;       &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├─src           &lt;span class=&quot;comment&quot;&gt;// 开发目录 &lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   ├─App&lt;span class=&quot;selector-class&quot;&gt;.vue&lt;/span&gt;       &lt;span class=&quot;comment&quot;&gt;// App.vue组件&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   ├─main&lt;span class=&quot;selector-class&quot;&gt;.js&lt;/span&gt;       &lt;span class=&quot;comment&quot;&gt;// 预编译入口&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;进到项目文件目录下安装依赖&lt;/p&gt;
+&lt;figure class=&quot;highlight sql&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;cd my-webpack-simple-demo&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;cnpm &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt;   &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;#在国内使用cnpm的来安装依赖速度快的不止一倍，安装方法： npm &lt;span class=&quot;keyword&quot;&gt;install&lt;/span&gt; -g cnpm &lt;span class=&quot;comment&quot;&gt;--registry=https://registry.npm.taobao.org，&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;运行示例：&lt;/p&gt;
+&lt;figure class=&quot;highlight applescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm &lt;span class=&quot;built_in&quot;&gt;run&lt;/span&gt; dev&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;打开&lt;code&gt;http://localhost:8080/&lt;/code&gt;：&lt;br&gt;&lt;img src=&quot;http://statics.oulafen.com/github-webpack-sample.png&quot; alt=&quot;&quot; style=&quot;max-width:100%; margin: auto;&quot;&gt;&lt;br&gt;注意：和browserify不同的是，执行&lt;code&gt;npm run dev&lt;/code&gt;命令后并不会在dist目录下生成build.js文件，开发环境下build.js是在运行内存中的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;执行以下命令会生成发布时的build.js，并且是经过压缩的。&lt;figure class=&quot;highlight applescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;npm &lt;span class=&quot;built_in&quot;&gt;run&lt;/span&gt; build&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&quot;使用vue-webpack模板&quot;&gt;&lt;a href=&quot;#使用vue-webpack模板&quot; class=&quot;headerlink&quot; title=&quot;使用vue-webpack模板&quot;&gt;&lt;/a&gt;使用vue-webpack模板&lt;/h3&gt;&lt;p&gt;过程与使用&lt;code&gt;vue-webpack-sample&lt;/code&gt;时类似&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;生成项目文件&lt;/p&gt;
+&lt;figure class=&quot;highlight applescript&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;vue init webpack &lt;span class=&quot;keyword&quot;&gt;my&lt;/span&gt;-webpack-demo&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;目录结构如下：(参考：&lt;a href=&quot;https://vuejs-templates.github.io/webpack/structure.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Project Structure&lt;/a&gt;)&lt;/p&gt;
+&lt;figure class=&quot;highlight axapta&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;9&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;10&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;11&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;12&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;13&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;14&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;15&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;16&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;17&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;18&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;19&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;20&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;21&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;22&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;23&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;24&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;25&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;26&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;27&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;28&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;├── build/                      &lt;span class=&quot;meta&quot;&gt;# webpack config files&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   └── ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├── config/                     &lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   ├── &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;.js                &lt;span class=&quot;meta&quot;&gt;# main project config&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   └── ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├── src/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   ├── main.js                 &lt;span class=&quot;meta&quot;&gt;# app entry file&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   ├── App.vue                 &lt;span class=&quot;meta&quot;&gt;# main app component&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   ├── components/             &lt;span class=&quot;meta&quot;&gt;# ui components&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   │   └── ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   └── assets/                 &lt;span class=&quot;meta&quot;&gt;# module assets (processed by webpack)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│       └── ...&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├── &lt;span class=&quot;keyword&quot;&gt;static&lt;/span&gt;/                     &lt;span class=&quot;meta&quot;&gt;# pure static assets (directly copied)&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├── test/&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   └── unit/                   &lt;span class=&quot;meta&quot;&gt;# unit tests&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   │   ├── specs/              &lt;span class=&quot;meta&quot;&gt;# test spec files&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   │   ├── &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;.js            &lt;span class=&quot;meta&quot;&gt;# test build entry file&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   │   └── karma.conf.js       &lt;span class=&quot;meta&quot;&gt;# test runner config file&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   └── e2e/                    &lt;span class=&quot;meta&quot;&gt;# e2e tests&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   │   ├── specs/              &lt;span class=&quot;meta&quot;&gt;# test spec files&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   │   ├── custom-assertions/  &lt;span class=&quot;meta&quot;&gt;# custom assertions for e2e tests&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   │   ├── runner.js           &lt;span class=&quot;meta&quot;&gt;# test runner script&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;│   │   └── nightwatch.conf.js  &lt;span class=&quot;meta&quot;&gt;# test runner config file&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├── .babelrc                    &lt;span class=&quot;meta&quot;&gt;# babel config&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├── .editorconfig.js            &lt;span class=&quot;meta&quot;&gt;# editor config&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├── .eslintrc.js                &lt;span class=&quot;meta&quot;&gt;# eslint config&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;├── &lt;span class=&quot;keyword&quot;&gt;index&lt;/span&gt;.html                  &lt;span class=&quot;meta&quot;&gt;# index.html template&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;└── package.json                &lt;span class=&quot;meta&quot;&gt;# build scripts and dependencies&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;安装依赖 &lt;code&gt;npm install&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;执行以下命令运行示例：&lt;code&gt;npm run dev&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;打开&lt;code&gt;http://localhost:8080/&lt;/code&gt;：&lt;br&gt;&lt;img src=&quot;http://statics.oulafen.com/github-webpack.png&quot; alt=&quot;&quot; style=&quot;max-width:100%; margin: auto;&quot;&gt;&lt;/li&gt;
+&lt;li&gt;生成发布：&lt;code&gt;npm run build&lt;/code&gt;&lt;br&gt;和&lt;code&gt;vue-simple-webpack&lt;/code&gt;模板不同的是，所有的静态资源，包括&lt;code&gt;index.html&lt;/code&gt;都生成到&lt;code&gt;dist&lt;/code&gt;目录下了。&lt;br&gt;这意味着你可以直接拿着dist目录去发布应用，例如在IIS下将dist目录发布为一个网站。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;阅读参考:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/keepfool/p/5678427.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Vue.js——60分钟webpack项目模板快速入门&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+    
+    <summary type="html">
+    
+      vue.js-快速构建webpack项目模板
+    
+    </summary>
+    
+      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="vue" scheme="http://blog.oulafen.com/tags/vue/"/>
+    
+      <category term="webpack" scheme="http://blog.oulafen.com/tags/webpack/"/>
+    
+  </entry>
   
   <entry>
     <title>判断密码强度</title>
@@ -505,32 +573,6 @@
     
     
       <category term="环境" scheme="http://blog.oulafen.com/tags/%E7%8E%AF%E5%A2%83/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>输入网址后都发生了什么</title>
-    <link href="http://blog.oulafen.com/2016/04/24/http/"/>
-    <id>http://blog.oulafen.com/2016/04/24/http/</id>
-    <published>2016-04-24T13:52:29.000Z</published>
-    <updated>2016-05-19T03:07:14.000Z</updated>
-    
-    <content type="html">&lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;输入网址后都发生了什么?&lt;br&gt;这是各大公司面试必问的题目, 没有标准答案, 角度不同答案不同, 最近在学全栈, 重新认识这个问题, 小记一二.&lt;br&gt;&lt;a id=&quot;more&quot;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&quot;通过代码来模拟浏览器&quot;&gt;&lt;a href=&quot;#通过代码来模拟浏览器&quot; class=&quot;headerlink&quot; title=&quot;通过代码来模拟浏览器&quot;&gt;&lt;/a&gt;通过代码来模拟浏览器&lt;/h2&gt;&lt;p&gt;建立连接  &lt;code&gt;telnet www.ucai.cn 80&lt;/code&gt;&lt;br&gt;发送请求:&lt;br&gt;&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;GET /index&lt;span class=&quot;selector-class&quot;&gt;.php&lt;/span&gt; HTTP/&lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host:www&lt;span class=&quot;selector-class&quot;&gt;.ucai&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cn&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;&lt;/p&gt;
-&lt;figure class=&quot;highlight stylus&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;HEAD /index&lt;span class=&quot;selector-class&quot;&gt;.php&lt;/span&gt; HTTP/&lt;span class=&quot;number&quot;&gt;1.1&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;Host:www&lt;span class=&quot;selector-class&quot;&gt;.ucai&lt;/span&gt;&lt;span class=&quot;selector-class&quot;&gt;.cn&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;code&gt;ps -ef | grep nginx.conf&lt;/code&gt;&lt;/p&gt;
-</content>
-    
-    <summary type="html">
-    
-      深度解析输入网址后发生了什么
-    
-    </summary>
-    
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
-    
-    
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
@@ -1123,7 +1165,7 @@
 &lt;h2 id=&quot;开始新段落&quot;&gt;&lt;a href=&quot;#开始新段落&quot; class=&quot;headerlink&quot; title=&quot;开始新段落&quot;&gt;&lt;/a&gt;开始新段落&lt;/h2&gt;&lt;figure class=&quot;highlight&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;4&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;想要开始一个新的段落，&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;乖乖的按两下回车吧&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;想要开始一个新的段落，&lt;/p&gt;
 &lt;p&gt;乖乖的按两下回车吧&lt;/p&gt;
-&lt;h2 id=&quot;粗体&quot;&gt;&lt;a href=&quot;#粗体&quot; class=&quot;headerlink&quot; title=&quot;粗体&quot;&gt;&lt;/a&gt;粗体&lt;/h2&gt;&lt;figure class=&quot;highlight markdown&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;strong&quot;&gt;**两个星号包围的是粗体**&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;emphasis&quot;&gt;*一个星号包围的是斜体*&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;h2 id=&quot;粗体&quot;&gt;&lt;a href=&quot;#粗体&quot; class=&quot;headerlink&quot; title=&quot;粗体&quot;&gt;&lt;/a&gt;粗体&lt;/h2&gt;&lt;figure class=&quot;highlight asciidoc&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;*&lt;span class=&quot;strong&quot;&gt;*两个星号包围的是粗体*&lt;/span&gt;*&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;strong&quot;&gt;*一个星号包围的是斜体*&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;strong&gt;两个星号包围的是粗体&lt;/strong&gt;&lt;br&gt;&lt;em&gt;一个星号包围的是斜体&lt;/em&gt;&lt;/p&gt;
 &lt;h2 id=&quot;引用&quot;&gt;&lt;a href=&quot;#引用&quot; class=&quot;headerlink&quot; title=&quot;引用&quot;&gt;&lt;/a&gt;引用&lt;/h2&gt;&lt;figure class=&quot;highlight markdown&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&quot;code&quot;&gt;&lt;pre&gt;&lt;span class=&quot;line&quot;&gt;&lt;span class=&quot;quote&quot;&gt;&amp;gt; 引用内容，多行的话，&lt;/span&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;line&quot;&gt;直接一个回车&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;blockquote&gt;
