@@ -86,12 +86,12 @@
 <li><p>运行示例：</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">run</span> dev</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>打开<code>http://localhost:8080/</code>：<br><img src="http://statics.oulafen.com/github-webpack-sample.png" alt="" style="max-width:100%; margin: auto;"><br>注意：和browserify不同的是，执行<code>npm run dev</code>命令后并不会在dist目录下生成build.js文件，开发环境下build.js是在运行内存中的。</p>
+<li><p>打开<code>http://localhost:8080/</code>：<br><img src="http://statics.oulafen.com/github-webpack-sample.png" alt="" style="max-width:100%; margin: auto;"><br>注意：执行<code>npm run dev</code>命令后并不会在dist目录下生成build.js文件，开发环境下build.js是在运行内存中的。</p>
 </li>
 <li>执行以下命令会生成发布时的build.js，并且是经过压缩的。<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">run</span> build</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="使用vue-webpack模板"><a href="#使用vue-webpack模板" class="headerlink" title="使用vue-webpack模板"></a>使用vue-webpack模板</h3><p>过程与使用<code>vue-webpack-sample</code>时类似</p>
+<h3 id="使用vue-webpack模板"><a href="#使用vue-webpack模板" class="headerlink" title="使用vue-webpack模板"></a>使用vue-webpack模板</h3><p>过程与使用<code>webpack-simple</code>模板时类似</p>
 <ul>
 <li><p>生成项目文件</p>
 <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack <span class="keyword">my</span>-webpack-demo</span><br></pre></td></tr></table></figure>
@@ -160,6 +160,8 @@
 
 <nav id="pagination" >
   
+  <a href="/2016/10/17/node-redis/" class="alignleft prev" >上一页</a>
+  
   
   <a href="/2016/08/25/judge-password-strength/" class="alignright next" >下一页</a>
   
@@ -191,7 +193,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>22</small></li>
+    <li><a href="/categories/blog/">blog</a><small>23</small></li>
   
   </ul>
 </div>
@@ -208,7 +210,7 @@
   
     <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
-    <li><a href="/tags/node/">node</a><small>2</small></li>
+    <li><a href="/tags/node/">node</a><small>3</small></li>
   
     <li><a href="/tags/nodejs/">nodejs</a><small>1</small></li>
   
@@ -236,6 +238,10 @@
   <ul class="entry">
     
       <li>
+        <a href="/2016/10/17/node-redis/">nodejs之redis的安装与使用</a>
+      </li>
+    
+      <li>
         <a href="/2016/10/11/vue-webpack/">vue.js-快速构建webpack项目模板</a>
       </li>
     
@@ -249,10 +255,6 @@
     
       <li>
         <a href="/2016/07/07/node-base64-encoding-decoding/">nodejs中的base64转码/解码</a>
-      </li>
-    
-      <li>
-        <a href="/2016/07/05/canvas-dashed-line/">使用canvas绘制虚线</a>
       </li>
     
   </ul>
