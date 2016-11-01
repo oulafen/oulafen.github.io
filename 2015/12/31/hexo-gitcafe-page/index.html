@@ -73,14 +73,14 @@
 <li>2、创建gitcafe-pages分支<br>项目pull到本地后的一系列操作<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$git checkout gitcafe-pages #切换到gitcafe-pages分支，然后新建一个index.html文件，里面随便写点东西即可</span><br><span class="line">$git add . </span><br><span class="line">$git commit -m 'first commit'</span><br><span class="line">$git push -u origin gitcafe-pages  #关键，将本地分支同步到线上</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h2><p>还没入门？戳<a href="http://oulafen.gitcafe.io/2015/12/29/hexo-quick-start/" target="_blank" rel="external">这里</a></p>
+<h2 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h2><p>还没入门？戳<a href="http://blog.oulafen.com/2015/12/29/hexo-quick-start/">这里</a></p>
 <p>在../hexo/_config.yml中，修改<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  message: ''</span><br><span class="line">  repository: git@github.com:oulafen/oulafen.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
 <p>为：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  message: ''</span><br><span class="line">  repo:</span><br><span class="line"><span class="code">    github: git@github.com:oulafen/oulafen.github.io.git,master</span></span><br><span class="line"><span class="code">    gitcafe: git@gitcafe.com:oulafen/oulafen.git,gitcafe-pages</span></span><br></pre></td></tr></table></figure></p>
 <p>注意：</p>
 <ul>
 <li>最好是配置下gitcafe和github的秘钥，git库的配置链接写成ssh的链接，不然老是输密码，手都麻了</li>
 </ul>
-<h2 id="GitCafe-将于-2016年5月31日-停止所有服务，届时在-GitCafe-的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至-Coding"><a href="#GitCafe-将于-2016年5月31日-停止所有服务，届时在-GitCafe-的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至-Coding" class="headerlink" title="GitCafe 将于 2016年5月31日 停止所有服务，届时在 GitCafe 的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至 Coding"></a>GitCafe 将于 2016年5月31日 停止所有服务，届时在 GitCafe 的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至 Coding</h2><p>更多详情请<a href="https://gitcafe.com/migration" target="_blank" rel="external">戳这里</a></p>
+<h2 id="GitCafe-已于-2016年5月31日-停止所有服务，届时在-GitCafe-的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至-Coding"><a href="#GitCafe-已于-2016年5月31日-停止所有服务，届时在-GitCafe-的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至-Coding" class="headerlink" title="GitCafe 已于 2016年5月31日 停止所有服务，届时在 GitCafe 的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至 Coding"></a>GitCafe 已于 2016年5月31日 停止所有服务，届时在 GitCafe 的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至 Coding</h2><p>更多详情请<a href="https://gitcafe.com/migration" target="_blank" rel="external">戳这里</a></p>
 
       
     </div>
@@ -238,7 +238,7 @@
   </div>
   <footer id="footer" class="inner"><div class="alignleft">
   
-  &copy; 2015 - 2016 <span style="padding: 0 10px;">oulafen</span>
+  &copy; 2015 - 2016 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
   
 </div>
 <div class="clearfix"></div>

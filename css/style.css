@@ -10,7 +10,7 @@
   padding: 0;
 }
 body {
-  background: #eee;
+  background-color: #eee;
   color: #444;
   font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif;
   font-size: 14px;
@@ -25,6 +25,10 @@ body {
   body {
     font-size: 13px;
     margin: 0 15px;
+    background-image: url(http://statics.oulafen.com/blog-body-bg-book.png);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 100px;
   }
 }
 h1,
