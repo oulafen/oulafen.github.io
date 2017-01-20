@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="ZE3XLdQP22" />
   
-  <title>about me | Oulafen&#39;s blog</title>
+  <title>js字符操作 | Oulafen&#39;s blog</title>
   <meta name="author" content="oulafen">
   
-  <meta name="description" content="oulafen&#39;s coding note">
+  <meta name="description" content="js操作字符">
   
-  
+  <meta name="keywords" content="js字符操作">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="about me"/>
+  <meta property="og:title" content="js字符操作"/>
   <meta property="og:site_name" content="Oulafen&#39;s blog"/>
 
   
@@ -49,30 +49,30 @@
 <div class="clearfix"></div>
 </header>
   <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article class="page">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
   
   <div class="post-content">
     <header>
       
+        <div class="icon"></div>
+        <time datetime="2017-01-20T13:00:28.000Z"><a href="/2017/01/20/js-func-1/">2017-01-20</a></time>
+      
       
   
-    <h1 class="title">about me</h1>
+    <h1 class="title">js字符操作</h1>
   
 
     </header>
     <div class="entry">
       
-        <p><img src="http://statics.oulafen.com/gitblog-xiaohuangren2.jpg" style="width:80px; float:left; margin-right: 20px;"><br>本银女，标准的90后，最喜欢和有激情无规矩的小伙伴们一起玩耍。</p>
-<p>自互联网+以来，前端越来越好玩，禁不住诱惑，终于有了这从后端大军中纵身一跃到前端之火中的桥段（Ruby、nodejs略懂一二，只是可以自己做个小东西玩玩）。</p>
-<p>当然，最最开始的初衷是因为设计，想不到吧，虽然审美还是一塌糊涂，但要相信美是可以熏陶出来的。</p>
-<p>小透一下，本银兴趣爱好广泛，读书、打球、绘画、旅游…只要是有利于身心的，都喜欢的啦`(*∩_∩*)′</p>
-<p>前端的干货已囤成小山，每次急需的时候都得翻山越岭的走一遍，听前辈的话，好脑子不如烂笔头，还是要整理出来比较好，利人利己，何乐而不为呢。</p>
-<p>之后会逐渐在这个博客里总结出来，好好学习，天天向上！<br><img src="http://statics.oulafen.com/gitblog-xiaohuangren1.jpg" style="width:80px; float:right; margin-right: 20px;"></p>
-<h3 id="Contact"><a href="#Contact" class="headerlink" title="Contact"></a>Contact</h3><ul>
-<li>wechat: oulafen</li>
-<li>Email: oulafen@gmail.com</li>
-<li>Blog: <a href="http://blog.oulafen.com/">http://blog.oulafen.com</a></li>
-<li>Project: <a href="https://github.com/oulafen" target="_blank" rel="external">https://github.com/oulafen</a></li>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在验证输入时常要对字符进行操作, 为免重复造轮子, 做个记录<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
+<li><p>计算字符数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 1个汉字 = 2个字符 **/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getBytesNum</span> (<span class="params">str</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> bytesCount = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; str.length; i++) &#123;</span><br><span class="line">        <span class="keyword">var</span> c = str.charAt(i);</span><br><span class="line">        <span class="regexp">/^[\u0000-\u00ff]$/</span>.test(c) ?  bytesCount += <span class="number">1</span> : bytesCount += <span class="number">2</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> bytesCount;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>截取前n个字符</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 截取字符, 一个汉字等于两个字符, ("我是oulafen", 6)=&gt;"我是ou" **/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subString</span>(<span class="params">str, n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!str)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'--'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> str.replace(<span class="regexp">/([^x00-xff])/g</span>, <span class="string">"$1a"</span>).slice(<span class="number">0</span>, n).replace(<span class="regexp">/([^x00-xff])a/g</span>, <span class="string">"$1"</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
@@ -80,7 +80,17 @@
     <footer>
       
         
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
         
+  
+  <div class="tags">
+    <a href="/tags/笔记/">笔记</a>
+  </div>
+
         <div class="alignright">
           <div class="bdsharebuttonbox">
     <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
@@ -116,12 +126,16 @@
 
 <nav id="pagination" >
     
+    <a href="/2017/01/20/js-func-2/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/11/18/vue-2-spa-start/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
 <section id="comment">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="about/index.html" data-title="about me" data-url="/about/index.html"></div>
+    <div class="ds-thread" data-thread-key="2017/01/20/js-func-1/" data-title="js字符操作" data-url="/2017/01/20/js-func-1/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">
