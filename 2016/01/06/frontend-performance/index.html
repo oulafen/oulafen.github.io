@@ -166,7 +166,7 @@
 <li><p><strong>HTTP请求与DNS 查询</strong><br>每当你从任何域名请求一个资源，会发出一个带有相关头部，被访问资源的 HTTP请求，并且会返回一个响应。这是对该过程的一个极端简化，但它基本就是事实上你需要知道的。这是一个HTTP请求，而且所有涉及的资源都从属于这个往返的旅行。当提到前端性能，这些请求正是主要的瓶颈所在，因为如我们谈到的，浏览器受限于有多少请求可以并行发生。这也是为什么我们经常要使用子域名；以便允许这些请求在数个域名上发生，允许同时发生多得多数量的请求。<br>然而关于这还有个问题，DNS查询。每次（从一个空缓存）一个新的域名被引用，HTTP请求会受制于一个耗时的DNS查询（某个介于20到120毫秒之间的值），在DNS查询中，发出的请求会查询资源实际存在的地点；互联网通过IP地址被绑定在一起，这些地址由DNS管理的主机名引用。<br>如果每个引用的新域名具有DNS查询的前端代价，你必须确保这个代价确实是值得的。如果是一个小网站（例如像CSS魔法），那么由子域名提供资源可能并不值得；相比执行多个域名的DNS查询并将其并行化来说，从一个域名非并行的获取若干资源，浏览器可能更快。<br>如果你或许有一打资源，你可能会考虑从一个子域名提供它们的资源服务；为了更好的并行化那许多资源，额外的DNS查询可能是值得的。如果说你有40个资源，可能将那些资源切分到两个子域名是值得的；为了由总数为三个的域名提供你的网站服务，两个额外的DNS查询会是值得的。<br>DNS查询代价很高，因此你需要决定什么才是对你的网站更合适的；承担查询的消耗或者只是由一个域名提供所有服务。<br>很重要的需要记得的是，比方说一旦HTML被请求于foo.com，对那个主机的DNS查询就立即发生了，所以后续的任何对foo.com的请求不再受制于DNS查询。</p>
 </li>
 <li><p><strong>DNS预取</strong><br>DNS预取所做的恰恰就是凭证领餐(on the tin)，它不能被简单实现。比方说，如果你需要请求来自widget.foo.com的资源，那么你可以通过简单的在页面的<head>里先增加下面这个来预取那个主机的DNS：</head></p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"//widget.foo.com"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    ...</div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"//widget.foo.com"</span>&gt;</span></div><div class="line">    ...</div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>这行简单的内容将会告诉支持的浏览器去开始预取那个域名的DNS，这要稍稍早于它实际需要的时刻。它意味着DNS查询过程，在浏览器<code>&lt;script&gt;</code>元素真正请求小程序的时候就已经在进行中了。<br>关于prefetch的更多介绍戳<a href="http://calendar.perfplanet.com/2012/speed-up-your-site-using-prefetching/" target="_blank" rel="external">这里</a></p>
 </li>
 <li><p><strong>CDN</strong><br>内容分发网络（CDN）是一组分散在不同地理位置的web服务器，用来给用户更高效地发送内容。典型地，选择用来发送内容的服务器是基于网络距离的衡量标准的。例如：选跳数（hop）最少的或者响应时间最快的服务器。</p>
@@ -258,7 +258,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>28</small></li>
+    <li><a href="/categories/blog/">blog</a><small>29</small></li>
   
   </ul>
 </div>
@@ -276,6 +276,8 @@
     <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
     <li><a href="/tags/node/">node</a><small>5</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
   
     <li><a href="/tags/vue/">vue</a><small>3</small></li>
   
@@ -305,11 +307,15 @@
   <ul class="entry">
     
       <li>
-        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
+        <a href="/2017/04/01/mysql-command/">mysql相关命令操作</a>
       </li>
     
       <li>
         <a href="/2017/01/20/js-func-1/">js字符操作</a>
+      </li>
+    
+      <li>
+        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
       </li>
     
       <li>
@@ -318,10 +324,6 @@
     
       <li>
         <a href="/2016/10/17/node-redis/">nodejs之redis的安装与使用</a>
-      </li>
-    
-      <li>
-        <a href="/2016/10/11/vue-webpack/">vue.js-快速构建webpack项目模板</a>
       </li>
     
   </ul>

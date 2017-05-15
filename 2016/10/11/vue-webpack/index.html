@@ -69,35 +69,35 @@
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="环境准备："><a href="#环境准备：" class="headerlink" title="环境准备："></a>环境准备：</h3><ul>
 <li>node环境 和 基于shell的命令行工具，如windows下的git bash, mac 和 linux下的terminal，以下统称为终端。</li>
 <li>npm包管理工具，最好在3.x以上，npm 3.x提供了更有效的包依赖管理。</li>
-<li>安装<code>vue-li</code>, 命令如下：<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -<span class="keyword">g</span> vue-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
+<li>安装<code>vue-li</code>, 命令如下：<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g vue-<span class="keyword">cli</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>安装完vue cli后，我们就可以基于vue-webpack-simple模板和vue-webpack模板创建项目了。</p>
 <h3 id="使用vue-webpack-simple模板"><a href="#使用vue-webpack-simple模板" class="headerlink" title="使用vue-webpack-simple模板"></a>使用vue-webpack-simple模板</h3><ul>
 <li><p>在终端中运行如下命令，其中<code>webpack-simple</code>是项目模板的名称，<code>my-webpack-simple-demo</code>是你要生成的项目名称。</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack-simple <span class="keyword">my</span>-webpack-simple-demo</span><br></pre></td></tr></table></figure>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vue init webpack-<span class="built_in">simple</span> my-webpack-<span class="built_in">simple</span>-demo</div></pre></td></tr></table></figure>
 </li>
 <li><p>执行完成之后，生成的文件目录结构：</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">├─<span class="selector-class">.babelrc</span>        <span class="comment">// babel配置文件</span></span><br><span class="line">├─<span class="selector-class">.gitignore</span>    </span><br><span class="line">├─index<span class="selector-class">.html</span>        <span class="comment">// 主页</span></span><br><span class="line">├─package<span class="selector-class">.json</span>      <span class="comment">// 项目配置文件</span></span><br><span class="line">├─README<span class="selector-class">.md</span>  </span><br><span class="line">├─webpack<span class="selector-class">.config</span><span class="selector-class">.js</span> <span class="comment">// webpack配置文件</span></span><br><span class="line">├─dist          <span class="comment">// 发布目录</span></span><br><span class="line">│   ├─<span class="selector-class">.gitkeep</span>       </span><br><span class="line">├─src           <span class="comment">// 开发目录 </span></span><br><span class="line">│   ├─App<span class="selector-class">.vue</span>       <span class="comment">// App.vue组件</span></span><br><span class="line">│   ├─main<span class="selector-class">.js</span>       <span class="comment">// 预编译入口</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">├─<span class="selector-class">.babelrc</span>        <span class="comment">// babel配置文件</span></div><div class="line">├─<span class="selector-class">.gitignore</span>    </div><div class="line">├─index<span class="selector-class">.html</span>        <span class="comment">// 主页</span></div><div class="line">├─package<span class="selector-class">.json</span>      <span class="comment">// 项目配置文件</span></div><div class="line">├─README<span class="selector-class">.md</span>  </div><div class="line">├─webpack<span class="selector-class">.config</span><span class="selector-class">.js</span> <span class="comment">// webpack配置文件</span></div><div class="line">├─dist          <span class="comment">// 发布目录</span></div><div class="line">│   ├─<span class="selector-class">.gitkeep</span>       </div><div class="line">├─src           <span class="comment">// 开发目录 </span></div><div class="line">│   ├─App<span class="selector-class">.vue</span>       <span class="comment">// App.vue组件</span></div><div class="line">│   ├─main<span class="selector-class">.js</span>       <span class="comment">// 预编译入口</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>进到项目文件目录下安装依赖</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd my-webpack-simple-demo</span><br><span class="line">cnpm <span class="keyword">install</span>   </span><br><span class="line">#在国内使用cnpm的来安装依赖速度快的不止一倍，安装方法： npm <span class="keyword">install</span> -g cnpm <span class="comment">--registry=https://registry.npm.taobao.org，</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">cd my-webpack-simple-demo</div><div class="line">cnpm <span class="keyword">install</span>   </div><div class="line">#在国内使用cnpm的来安装依赖速度快的不止一倍，安装方法： npm <span class="keyword">install</span> -g cnpm <span class="comment">--registry=https://registry.npm.taobao.org，</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>运行示例：</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">run</span> dev</span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">run</span><span class="bash"> dev</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>打开<code>http://localhost:8080/</code>：<br><img src="http://statics.oulafen.com/github-webpack-sample.png" alt="" style="max-width:100%; margin: auto;"><br>注意：执行<code>npm run dev</code>命令后并不会在dist目录下生成build.js文件，开发环境下build.js是在运行内存中的。</p>
 </li>
-<li>执行以下命令会生成发布时的build.js，并且是经过压缩的。<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="built_in">run</span> build</span><br></pre></td></tr></table></figure>
+<li>执行以下命令会生成发布时的build.js，并且是经过压缩的。<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm <span class="keyword">run</span><span class="bash"> build</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="使用vue-webpack模板"><a href="#使用vue-webpack模板" class="headerlink" title="使用vue-webpack模板"></a>使用vue-webpack模板</h3><p>过程与使用<code>webpack-simple</code>模板时类似</p>
 <ul>
 <li><p>生成项目文件</p>
-<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack <span class="keyword">my</span>-webpack-demo</span><br></pre></td></tr></table></figure>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vue init webpack <span class="keyword">my</span>-webpack-demo</div></pre></td></tr></table></figure>
 </li>
 <li><p>目录结构如下：(参考：<a href="https://vuejs-templates.github.io/webpack/structure.html" target="_blank" rel="external">Project Structure</a>)</p>
-<figure class="highlight axapta"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">├── build/                      <span class="meta"># webpack config files</span></span><br><span class="line">│   └── ...</span><br><span class="line">├── config/                     </span><br><span class="line">│   ├── <span class="keyword">index</span>.js                <span class="meta"># main project config</span></span><br><span class="line">│   └── ...</span><br><span class="line">├── src/</span><br><span class="line">│   ├── main.js                 <span class="meta"># app entry file</span></span><br><span class="line">│   ├── App.vue                 <span class="meta"># main app component</span></span><br><span class="line">│   ├── components/             <span class="meta"># ui components</span></span><br><span class="line">│   │   └── ...</span><br><span class="line">│   └── assets/                 <span class="meta"># module assets (processed by webpack)</span></span><br><span class="line">│       └── ...</span><br><span class="line">├── <span class="keyword">static</span>/                     <span class="meta"># pure static assets (directly copied)</span></span><br><span class="line">├── test/</span><br><span class="line">│   └── unit/                   <span class="meta"># unit tests</span></span><br><span class="line">│   │   ├── specs/              <span class="meta"># test spec files</span></span><br><span class="line">│   │   ├── <span class="keyword">index</span>.js            <span class="meta"># test build entry file</span></span><br><span class="line">│   │   └── karma.conf.js       <span class="meta"># test runner config file</span></span><br><span class="line">│   └── e2e/                    <span class="meta"># e2e tests</span></span><br><span class="line">│   │   ├── specs/              <span class="meta"># test spec files</span></span><br><span class="line">│   │   ├── custom-assertions/  <span class="meta"># custom assertions for e2e tests</span></span><br><span class="line">│   │   ├── runner.js           <span class="meta"># test runner script</span></span><br><span class="line">│   │   └── nightwatch.conf.js  <span class="meta"># test runner config file</span></span><br><span class="line">├── .babelrc                    <span class="meta"># babel config</span></span><br><span class="line">├── .editorconfig.js            <span class="meta"># editor config</span></span><br><span class="line">├── .eslintrc.js                <span class="meta"># eslint config</span></span><br><span class="line">├── <span class="keyword">index</span>.html                  <span class="meta"># index.html template</span></span><br><span class="line">└── package.json                <span class="meta"># build scripts and dependencies</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line">├── build/                      <span class="comment"># webpack config files</span></div><div class="line">│   └── <span class="string">...</span></div><div class="line">├── config/                     </div><div class="line">│   ├── index.js                <span class="comment"># main project config</span></div><div class="line">│   └── <span class="string">...</span></div><div class="line">├── src/</div><div class="line">│   ├── main.js                 <span class="comment"># app entry file</span></div><div class="line">│   ├── App.vue                 <span class="comment"># main app component</span></div><div class="line">│   ├── components/             <span class="comment"># ui components</span></div><div class="line">│   │   └── <span class="string">...</span></div><div class="line">│   └── assets/                 <span class="comment"># module assets (processed by webpack)</span></div><div class="line">│       └── <span class="string">...</span></div><div class="line">├── static/                     <span class="comment"># pure static assets (directly copied)</span></div><div class="line">├── test/</div><div class="line">│   └── unit/                   <span class="comment"># unit tests</span></div><div class="line">│   │   ├── specs/              <span class="comment"># test spec files</span></div><div class="line">│   │   ├── index.js            <span class="comment"># test build entry file</span></div><div class="line">│   │   └── karma.conf.js       <span class="comment"># test runner config file</span></div><div class="line">│   └── e2e/                    <span class="comment"># e2e tests</span></div><div class="line">│   │   ├── specs/              <span class="comment"># test spec files</span></div><div class="line">│   │   ├── custom-assertions/  <span class="comment"># custom assertions for e2e tests</span></div><div class="line">│   │   ├── runner.js           <span class="comment"># test runner script</span></div><div class="line">│   │   └── nightwatch.conf.js  <span class="comment"># test runner config file</span></div><div class="line">├── <span class="string">.babelrc</span>                    <span class="comment"># babel config</span></div><div class="line">├── <span class="string">.editorconfig.js</span>            <span class="comment"># editor config</span></div><div class="line">├── <span class="string">.eslintrc.js</span>                <span class="comment"># eslint config</span></div><div class="line">├── index.html                  <span class="comment"># index.html template</span></div><div class="line">└── package.json                <span class="comment"># build scripts and dependencies</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>安装依赖 <code>npm install</code></p>
 </li>
@@ -194,7 +194,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>28</small></li>
+    <li><a href="/categories/blog/">blog</a><small>29</small></li>
   
   </ul>
 </div>
@@ -212,6 +212,8 @@
     <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
     <li><a href="/tags/node/">node</a><small>5</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
   
     <li><a href="/tags/vue/">vue</a><small>3</small></li>
   
@@ -241,11 +243,15 @@
   <ul class="entry">
     
       <li>
-        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
+        <a href="/2017/04/01/mysql-command/">mysql相关命令操作</a>
       </li>
     
       <li>
         <a href="/2017/01/20/js-func-1/">js字符操作</a>
+      </li>
+    
+      <li>
+        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
       </li>
     
       <li>
@@ -254,10 +260,6 @@
     
       <li>
         <a href="/2016/10/17/node-redis/">nodejs之redis的安装与使用</a>
-      </li>
-    
-      <li>
-        <a href="/2016/10/11/vue-webpack/">vue.js-快速构建webpack项目模板</a>
       </li>
     
   </ul>

@@ -67,7 +67,7 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根据时间戳格式化日期<br><a id="more"></a></p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
-<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</span><br><span class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</span><br><span class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</span><br><span class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</span><br><span class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</span><br><span class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</span><br><span class="line">    string += h.toString();</span><br><span class="line">    string += <span class="string">':'</span>;</span><br><span class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</span><br><span class="line">    string += min.toString();</span><br><span class="line">    string += <span class="string">':'</span>;</span><br><span class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</span><br><span class="line">    string += s.toString();</span><br><span class="line">    <span class="keyword">return</span> string;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</div><div class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</div><div class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</div><div class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += h.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += min.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += s.toString();</div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -122,8 +122,10 @@
 
 <nav id="pagination" >
     
+    <a href="/2017/01/20/js-func-1/" class="alignleft prev" >上一页</a>
     
-    <a href="/2017/01/20/js-func-1/" class="alignright next" >下一页</a>
+    
+    <a href="/2016/11/18/vue-2-spa-start/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
@@ -153,7 +155,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>28</small></li>
+    <li><a href="/categories/blog/">blog</a><small>29</small></li>
   
   </ul>
 </div>
@@ -171,6 +173,8 @@
     <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
     <li><a href="/tags/node/">node</a><small>5</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
   
     <li><a href="/tags/vue/">vue</a><small>3</small></li>
   
@@ -200,11 +204,15 @@
   <ul class="entry">
     
       <li>
-        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
+        <a href="/2017/04/01/mysql-command/">mysql相关命令操作</a>
       </li>
     
       <li>
         <a href="/2017/01/20/js-func-1/">js字符操作</a>
+      </li>
+    
+      <li>
+        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
       </li>
     
       <li>
@@ -213,10 +221,6 @@
     
       <li>
         <a href="/2016/10/17/node-redis/">nodejs之redis的安装与使用</a>
-      </li>
-    
-      <li>
-        <a href="/2016/10/11/vue-webpack/">vue.js-快速构建webpack项目模板</a>
       </li>
     
   </ul>

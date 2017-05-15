@@ -67,8 +67,8 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在nodejs中怎么将字符串转化为base64呢? 是不是也像php中的<code>base64_encode()</code>一样简单呢?<br><a id="more"></a><br>作为<code>javascript</code>的nodejs, 对于编码字符串有个更合乎逻辑的方法, 而不是设置各种不一样的全局方法.</p>
 <p>入题吧, 看如下的实现方法:</p>
-<h3 id="编码-encode-将正常的字符串转为base64串"><a href="#编码-encode-将正常的字符串转为base64串" class="headerlink" title="编码(encode)-将正常的字符串转为base64串"></a>编码(encode)-将正常的字符串转为base64串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="keyword">new</span> Buffer(<span class="string">'JavaScript'</span>);</span><br><span class="line"><span class="keyword">var</span> base_str = str.toString(<span class="string">'base64'</span>);</span><br><span class="line"><span class="comment">// base_str = SmF2YVNjcmlwdA==</span></span><br></pre></td></tr></table></figure>
-<h3 id="解码-decode-将base64串转为正常的字符串"><a href="#解码-decode-将base64串转为正常的字符串" class="headerlink" title="解码(decode)-将base64串转为正常的字符串"></a>解码(decode)-将base64串转为正常的字符串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> base_str = <span class="keyword">new</span> Buffer(<span class="string">'SmF2YVNjcmlwdA=='</span>, <span class="string">'base64'</span>)</span><br><span class="line"><span class="keyword">var</span> str = base_str.toString();</span><br><span class="line"><span class="comment">// str = JavaScript</span></span><br></pre></td></tr></table></figure>
+<h3 id="编码-encode-将正常的字符串转为base64串"><a href="#编码-encode-将正常的字符串转为base64串" class="headerlink" title="编码(encode)-将正常的字符串转为base64串"></a>编码(encode)-将正常的字符串转为base64串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> str = <span class="keyword">new</span> Buffer(<span class="string">'JavaScript'</span>);</div><div class="line"><span class="keyword">var</span> base_str = str.toString(<span class="string">'base64'</span>);</div><div class="line"><span class="comment">// base_str = SmF2YVNjcmlwdA==</span></div></pre></td></tr></table></figure>
+<h3 id="解码-decode-将base64串转为正常的字符串"><a href="#解码-decode-将base64串转为正常的字符串" class="headerlink" title="解码(decode)-将base64串转为正常的字符串"></a>解码(decode)-将base64串转为正常的字符串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> base_str = <span class="keyword">new</span> Buffer(<span class="string">'SmF2YVNjcmlwdA=='</span>, <span class="string">'base64'</span>)</div><div class="line"><span class="keyword">var</span> str = base_str.toString();</div><div class="line"><span class="comment">// str = JavaScript</span></div></pre></td></tr></table></figure>
 <h2 id="关于Buffer的种种"><a href="#关于Buffer的种种" class="headerlink" title="关于Buffer的种种"></a>关于<code>Buffer</code>的种种</h2><ul>
 <li>什么时候该用buffer，什么时候不该用<br>  有测试证明: 我们在保存字符串的时候，该用string还是要用string，就算大字符串拼接string的速度也不会比buffer慢。<br>  那什么时候我们又需要用buffer呢？没办法的时候，当我们保存非utf-8字符串，2进制等等其他格式的时候，我们就必须得使用了。</li>
 <li>buffer不得不提的8KB<br>  buffer著名的8KB载体，举个例子好比，node把一幢大房子分成很多小房间，每个房间能容纳8个人，为了保证房间的充分使用，只有当一个房间塞满8个人后才会去开新的房间，但是当一次性有多个人来入住，node会保证要把这些人放到一个房间中，比如当前房间A有4个人住，但是一下子来了5个人，所以node不得不新开一间房间B，把这5个人安顿下来，此时又来了4个人，发现5个人的B房间也容纳不下了，只能再开一间房间C了，这样所有人都安顿下来了。但是之前的两间房A和B都各自浪费了4个和3个位置，而房间C就成为了当前的房间。<br>  具体点说就是当我们实例化一个新的Buffer类，会根据实例化时的大小去申请内存空间，如果需要的空间小于8KB，则会多一次判定，判定当前的8KB载体剩余容量是否够新的buffer实例，如果够用，则将新的buffer实例保存在当前的8KB载体中，并且更新剩余的空间。</li>
@@ -169,7 +169,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>28</small></li>
+    <li><a href="/categories/blog/">blog</a><small>29</small></li>
   
   </ul>
 </div>
@@ -187,6 +187,8 @@
     <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
     <li><a href="/tags/node/">node</a><small>5</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
   
     <li><a href="/tags/vue/">vue</a><small>3</small></li>
   
@@ -216,11 +218,15 @@
   <ul class="entry">
     
       <li>
-        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
+        <a href="/2017/04/01/mysql-command/">mysql相关命令操作</a>
       </li>
     
       <li>
         <a href="/2017/01/20/js-func-1/">js字符操作</a>
+      </li>
+    
+      <li>
+        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
       </li>
     
       <li>
@@ -229,10 +235,6 @@
     
       <li>
         <a href="/2016/10/17/node-redis/">nodejs之redis的安装与使用</a>
-      </li>
-    
-      <li>
-        <a href="/2016/10/11/vue-webpack/">vue.js-快速构建webpack项目模板</a>
       </li>
     
   </ul>

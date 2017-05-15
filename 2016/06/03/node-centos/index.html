@@ -68,57 +68,57 @@
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>此文记录在 centos服务器上部署nodejs环境的安装及配置步骤.<br><a id="more"></a></p>
 <h2 id="安装node"><a href="#安装node" class="headerlink" title="安装node"></a>安装node</h2><ul>
 <li><p>准备：</p>
-  <figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">yum</span> <span class="literal">-</span><span class="comment">y</span> <span class="comment">install</span> <span class="comment">gcc</span> <span class="comment">make</span> <span class="comment">gcc</span><span class="literal">-</span><span class="comment">c</span><span class="literal">+</span><span class="literal">+</span> <span class="comment">openssl</span><span class="literal">-</span><span class="comment">devel</span> <span class="comment">wget</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight brainfuck"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="comment">yum</span> <span class="literal">-</span><span class="comment">y</span> <span class="comment">install</span> <span class="comment">gcc</span> <span class="comment">make</span> <span class="comment">gcc</span><span class="literal">-</span><span class="comment">c</span><span class="literal">+</span><span class="literal">+</span> <span class="comment">openssl</span><span class="literal">-</span><span class="comment">devel</span> <span class="comment">wget</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>下载源码及解压</p>
-  <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget http://nodejs.org/dist/v0.<span class="number">10.26</span>/<span class="keyword">node</span><span class="title">-v0</span>.<span class="number">10.26</span>.tar.gz</span><br><span class="line">tar -zvxf <span class="keyword">node</span><span class="title">-v0</span>.<span class="number">10.26</span>.tar.gz</span><br></pre></td></tr></table></figure>
+  <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget http://nodejs.org/dist/v0.<span class="number">10.26</span>/<span class="keyword">node</span><span class="title">-v0</span>.<span class="number">10.26</span>.tar.gz</div><div class="line">tar -zvxf <span class="keyword">node</span><span class="title">-v0</span>.<span class="number">10.26</span>.tar.gz</div></pre></td></tr></table></figure>
 </li>
 <li><p>编译及安装</p>
-  <figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">make</span> &amp;&amp; <span class="built_in">make</span> install</span><br></pre></td></tr></table></figure>
+  <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">make</span> &amp;&amp; <span class="built_in">make</span> install</div></pre></td></tr></table></figure>
 </li>
 <li><p>验证是否安装配置成功</p>
-  <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">node</span> <span class="title">-v</span> &amp;&amp; npm -v</span><br></pre></td></tr></table></figure>
+  <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">node</span> <span class="title">-v</span> &amp;&amp; npm -v</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="安装git"><a href="#安装git" class="headerlink" title="安装git"></a>安装git</h2><ul>
 <li><p>安装依赖包：</p>
-  <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -<span class="keyword">y</span> install zlib-devel curl-devel openssl-devel <span class="keyword">perl</span> cpio expat-devel gettext-devel openssl zlib autoconf tk <span class="keyword">perl</span>-ExtUtils-MakeMaker</span><br></pre></td></tr></table></figure>
+  <figure class="highlight nsis"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum -y install <span class="literal">zlib</span>-devel curl-devel openssl-devel perl cpio expat-devel gettext-devel openssl <span class="literal">zlib</span> autoconf tk perl-ExtUtils-MakeMaker</div></pre></td></tr></table></figure>
 </li>
 <li><p>获取最新版 Git 源码包<br>  从 <a href="https://github.com/git/git/releases" target="_blank" rel="external">https://github.com/git/git/releases</a> 下载最新版的 zip 包或者 tar.gz 并解压：<br>  以 tar.gz 格式为例（在网页的 tar.gz 上右键复制下载链接即可）：</p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https:<span class="comment">//github.com/git/git/archive/v2.4.0.tar.gz</span></span><br><span class="line">tar zxvf v2.<span class="number">4.0</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https:<span class="comment">//github.com/git/git/archive/v2.4.0.tar.gz</span></div><div class="line">tar zxvf v2.<span class="number">4.0</span><span class="selector-class">.tar</span><span class="selector-class">.gz</span></div></pre></td></tr></table></figure>
 <p>  会得到一个 git-2.4.0 的目录（版本号与下载的一致），然后进入这个目录<code>cd git-2.4.0</code>:<br>  编译安装</p>
-  <figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">autoconf</span><br><span class="line">./configure</span><br><span class="line"><span class="built_in">make</span></span><br><span class="line"><span class="built_in">make</span> install</span><br></pre></td></tr></table></figure>
+  <figure class="highlight gauss"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">autoconf</div><div class="line">./configure</div><div class="line"><span class="built_in">make</span></div><div class="line"><span class="built_in">make</span> install</div></pre></td></tr></table></figure>
 <p>  以上4步请一步步来，以免出现错误不好找原因。<br>  然后修改 <code>/etc/ld.so.conf</code> 文件，在最后加入一行：</p>
-  <figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/local/<span class="class"><span class="keyword">lib</span></span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight crystal"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/usr/local/<span class="class"><span class="keyword">lib</span></span></div></pre></td></tr></table></figure>
 <p>  保存并关闭。<br>  这就安装好了，看看版本：</p>
-  <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git <span class="comment">--version</span></span><br><span class="line"><span class="comment"># git version 2.4.0</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight applescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">git <span class="comment">--version</span></div><div class="line"><span class="comment"># git version 2.4.0</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>错误处理<br>  如果安装后报以下错误：</p>
-  <figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">bash:</span> <span class="regexp">/usr/</span>bin/<span class="string">git:</span> 没有那个文件或目录</span><br></pre></td></tr></table></figure>
+  <figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="string">bash:</span> <span class="regexp">/usr/</span>bin/<span class="string">git:</span> 没有那个文件或目录</div></pre></td></tr></table></figure>
 <p>  那么请编辑 <code>/etc/profile</code> 在最后加入一行：</p>
-  <figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export PATH=<span class="variable">$PATH</span><span class="symbol">:/usr/local/bin</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export PATH=<span class="variable">$PATH</span><span class="symbol">:/usr/local/bin</span></div></pre></td></tr></table></figure>
 <p>  然后重新开窗口，或者执行命令 <code>source /etc/profile</code> 后就好了。</p>
 <p>  查看系统版本</p>
-  <figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># cat /etc/system-release</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"># cat /etc/<span class="keyword">system</span>-release</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><ul>
 <li><p>第一步，在<code>/etc/yum.repos.d/</code>目录下创建一个源配置文件<code>nginx.repo</code>：</p>
-  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yum<span class="selector-class">.repos</span><span class="selector-class">.d</span>/nginx.repo</span><br></pre></td></tr></table></figure>
+  <figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi /etc/yum<span class="selector-class">.repos</span><span class="selector-class">.d</span>/nginx.repo</div></pre></td></tr></table></figure>
 <p>  填写如下内容：</p>
-  <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[nginx]</span></span><br><span class="line"><span class="attr">name</span>=nginx repo</span><br><span class="line"><span class="attr">baseurl</span>=http://nginx.org/packages/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</span><br><span class="line"><span class="attr">gpgcheck</span>=<span class="number">0</span></span><br><span class="line"><span class="attr">enabled</span>=<span class="number">1</span></span><br></pre></td></tr></table></figure>
+  <figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="section">[nginx]</span></div><div class="line"><span class="attr">name</span>=nginx repo</div><div class="line"><span class="attr">baseurl</span>=http://nginx.org/packages/centos/<span class="variable">$releasever</span>/<span class="variable">$basearch</span>/</div><div class="line"><span class="attr">gpgcheck</span>=<span class="number">0</span></div><div class="line"><span class="attr">enabled</span>=<span class="number">1</span></div></pre></td></tr></table></figure>
 <p>  保存并退出；</p>
 </li>
 <li><p>执行如下指令进行安装：</p>
-  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum <span class="keyword">install</span> nginx</span><br></pre></td></tr></table></figure>
+  <figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum <span class="keyword">install</span> nginx</div></pre></td></tr></table></figure>
 <p>  安装完成，启动Nginx：</p>
-  <figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.<span class="keyword">d</span>/nginx start</span><br></pre></td></tr></table></figure>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="regexp">/etc/i</span>nit.d<span class="regexp">/nginx start</span></div></pre></td></tr></table></figure>
 <p>  如果还无法访问，则需配置一下Linux防火墙。</p>
-  <figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT <span class="number">5</span> -i eth0 -p tcp --dport <span class="number">80</span> -m <span class="keyword">state</span> --state NEW,ESTABLISHED -j ACCEPT</span><br><span class="line">service iptables save</span><br><span class="line">service iptables restart</span><br></pre></td></tr></table></figure>
+  <figure class="highlight pf"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">iptables -I INPUT <span class="number">5</span> -i eth0 -p tcp --dport <span class="number">80</span> -m <span class="keyword">state</span> --state NEW,ESTABLISHED -j ACCEPT</div><div class="line">service iptables save</div><div class="line">service iptables restart</div></pre></td></tr></table></figure>
 </li>
 <li><p>Nginx的命令以及配置文件位置：</p>
-  <figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta-keyword">/etc/</span>init.d/nginx start    <span class="meta">#启动nginx服务</span></span><br><span class="line"><span class="meta-keyword">/etc/</span>init.d/nginx stop	<span class="meta">#停止nginx服务</span></span><br><span class="line"><span class="meta-keyword">/etc/</span>init.d/nginx restart		<span class="meta">#重启nginx服务</span></span><br><span class="line"><span class="meta-keyword">/etc/</span>nginx/nginx.conf   <span class="meta">#nginx配置文件位置</span></span><br><span class="line">chkconfig nginx on  <span class="meta">#设为开机启动</span></span><br></pre></td></tr></table></figure>
-  <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service nginx <span class="literal">start</span></span><br><span class="line">service nginx <span class="literal">stop</span></span><br><span class="line">service nginx restart</span><br></pre></td></tr></table></figure>
+  <figure class="highlight dts"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta-keyword">/etc/</span>init.d/nginx start    <span class="meta">#启动nginx服务</span></div><div class="line"><span class="meta-keyword">/etc/</span>init.d/nginx stop	<span class="meta">#停止nginx服务</span></div><div class="line"><span class="meta-keyword">/etc/</span>init.d/nginx restart		<span class="meta">#重启nginx服务</span></div><div class="line"><span class="meta-keyword">/etc/</span>nginx/nginx.conf   <span class="meta">#nginx配置文件位置</span></div><div class="line">chkconfig nginx on  <span class="meta">#设为开机启动</span></div></pre></td></tr></table></figure>
+  <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">service nginx <span class="literal">start</span></div><div class="line">service nginx <span class="literal">stop</span></div><div class="line">service nginx restart</div></pre></td></tr></table></figure>
 </li>
 <li><p>关于nginx的配置，可参考：<br>  Centos下Nginx安装与配置<a href="http://www.jianshu.com/p/d5114a2a2052" target="_blank" rel="external">http://www.jianshu.com/p/d5114a2a2052</a><br>  Nginx同一端口根据不同域名转发到不同端口<a href="http://my.oschina.net/wangt10/blog/630531?fromerr=So7zDfGn" target="_blank" rel="external">http://my.oschina.net/wangt10/blog/630531?fromerr=So7zDfGn</a> </p>
 </li>
@@ -208,7 +208,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>28</small></li>
+    <li><a href="/categories/blog/">blog</a><small>29</small></li>
   
   </ul>
 </div>
@@ -226,6 +226,8 @@
     <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
     <li><a href="/tags/node/">node</a><small>5</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
   
     <li><a href="/tags/vue/">vue</a><small>3</small></li>
   
@@ -255,11 +257,15 @@
   <ul class="entry">
     
       <li>
-        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
+        <a href="/2017/04/01/mysql-command/">mysql相关命令操作</a>
       </li>
     
       <li>
         <a href="/2017/01/20/js-func-1/">js字符操作</a>
+      </li>
+    
+      <li>
+        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
       </li>
     
       <li>
@@ -268,10 +274,6 @@
     
       <li>
         <a href="/2016/10/17/node-redis/">nodejs之redis的安装与使用</a>
-      </li>
-    
-      <li>
-        <a href="/2016/10/11/vue-webpack/">vue.js-快速构建webpack项目模板</a>
       </li>
     
   </ul>

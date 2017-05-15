@@ -1,0 +1,15 @@
+<h2 id="数据库命令操作"><a href="#数据库命令操作" class="headerlink" title="数据库命令操作"></a>数据库命令操作</h2><h3 id="linux局域网内数据库拷贝："><a href="#linux局域网内数据库拷贝：" class="headerlink" title="linux局域网内数据库拷贝："></a>linux局域网内数据库拷贝：</h3><figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//格式</span></div><div class="line">scp local_file remote_username<span class="meta">@remote</span><span class="string">_ip:</span>remote_folder</div><div class="line"><span class="comment">//如：</span></div><div class="line">scp lemon_feedback.sql work@<span class="number">10.172</span><span class="number">.229</span><span class="number">.96</span>:sql</div></pre></td></tr></table></figure>
+<h3 id="将数据库文件导入数据库中："><a href="#将数据库文件导入数据库中：" class="headerlink" title="将数据库文件导入数据库中："></a>将数据库文件导入数据库中：</h3><ul>
+<li><p>建空数据库</p>
+<figure class="highlight n1ql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">mysql&gt;<span class="keyword">create</span> <span class="keyword">database</span> abc;</div></pre></td></tr></table></figure>
+</li>
+<li><p>导入数据库</p>
+</li>
+</ul>
+<p>方法一：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">//选择数据库</div><div class="line"><span class="meta">mysql&gt;</span><span class="bash">use abc;</span></div><div class="line"></div><div class="line">//设置数据库编码</div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"><span class="built_in">set</span> names utf8;</span></div><div class="line"></div><div class="line">//导入数据（注意sql文件的路径）</div><div class="line"><span class="meta">mysql&gt;</span><span class="bash"><span class="built_in">source</span> /home/abc/abc.sql;</span></div></pre></td></tr></table></figure></p>
+<p>方法二：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql -u用户名 -p密码 数据库名 &lt; 数据库名<span class="selector-class">.sql</span></div><div class="line"></div><div class="line"><span class="comment">//例如：</span></div><div class="line">mysql -ulemon -p2016Lemon lemon_feedback &lt; lemon_feedback.sql</div></pre></td></tr></table></figure></p>
+<h3 id="常用mysql命令"><a href="#常用mysql命令" class="headerlink" title="常用mysql命令"></a>常用mysql命令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">show databases; //查看所有的数据库</div></pre></td></tr></table></figure>
+<p>阅读参考:</p>
+<ul>
+<li><a href="http://liubin.org/promises-book/" target="_blank" rel="external">JavaScript Promise迷你书（中文版）</a></li>
+</ul>

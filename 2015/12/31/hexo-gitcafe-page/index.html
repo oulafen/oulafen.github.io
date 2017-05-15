@@ -70,12 +70,12 @@
 <p>gitcafe上有一篇关于page建立的帮助文档，看官网戳<a href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9#wiki" target="_blank" rel="external">这里</a><br>有几点注意的如下：</p>
 <ul>
 <li>1、创建的项目务必要与用户名相同  </li>
-<li>2、创建gitcafe-pages分支<br>项目pull到本地后的一系列操作<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$git checkout gitcafe-pages #切换到gitcafe-pages分支，然后新建一个index.html文件，里面随便写点东西即可</span><br><span class="line">$git add . </span><br><span class="line">$git commit -m 'first commit'</span><br><span class="line">$git push -u origin gitcafe-pages  #关键，将本地分支同步到线上</span><br></pre></td></tr></table></figure>
+<li>2、创建gitcafe-pages分支<br>项目pull到本地后的一系列操作<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$git checkout gitcafe-pages #切换到gitcafe-pages分支，然后新建一个index.html文件，里面随便写点东西即可</div><div class="line">$git add . </div><div class="line">$git commit -m 'first commit'</div><div class="line">$git push -u origin gitcafe-pages  #关键，将本地分支同步到线上</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h2><p>还没入门？戳<a href="http://blog.oulafen.com/2015/12/29/hexo-quick-start/">这里</a></p>
-<p>在../hexo/_config.yml中，修改<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  message: ''</span><br><span class="line">  repository: git@github.com:oulafen/oulafen.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
-<p>为：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  message: ''</span><br><span class="line">  repo:</span><br><span class="line"><span class="code">    github: git@github.com:oulafen/oulafen.github.io.git,master</span></span><br><span class="line"><span class="code">    gitcafe: git@gitcafe.com:oulafen/oulafen.git,gitcafe-pages</span></span><br></pre></td></tr></table></figure></p>
+<p>在../hexo/_config.yml中，修改<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  message: ''</div><div class="line">  repository: git@github.com:oulafen/oulafen.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
+<p>为：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  message: ''</div><div class="line">  repo:</div><div class="line"><span class="code">    github: git@github.com:oulafen/oulafen.github.io.git,master</span></div><div class="line"><span class="code">    gitcafe: git@gitcafe.com:oulafen/oulafen.git,gitcafe-pages</span></div></pre></td></tr></table></figure></p>
 <p>注意：</p>
 <ul>
 <li>最好是配置下gitcafe和github的秘钥，git库的配置链接写成ssh的链接，不然老是输密码，手都麻了</li>
@@ -166,7 +166,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>28</small></li>
+    <li><a href="/categories/blog/">blog</a><small>29</small></li>
   
   </ul>
 </div>
@@ -184,6 +184,8 @@
     <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
     <li><a href="/tags/node/">node</a><small>5</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
   
     <li><a href="/tags/vue/">vue</a><small>3</small></li>
   
@@ -213,11 +215,15 @@
   <ul class="entry">
     
       <li>
-        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
+        <a href="/2017/04/01/mysql-command/">mysql相关命令操作</a>
       </li>
     
       <li>
         <a href="/2017/01/20/js-func-1/">js字符操作</a>
+      </li>
+    
+      <li>
+        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
       </li>
     
       <li>
@@ -226,10 +232,6 @@
     
       <li>
         <a href="/2016/10/17/node-redis/">nodejs之redis的安装与使用</a>
-      </li>
-    
-      <li>
-        <a href="/2016/10/11/vue-webpack/">vue.js-快速构建webpack项目模板</a>
       </li>
     
   </ul>

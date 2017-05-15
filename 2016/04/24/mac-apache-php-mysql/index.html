@@ -84,7 +84,7 @@
 <li>根目录及对应网址是<code>~/Sites</code>  <code>http://localhost/~oulafen/</code> </li>
 <li><code>~/Sites</code> 也就是用户目录下面的”站点”目录，在OS X 中，这个目录可能没有，所以需要手动建立一个同名目录。在终端运行<code>sudo mkdir ~/Sites</code>即可建立站点文件夹</li>
 <li><p>建立站点文件夹后，检查 <code>/etc</code> 下是否有 <code>oulafen.conf</code> 这个文件，若没有则新键，并插入如下内容</p>
-<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Directory</span> "/<span class="attr">Users</span>/<span class="attr">oulafen</span>/<span class="attr">Sites</span>/"&gt;</span></span><br><span class="line">    Options Indexes MultiViews</span><br><span class="line">    AllowOverride All</span><br><span class="line">    Order allow,deny</span><br><span class="line">    Allow from all</span><br><span class="line"><span class="tag">&lt;/<span class="name">Directory</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Directory</span> "/<span class="attr">Users</span>/<span class="attr">oulafen</span>/<span class="attr">Sites</span>/"&gt;</span></div><div class="line">    Options Indexes MultiViews</div><div class="line">    AllowOverride All</div><div class="line">    Order allow,deny</div><div class="line">    Allow from all</div><div class="line"><span class="tag">&lt;/<span class="name">Directory</span>&gt;</span></div></pre></td></tr></table></figure>
 </li>
 <li><p>文件保存之后，赋予读写权限 <code>sudo chmod 755 /etc/apache2/users/oulafen.conf</code></p>
 </li>
@@ -101,9 +101,9 @@
 <li><code>sudo vi /etc/apache2/httpd.conf</code>，</li>
 <li>在 httpd.conf 中找到 <code>#Include /private/etc/apache2/extra/httpd-vhosts.conf</code> ，去掉前面的<code>#</code> ，重启Apache <code>sudo apachectl restart</code></li>
 <li><p>配置虚拟主机文件 <code>httpd-vhost.conf</code></p>
-<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi <span class="meta-keyword">/etc/</span>apache2<span class="meta-keyword">/extra/</span>httpd-vhosts.conf</span><br></pre></td></tr></table></figure>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi <span class="regexp">/etc/</span>apache2<span class="regexp">/extra/</span>httpd-vhosts.conf</div></pre></td></tr></table></figure>
 <p>  在文件中加入类似如下代码</p>
-<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></span><br><span class="line">        <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/oulafen/Sites"</span></span><br><span class="line">        <span class="attribute"><span class="nomarkup">ServerName</span></span> localhost</span><br><span class="line">        <span class="attribute">DirectoryIndex</span> index.php</span><br><span class="line">        <span class="section">&lt;Directory /&gt;</span></span><br><span class="line">            <span class="attribute"><span class="nomarkup">Options</span></span> Indexes FollowSymLinks</span><br><span class="line">            <span class="attribute">AllowOverride</span> None</span><br><span class="line">            <span class="attribute"><span class="nomarkup">Order</span></span> allow,deny</span><br><span class="line">            <span class="attribute"><span class="nomarkup">Allow</span></span> from <span class="literal">all</span></span><br><span class="line">        <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br><span class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></span><br><span class="line">        <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/oulafen/Sites/mysite"</span>  ##项目根目录</span><br><span class="line">        <span class="attribute"><span class="nomarkup">ServerName</span></span> mysite.com              ##在本地访问的域名，最好不要与线上的冲突 </span><br><span class="line">        <span class="attribute">DirectoryIndex</span> index.php</span><br><span class="line">        <span class="section">&lt;Directory /&gt;</span></span><br><span class="line">            <span class="attribute"><span class="nomarkup">Options</span></span> Indexes FollowSymLinks</span><br><span class="line">            <span class="attribute">AllowOverride</span> None</span><br><span class="line">            <span class="attribute"><span class="nomarkup">Order</span></span> allow,deny</span><br><span class="line">            <span class="attribute"><span class="nomarkup">Allow</span></span> from <span class="literal">all</span></span><br><span class="line">        <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">        <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/oulafen/Sites"</span></div><div class="line">        <span class="attribute"><span class="nomarkup">ServerName</span></span> localhost</div><div class="line">        <span class="attribute">DirectoryIndex</span> index.php</div><div class="line">        <span class="section">&lt;Directory /&gt;</span></div><div class="line">            <span class="attribute"><span class="nomarkup">Options</span></span> Indexes FollowSymLinks</div><div class="line">            <span class="attribute">AllowOverride</span> None</div><div class="line">            <span class="attribute"><span class="nomarkup">Order</span></span> allow,deny</div><div class="line">            <span class="attribute"><span class="nomarkup">Allow</span></span> from <span class="literal">all</span></div><div class="line">        <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div><div class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></div><div class="line">        <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/oulafen/Sites/mysite"</span>  ##项目根目录</div><div class="line">        <span class="attribute"><span class="nomarkup">ServerName</span></span> mysite.com              ##在本地访问的域名，最好不要与线上的冲突 </div><div class="line">        <span class="attribute">DirectoryIndex</span> index.php</div><div class="line">        <span class="section">&lt;Directory /&gt;</span></div><div class="line">            <span class="attribute"><span class="nomarkup">Options</span></span> Indexes FollowSymLinks</div><div class="line">            <span class="attribute">AllowOverride</span> None</div><div class="line">            <span class="attribute"><span class="nomarkup">Order</span></span> allow,deny</div><div class="line">            <span class="attribute"><span class="nomarkup">Allow</span></span> from <span class="literal">all</span></div><div class="line">        <span class="section">&lt;/Directory&gt;</span></div><div class="line"><span class="section">&lt;/VirtualHost&gt;</span></div></pre></td></tr></table></figure>
 <p>  保存并退出后，重启Apache，访问 <code>http://localhost/mysite/</code> 或 <code>http://mysite.com</code> 查看效果。</p>
 </li>
 </ul>
@@ -225,7 +225,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>28</small></li>
+    <li><a href="/categories/blog/">blog</a><small>29</small></li>
   
   </ul>
 </div>
@@ -243,6 +243,8 @@
     <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
     <li><a href="/tags/node/">node</a><small>5</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
   
     <li><a href="/tags/vue/">vue</a><small>3</small></li>
   
@@ -272,11 +274,15 @@
   <ul class="entry">
     
       <li>
-        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
+        <a href="/2017/04/01/mysql-command/">mysql相关命令操作</a>
       </li>
     
       <li>
         <a href="/2017/01/20/js-func-1/">js字符操作</a>
+      </li>
+    
+      <li>
+        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
       </li>
     
       <li>
@@ -285,10 +291,6 @@
     
       <li>
         <a href="/2016/10/17/node-redis/">nodejs之redis的安装与使用</a>
-      </li>
-    
-      <li>
-        <a href="/2016/10/11/vue-webpack/">vue.js-快速构建webpack项目模板</a>
       </li>
     
   </ul>
