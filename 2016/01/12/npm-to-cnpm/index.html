@@ -4,15 +4,15 @@
   <meta charset="utf-8">
   <meta name="baidu-site-verification" content="ZE3XLdQP22" />
   
-  <title>在gitcafe中搭建自己的博客，以及在hexo中的配置 | Oulafen&#39;s blog</title>
+  <title>快速安装npm安装包 | Oulafen&#39;s blog</title>
   <meta name="author" content="oulafen">
   
-  <meta name="description" content="oulafen&#39;s coding note">
+  <meta name="description" content="国内快速安装npm包">
   
-  
+  <meta name="keywords" content="npm cnpm">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  <meta property="og:title" content="在gitcafe中搭建自己的博客，以及在hexo中的配置"/>
+  <meta property="og:title" content="快速安装npm安装包"/>
   <meta property="og:site_name" content="Oulafen&#39;s blog"/>
 
   
@@ -55,32 +55,21 @@
     <header>
       
         <div class="icon"></div>
-        <time datetime="2015-12-31T09:24:49.000Z"><a href="/2015/12/31/hexo-gitcafe-page/">2015-12-31</a></time>
+        <time datetime="2016-01-12T12:58:29.000Z"><a href="/2016/01/12/npm-to-cnpm/">2016-01-12</a></time>
       
       
   
-    <h1 class="title">在gitcafe中搭建自己的博客，以及在hexo中的配置</h1>
+    <h1 class="title">快速安装npm安装包</h1>
   
 
     </header>
     <div class="entry">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>使用github page建了自己的博客，可访问速度却跟不上，啥也不说了，果断在gitcafe上也迁一份博客代码吧。<br><a id="more"></a></p>
-<h2 id="创建gitcafe-page"><a href="#创建gitcafe-page" class="headerlink" title="创建gitcafe page"></a>创建gitcafe page</h2><p>首先要有个gitcafe账号是必须的啦，gitcafe官网<a href="https://gitcafe.com/" target="_blank" rel="external">戳戳戳</a></p>
-<p>gitcafe上有一篇关于page建立的帮助文档，看官网戳<a href="https://gitcafe.com/GitCafe/Help/wiki/Pages-%E7%9B%B8%E5%85%B3%E5%B8%AE%E5%8A%A9#wiki" target="_blank" rel="external">这里</a><br>有几点注意的如下：</p>
-<ul>
-<li>1、创建的项目务必要与用户名相同  </li>
-<li>2、创建gitcafe-pages分支<br>项目pull到本地后的一系列操作<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$git checkout gitcafe-pages #切换到gitcafe-pages分支，然后新建一个index.html文件，里面随便写点东西即可</div><div class="line">$git add . </div><div class="line">$git commit -m 'first commit'</div><div class="line">$git push -u origin gitcafe-pages  #关键，将本地分支同步到线上</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h2 id="配置hexo"><a href="#配置hexo" class="headerlink" title="配置hexo"></a>配置hexo</h2><p>还没入门？戳<a href="http://blog.oulafen.com/2015/12/29/hexo-quick-start/">这里</a></p>
-<p>在../hexo/_config.yml中，修改<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  message: ''</div><div class="line">  repository: git@github.com:oulafen/oulafen.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<p>为：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  message: ''</div><div class="line">  repo:</div><div class="line"><span class="code">    github: git@github.com:oulafen/oulafen.github.io.git,master</span></div><div class="line"><span class="code">    gitcafe: git@gitcafe.com:oulafen/oulafen.git,gitcafe-pages</span></div></pre></td></tr></table></figure></p>
-<p>注意：</p>
-<ul>
-<li>最好是配置下gitcafe和github的秘钥，git库的配置链接写成ssh的链接，不然老是输密码，手都麻了</li>
-</ul>
-<h2 id="GitCafe-已于-2016年5月31日-停止所有服务，届时在-GitCafe-的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至-Coding"><a href="#GitCafe-已于-2016年5月31日-停止所有服务，届时在-GitCafe-的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至-Coding" class="headerlink" title="GitCafe 已于 2016年5月31日 停止所有服务，届时在 GitCafe 的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至 Coding"></a>GitCafe 已于 2016年5月31日 停止所有服务，届时在 GitCafe 的账户资料及所有项目都将被永久删除，请尽快将您的资料和项目迁移至 Coding</h2><p>更多详情请<a href="https://gitcafe.com/migration" target="_blank" rel="external">戳这里</a></p>
+        <h1 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h1><p>npm全称：<code>node package manager</code>，即“node包管理器”；见名知意，还不晓得的，快谷歌。</p>
+<h1 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h1><p>国内使用 npm 速度很慢，so我们可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> install -g cnpm --registry=https:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</div></pre></td></tr></table></figure></p>
+<p>或者直接通过添加 npm 参数 alias 一个新命令:<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">alias cnpm="npm --registry=https://registry.npm.taobao.org \</div><div class="line">-<span class="ruby">-cache=$HOME/.npm/.cache/cnpm \</span></div><div class="line">-<span class="ruby">-disturl=<span class="symbol">https:</span>/<span class="regexp">/npm.taobao.org/dist</span> \</span></div><div class="line">-<span class="ruby">-userconfig=$HOME/.cnpmrc<span class="string">"</span></span></div><div class="line"></div><div class="line"># Or alias it in .bashrc or .zshrc</div><div class="line">$ echo '\n#alias for cnpm\nalias cnpm="npm --registry=https://registry.npm.taobao.org \</div><div class="line">  -<span class="ruby"><span class="string">-cache=$HOME/.npm/.cache/cnpm \</span></span></div><div class="line">  -<span class="ruby"><span class="string">-disturl=https://npm.taobao.org/dist \</span></span></div><div class="line">  -<span class="ruby"><span class="string">-userconfig=$HOME/.cnpmrc"</span><span class="string">' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</span></span></div></pre></td></tr></table></figure></p>
+<h1 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm <span class="keyword">install</span> [<span class="keyword">name</span>]</div></pre></td></tr></table></figure>
+<p>更多请看<a href="https://npm.taobao.org/" target="_blank" rel="external">淘宝NPM镜像</a></p>
 
       
     </div>
@@ -95,7 +84,7 @@
         
   
   <div class="tags">
-    <a href="/tags/git/">git</a>, <a href="/tags/hexo/">hexo</a>
+    <a href="/tags/node/">node</a>
   </div>
 
         <div class="alignright">
@@ -133,16 +122,16 @@
 
 <nav id="pagination" >
     
-    <a href="/2016/01/04/git-commands/" class="alignleft prev" >上一页</a>
+    <a href="/2016/02/24/frontend-mac-installing/" class="alignleft prev" >上一页</a>
     
     
-    <a href="/2015/12/31/hexo-commands/" class="alignright next" >下一页</a>
+    <a href="/2016/01/07/crop-image/" class="alignright next" >下一页</a>
     
     <div class="clearfix"></div>
 </nav>
 <section id="comment">
     <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2015/12/31/hexo-gitcafe-page/" data-title="在gitcafe中搭建自己的博客，以及在hexo中的配置" data-url="/2015/12/31/hexo-gitcafe-page/"></div>
+    <div class="ds-thread" data-thread-key="2016/01/12/npm-to-cnpm/" data-title="快速安装npm安装包" data-url="/2016/01/12/npm-to-cnpm/"></div>
     <!-- 多说评论框 end -->
     <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
     <script type="text/javascript">

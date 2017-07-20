@@ -56,6 +56,42 @@
     <header>
       
         <div class="icon"></div>
+        <time datetime="2016-01-12T12:58:29.000Z"><a href="/2016/01/12/npm-to-cnpm/">2016-01-12</a></time>
+      
+      
+  
+    <h1 class="title"><a href="/2016/01/12/npm-to-cnpm/">快速安装npm安装包</a></h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h1 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h1><p>npm全称：<code>node package manager</code>，即“node包管理器”；见名知意，还不晓得的，快谷歌。</p>
+<h1 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h1><p>国内使用 npm 速度很慢，so我们可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> install -g cnpm --registry=https:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</div></pre></td></tr></table></figure></p>
+<p>或者直接通过添加 npm 参数 alias 一个新命令:<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">alias cnpm="npm --registry=https://registry.npm.taobao.org \</div><div class="line">-<span class="ruby">-cache=$HOME/.npm/.cache/cnpm \</span></div><div class="line">-<span class="ruby">-disturl=<span class="symbol">https:</span>/<span class="regexp">/npm.taobao.org/dist</span> \</span></div><div class="line">-<span class="ruby">-userconfig=$HOME/.cnpmrc<span class="string">"</span></span></div><div class="line"></div><div class="line"># Or alias it in .bashrc or .zshrc</div><div class="line">$ echo '\n#alias for cnpm\nalias cnpm="npm --registry=https://registry.npm.taobao.org \</div><div class="line">  -<span class="ruby"><span class="string">-cache=$HOME/.npm/.cache/cnpm \</span></span></div><div class="line">  -<span class="ruby"><span class="string">-disturl=https://npm.taobao.org/dist \</span></span></div><div class="line">  -<span class="ruby"><span class="string">-userconfig=$HOME/.cnpmrc"</span><span class="string">' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</span></span></div></pre></td></tr></table></figure></p>
+<h1 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm <span class="keyword">install</span> [<span class="keyword">name</span>]</div></pre></td></tr></table></figure>
+<p>更多请看<a href="https://npm.taobao.org/" target="_blank" rel="external">淘宝NPM镜像</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+
+  <article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
         <time datetime="2016-01-07T02:53:14.000Z"><a href="/2016/01/07/crop-image/">2016-01-07</a></time>
       
       
@@ -385,7 +421,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>29</small></li>
+    <li><a href="/categories/blog/">blog</a><small>30</small></li>
   
   </ul>
 </div>
@@ -402,7 +438,7 @@
   
     <li><a href="/tags/mac/">mac</a><small>2</small></li>
   
-    <li><a href="/tags/node/">node</a><small>5</small></li>
+    <li><a href="/tags/node/">node</a><small>6</small></li>
   
     <li><a href="/tags/sql/">sql</a><small>1</small></li>
   
@@ -438,11 +474,11 @@
       </li>
     
       <li>
-        <a href="/2017/01/20/js-func-1/">js字符操作</a>
+        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
       </li>
     
       <li>
-        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
+        <a href="/2017/01/20/js-func-1/">js字符操作</a>
       </li>
     
       <li>
