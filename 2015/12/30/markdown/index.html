@@ -76,7 +76,7 @@
 <h2 id="开始新段落"><a href="#开始新段落" class="headerlink" title="开始新段落"></a>开始新段落</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">想要开始一个新的段落，</div><div class="line"></div><div class="line"></div><div class="line">乖乖的按两下回车吧</div></pre></td></tr></table></figure>
 <p>想要开始一个新的段落，</p>
 <p>乖乖的按两下回车吧</p>
-<h2 id="粗体"><a href="#粗体" class="headerlink" title="粗体"></a>粗体</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="strong">**两个星号包围的是粗体**</span></div><div class="line"><span class="emphasis">*一个星号包围的是斜体*</span></div></pre></td></tr></table></figure>
+<h2 id="粗体"><a href="#粗体" class="headerlink" title="粗体"></a>粗体</h2><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">*<span class="strong">*两个星号包围的是粗体*</span>*</div><div class="line"><span class="strong">*一个星号包围的是斜体*</span></div></pre></td></tr></table></figure>
 <p><strong>两个星号包围的是粗体</strong><br><em>一个星号包围的是斜体</em></p>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span><span class="bash"> 引用内容，多行的话，</span></div><div class="line">直接一个回车</div></pre></td></tr></table></figure>
 <blockquote>
@@ -173,24 +173,44 @@
     
     <div class="clearfix"></div>
 </nav>
-<section id="comment">
-    <!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="2015/12/30/markdown/" data-title="markdown 语法规则" data-url="/2015/12/30/markdown/"></div>
-    <!-- 多说评论框 end -->
-    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<!-- 来必力City版安装代码 -->
+<div id="lv-container" data-id="city" data-uid="MTAyMC8zMTQyNS83OTg5">
     <script type="text/javascript">
-        var duoshuoQuery = {short_name:"oulafen"};
-        (function() {
-            var ds = document.createElement('script');
-            ds.type = 'text/javascript';ds.async = true;
-            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-            ds.charset = 'UTF-8';
-            (document.getElementsByTagName('head')[0]
-            || document.getElementsByTagName('body')[0]).appendChild(ds);
-        })();
+        (function(d, s) {
+            var j, e = d.getElementsByTagName(s)[0];
+
+            if (typeof LivereTower === 'function') { return; }
+
+            j = d.createElement(s);
+            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+            j.async = true;
+
+            e.parentNode.insertBefore(j, e);
+        })(document, 'script');
     </script>
-    <!-- 多说公共JS代码 end -->
-</section>
+    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+</div>
+<!-- City版安装代码已完成 -->
+
+
+<!--<section id="comment">-->
+    <!--&lt;!&ndash; 多说评论框 start &ndash;&gt;-->
+    <!--<div class="ds-thread" data-thread-key="2015/12/30/markdown/" data-title="markdown 语法规则" data-url="/2015/12/30/markdown/"></div>-->
+    <!--&lt;!&ndash; 多说评论框 end &ndash;&gt;-->
+    <!--&lt;!&ndash; 多说公共JS代码 start (一个网页只需插入一次) &ndash;&gt;-->
+    <!--<script type="text/javascript">-->
+        <!--var duoshuoQuery = {short_name:"oulafen"};-->
+        <!--(function() {-->
+            <!--var ds = document.createElement('script');-->
+            <!--ds.type = 'text/javascript';ds.async = true;-->
+            <!--ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';-->
+            <!--ds.charset = 'UTF-8';-->
+            <!--(document.getElementsByTagName('head')[0]-->
+            <!--|| document.getElementsByTagName('body')[0]).appendChild(ds);-->
+        <!--})();-->
+    <!--</script>-->
+    <!--&lt;!&ndash; 多说公共JS代码 end &ndash;&gt;-->
+<!--</section>-->
 
 </div></div>
     <aside id="sidebar" class="alignright">
@@ -252,11 +272,11 @@
       </li>
     
       <li>
-        <a href="/2017/01/20/js-func-1/">js字符操作</a>
+        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
       </li>
     
       <li>
-        <a href="/2017/01/20/js-func-2/">js格式化日期</a>
+        <a href="/2017/01/20/js-func-1/">js字符操作</a>
       </li>
     
       <li>
