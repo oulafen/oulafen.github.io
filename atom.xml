@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.oulafen.com/"/>
-  <updated>2017-10-20T03:28:06.000Z</updated>
+  <updated>2017-11-22T14:54:53.000Z</updated>
   <id>http://blog.oulafen.com/</id>
   
   <author>
@@ -14,6 +14,59 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>用ES6写jquery语法时的this绑定问题</title>
+    <link href="http://blog.oulafen.com/2017/11/22/es6-jq-this/"/>
+    <id>http://blog.oulafen.com/2017/11/22/es6-jq-this/</id>
+    <published>2017-11-22T12:58:29.000Z</published>
+    <updated>2017-11-22T14:54:53.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在es6里使用jquery时，习惯用es5中直接获取dom元素，如<code>$(&#39;selector&#39;)</code>, 绑定<code>click</code>或<code>hover</code>等事件; 追求潮流，在事件中使用箭头函数来定义，并用到<code>$(this)</code>的话， 你一定像我一样遇到了小小的困扰。<br><a id="more"></a></p>
+<h2 id="问题重现"><a href="#问题重现" class="headerlink" title="问题重现"></a>问题重现</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>).hover(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            !Base.browser.mobile &amp;&amp; $(<span class="keyword">this</span>).find(<span class="string">'.qr-code'</span>).css(&#123;</div><div class="line">                <span class="string">'height'</span>: ( $(<span class="keyword">this</span>).find(<span class="string">'.img'</span>).height() + <span class="number">2</span> ) + <span class="string">'px'</span>,</div><div class="line">                <span class="string">'opacity'</span>: <span class="number">1</span>,</div><div class="line">                <span class="string">'z-index'</span>: <span class="number">1</span></div><div class="line">            &#125;);</div><div class="line">        &#125;, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            $(<span class="keyword">this</span>).find(<span class="string">'.qr-code'</span>).css(&#123;<span class="string">'opacity'</span>: <span class="number">0</span>, <span class="string">'z-index'</span>: <span class="number">-1</span>&#125;);</div><div class="line">        &#125;)</div><div class="line">        .click(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">            Base.browser.mobile &amp;&amp; location.href = $(<span class="keyword">this</span>).data(<span class="string">'href'</span>);</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<p>乍一看，这段代码没什么问题，逻辑也很简单，就是在所有属性有<code>data-action=&quot;imgQRCodeCtrl&quot;</code>的列表元素上绑定<code>hover</code>及<code>click</code>事件，实现pc端hover时能够使内部的一个块显示或隐藏，移动端点击时获取当前属性上的href并进行跳转；</p>
+<p>当然so easy，在过去的es5上按这种逻辑写完全么有问题；but ES6里解析后，会重新定义this，<br>如下是真实浏览器上加载解析后的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> $ = __webpack_require__(<span class="string">"./node_modules/jquery/dist/jquery.js"</span>);</div><div class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">    <span class="comment">//....</span></div><div class="line">    $(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>).hover(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        !_base2.default.browser.mobile &amp;&amp; $(_this).find(<span class="string">'.qr-code'</span>).css(&#123;</div><div class="line">            <span class="string">'height'</span>: $(_this).find(<span class="string">'.img'</span>).height() + <span class="number">2</span> + <span class="string">'px'</span>,</div><div class="line">            <span class="string">'opacity'</span>: <span class="number">1</span>,</div><div class="line">            <span class="string">'z-index'</span>: <span class="number">1</span></div><div class="line">        &#125;);</div><div class="line">    &#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        $(_this).find(<span class="string">'.qr-code'</span>).css(&#123; <span class="string">'opacity'</span>: <span class="number">0</span>, <span class="string">'z-index'</span>: <span class="number">-1</span> &#125;);</div><div class="line">    &#125;).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">        _base2.default.browser.mobile &amp;&amp; location.href = $(_this).data(<span class="string">'href'</span>);</div><div class="line">    &#125;);</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<p>看<code>this</code>发生了什么！</p>
+<p>即便没有真实运行这段代码，有点基础的，肯定能预见到页面上发生了什么。。。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><blockquote>
+<p>This has nothing to do with Traceur and turning something off, this is simply how ES6 works. It’s the specific functionality you’re asking for by using =&gt; instead of function () { }.</p>
+<p>If you want to write ES6, you need to write ES6 all the time, you can’t switch in and out of it on certain lines of code, and you definitely cannot suppress or alter the way =&gt; works. Even if you could, you would just wind up with some bizarre version of JavaScript that only you understand and which would never work correctly outside of your customized Traceur, which definitely isn’t the point of Traceur.</p>
+</blockquote>
+<p>我理解的大意是说 “ES6的工作方式就是这样，跟编译无关，与写法有关；若想用ES6，最好全用ES6的写法，不能改变它原本的定义…”（英文不好，欢迎大神指正 &gt;_&lt; ）</p>
+<p>看到这儿，吓得我赶紧查了查文档</p>
+<p>原来箭头函数，不绑定自己的this，这一下就说通了；好好看看下面这句吧，不遇到问题时永远记忆模糊，哈哈</p>
+<blockquote>
+<p>箭头函数表达式的语法比函数表达式更短，并且不绑定自己的this，arguments，super或 new.target。这些函数表达式最适合用于非方法函数，并且它们不能用作构造函数。</p>
+</blockquote>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><ul>
+<li>方法一：弄清除原理后，就很简单了，绑定<code>this</code>的函数不使用箭头函数不就行了，如下试验果然ok：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>)</div><div class="line">        <span class="comment">//...</span></div><div class="line">        .click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (Base.browser.mobile) &#123;</div><div class="line">                location.href = $(<span class="keyword">this</span>).data(<span class="string">'href'</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>方法二：不使用<code>this</code>, 使用<code>event.currentTarget</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>)</div><div class="line">        <span class="comment">//...</span></div><div class="line">        .click(<span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</div><div class="line">            <span class="keyword">if</span> (Base.browser.mobile) &#123;</div><div class="line">                location.href = $(event.currentTarget).data(<span class="string">'href'</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div></pre></td></tr></table></figure>
+<ul>
+<li>方法三：利用each函数循环绑定到每一个小元素上，如此就不需要<code>this</code>了</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>).each(<span class="function">(<span class="params">index, element</span>) =&gt;</span> &#123;</div><div class="line">        <span class="keyword">let</span> _this = element;</div><div class="line">        $(_this).click(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">                <span class="keyword">if</span> (Base.browser.mobile) &#123;</div><div class="line">                    location.href = $(_this).data(<span class="string">'href'</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">    &#125;);</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上的解决方法都能得到想要的效果，不过还是提议使用 <em>方法一</em> 来解决，更简单直白，在维护和团队合作上会起很大作用，因为没人愿意读别人写的拐了十八个弯弯的代码</p>
+<p>这个问题挺小的，可能某些大牛看到后会鄙视我，不过喜欢这种遇到问题自己一步步解决并完美解释清楚的感觉，还在路上，有问题欢迎交流指正，以后还会多多以这种方式总结下。。。</p>
+<p>参考链接<br><a href="https://stackoverflow.com/questions/27670401/using-jquery-this-with-es6-arrow-functions-lexical-this-binding" target="_blank" rel="external">https://stackoverflow.com/questions/27670401/using-jquery-this-with-es6-arrow-functions-lexical-this-binding</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      用ES6写jquery语法时的事件this绑定问题
+    
+    </summary>
+    
+      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="ES6" scheme="http://blog.oulafen.com/tags/ES6/"/>
+    
+  </entry>
   
   <entry>
     <title>mysql相关命令操作</title>
@@ -50,6 +103,33 @@
   </entry>
   
   <entry>
+    <title>js格式化日期</title>
+    <link href="http://blog.oulafen.com/2017/01/20/js-func-2/"/>
+    <id>http://blog.oulafen.com/2017/01/20/js-func-2/</id>
+    <published>2017-01-20T13:00:28.000Z</published>
+    <updated>2017-01-20T08:09:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根据时间戳格式化日期<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
+<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</div><div class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</div><div class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</div><div class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += h.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += min.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += s.toString();</div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      js格式化日期
+    
+    </summary>
+    
+      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="笔记" scheme="http://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>js字符操作</title>
     <link href="http://blog.oulafen.com/2017/01/20/js-func-1/"/>
     <id>http://blog.oulafen.com/2017/01/20/js-func-1/</id>
@@ -70,33 +150,6 @@
     <summary type="html">
     
       js操作字符
-    
-    </summary>
-    
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
-    
-    
-      <category term="笔记" scheme="http://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>js格式化日期</title>
-    <link href="http://blog.oulafen.com/2017/01/20/js-func-2/"/>
-    <id>http://blog.oulafen.com/2017/01/20/js-func-2/</id>
-    <published>2017-01-20T13:00:28.000Z</published>
-    <updated>2017-01-20T08:09:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根据时间戳格式化日期<br><a id="more"></a></p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
-<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</div><div class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</div><div class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</div><div class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += h.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += min.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += s.toString();</div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      js格式化日期
     
     </summary>
     
@@ -1135,7 +1188,7 @@
 <p>预览裁后结果：<br><img alt="预览裁后结果" src="http://statics.oulafen.com/gitblog-crop-3.jpg"></p>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="例："><a href="#例：" class="headerlink" title="例："></a>例：</h3><p>配置html：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"display:none"</span> <span class="attr">type</span>=<span class="string">"file"</span></span></div><div class="line">       <span class="attr">id</span>=<span class="string">"imgInput"</span></div><div class="line">       <span class="attr">onchange</span>=<span class="string">"imgCrop.change(this)"</span></div><div class="line">       <span class="attr">data-width</span>=<span class="string">"380"</span></div><div class="line">       <span class="attr">data-height</span>=<span class="string">"380"</span></div><div class="line">       <span class="attr">data-previd</span>=<span class="string">"imgPrev"</span></div><div class="line">       <span class="attr">data-maxsize</span>=<span class="string">"2"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span></span></div><div class="line">   <span class="attr">class</span>=<span class="string">"image-show J-upload-img-btn"</span></div><div class="line">   <span class="attr">data-target</span>=<span class="string">"imgInput"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"upload-img-box"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>上传图片<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"img-desc"</span>&gt;</span>支持小于2M，格式为jpg、png的图片，分辨率为380*380px<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"img-prev"</span> <span class="attr">id</span>=<span class="string">"imgPrev"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>裁切框：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal fade crop-modal J-crop-modal"</span> <span class="attr">data-backdrop</span>=<span class="string">"static"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-dialog"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-content"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-body"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"image-box"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">img</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"preview-box"</span> <span class="attr">style</span>=<span class="string">"width:150px;"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">img</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">class</span>=<span class="string">"J-canvas"</span> <span class="attr">style</span>=<span class="string">"overflow:hidden; display:none"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"crop-btns"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">class</span>=<span class="string">"btn confirm-btn J-confirm-btn"</span> <span class="attr">onclick</span>=<span class="string">"imgCrop.confirm()"</span>&gt;</span>确定<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">class</span>=<span class="string">"btn cancel-btn"</span>  <span class="attr">onclick</span>=<span class="string">"imgCrop.cancel()"</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>在dom底部加载js：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/jquery-1.11.3.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--用到了模态框--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/jquery.imgareaselect.pack.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>     <span class="comment">&lt;!--imgAreaSelect文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/img-crop.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--实现crop的功能文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        imgCrop.init(<span class="string">'.J-upload-img-btn'</span>);   <span class="comment">//初始化crop事件</span></div><div class="line">    &#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在dom底部加载js：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/jquery-1.11.3.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--用到了模态框--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/jquery.imgareaselect.pack.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>     <span class="comment">&lt;!--imgAreaSelect文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/img-crop.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--实现crop的功能文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">    $(function()&#123;</div><div class="line">        imgCrop.init('.J-upload-img-btn');   //初始化crop事件</div><div class="line">    &#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>说明：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="section">#html设置</span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"display:none"</span> <span class="attr">type</span>=<span class="string">"file"</span></span></span></div><div class="line">       <span class="attr">id</span>=<span class="string">"文件输入ID"</span></div><div class="line">       <span class="attr">onchange</span>=<span class="string">"imgCrop.change(this)"</span></div><div class="line">       <span class="attr">data-width</span>=<span class="string">"要裁切的宽度，/px"</span></div><div class="line">       <span class="attr">data-height</span>=<span class="string">"要裁切的高度，/px"</span></div><div class="line">       <span class="attr">data-previd</span>=<span class="string">"裁切后要显示在哪儿的ID"</span></div><div class="line">       <span class="attr">data-maxsize</span>=<span class="string">"图片大小设置，/M"</span>&gt;</div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span></span></span></div><div class="line">   <span class="attr">class</span>=<span class="string">"image-show J-upload-img-btn"</span></div><div class="line">   <span class="attr">data-target</span>=<span class="string">"文件输入ID"</span>&gt;</div><div class="line"><span class="code">    &lt;div class="upload-img-box"&gt;</span></div><div class="line"><span class="code">        &lt;span&gt;上传图片&lt;/span&gt;</span></div><div class="line"><span class="code">    &lt;/div&gt;</span></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"img-desc"</span>&gt;</span></span>支持小于2M，格式为jpg、png的图片，分辨率为380*380px<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"img-prev"</span> <span class="attr">id</span>=<span class="string">"裁切后要显示在哪儿的ID"</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
 <p>原理：</p>
 <ul>
@@ -1622,30 +1675,6 @@
     
     
       <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="http://blog.oulafen.com/2015/12/29/hello-world/"/>
-    <id>http://blog.oulafen.com/2015/12/29/hello-world/</id>
-    <published>2015-12-29T07:56:00.000Z</published>
-    <updated>2016-04-22T06:26:43.000Z</updated>
-    
-    <content type="html"><![CDATA[<h4 id="终于在自己的地盘上显示了-hello-world，码农不容易，好好珍惜这一亩三分地。"><a href="#终于在自己的地盘上显示了-hello-world，码农不容易，好好珍惜这一亩三分地。" class="headerlink" title="终于在自己的地盘上显示了 hello world，码农不容易，好好珍惜这一亩三分地。"></a>终于在自己的地盘上显示了 hello world，码农不容易，好好珍惜这一亩三分地。</h4><a id="more"></a> 
-<p>从03年第一次coding，到现在也有两个年头了,虽说中途静静的埋了自己一回，但如今在那坟头除草亦添了不少乐趣。。。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h4 id=&quot;终于在自己的地盘上显示了-hello-world，码农不容易，好好珍惜这一亩三分地。&quot;&gt;&lt;a href=&quot;#终于在自己的地盘上显示了-hello-world，码农不容易，好好珍惜这一亩三分地。&quot; class=&quot;headerlink&quot; title=&quot;终于在自己的地盘上显示了 hello world，码农不容易，好好珍惜这一亩三分地。&quot;&gt;&lt;/a&gt;终于在自己的地盘上显示了 hello world，码农不容易，好好珍惜这一亩三分地。&lt;/h4&gt;
-    
-    </summary>
-    
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
-    
-    
-      <category term="杂文" scheme="http://blog.oulafen.com/tags/%E6%9D%82%E6%96%87/"/>
     
   </entry>
   
