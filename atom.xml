@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.oulafen.com/"/>
-  <updated>2017-11-23T02:31:43.000Z</updated>
+  <updated>2018-07-14T01:08:13.000Z</updated>
   <id>http://blog.oulafen.com/</id>
   
   <author>
@@ -14,6 +14,71 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>解决公众号SPA的微信缓存问题</title>
+    <link href="http://blog.oulafen.com/2018/07/14/spa_wechat_cache/"/>
+    <id>http://blog.oulafen.com/2018/07/14/spa_wechat_cache/</id>
+    <published>2018-07-13T16:23:28.000Z</published>
+    <updated>2018-07-14T01:08:13.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>进行公众号开发的同学肯定遇到过这样的问题，新上线的功能，重新请求时，页面没有更新。<br>本人使用VUE开发的单页面应用，就是如此，问题虽小却棘手。<br>如何解决微信缓存问题，又不用手动更改版本号，实现自动化生成发布文件呢？</p>
+<a id="more"></a>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>项目背景：</p>
+<pre><code>基于vue-cli生成的webpack-sample项目
+项目目录（已去除跟本次问题无关的）
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">project_name</div><div class="line">├── dist            #编译好的资源目录</div><div class="line">│   ├── main<span class="selector-class">.bundle</span><span class="selector-class">.js</span></div><div class="line">│   ├── common<span class="selector-class">.bundle</span><span class="selector-class">.js</span></div><div class="line">│   ├── chunks      #模块化的js文件</div><div class="line">│   │      │── <span class="number">1</span>-xx<span class="selector-class">.js</span></div><div class="line">│   │      ...</div><div class="line">├── index<span class="selector-class">.html</span>      #项目入口文件</div><div class="line">├── webpack<span class="selector-class">.config</span><span class="selector-class">.js</span>   #webpack配置</div><div class="line">...</div></pre></td></tr></table></figure>
+</code></pre><p>在使用webpack打包代码时，会有个入口文件，以及一些模块化的chunks文件；<br>新更新的功能，build代码，更新服务器后，需手动修改入口文件的版本号</p>
+<p>index.html<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">&lt;!--...--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/dist/common.build.js?v=1.3.35"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"/dist/main.build.js?v=1.3.35"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>按预期<code>?v=xxx</code>更改后，浏览器会重新请求最新文件，But在微信浏览器中，并非全部如此。<br>经不完全测试，iphone系列以及部分安卓机可以按预期没有问题，但还有为数不少的安卓手机（比如三星、小米）上必须手动在微信网页右上角入口里刷新页面才行，这对用户来说肯定是不好的体验，不明所以的就会觉得程序有bug。</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>既然更改静态资源版本号不好使，那暴力点儿，直接更改文件名呢？<br>（之前受制于vue-li集成的webpack-sample项目，入口文件在项目跟目录下，无法自动更改，故每次发版后手动更改index.html里的文件版本号，有一点刀耕火种。）</p>
+<p>如此，便解决以下几个问题就万事大吉了</p>
+<pre><code>1.如何生成新名字的js文件
+2.新的js文件如何被自动引入到项目入口文件里
+3.如何不影响本地集成的开发环境
+</code></pre><ul>
+<li><p>针对第一点，在webpack的配置里修改export的filename即可</p>
+<p>  修改webpack配置，在原来的名字后面加了时间戳，每次build时都会发生变化</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//...</span></div><div class="line">output: &#123;</div><div class="line">    <span class="attr">path</span>: path.resolve(__dirname, <span class="string">'./dist'</span>),</div><div class="line">    <span class="attr">filename</span>: <span class="string">`[name]-<span class="subst">$&#123;<span class="built_in">Date</span>.parse(<span class="keyword">new</span> <span class="built_in">Date</span>())&#125;</span>.build.js`</span>, <span class="comment">//在原来的名字后面加了时间戳，每次build时都会发生变化</span></div><div class="line">    chunkFilename: <span class="string">'chunts/[name]-[chunkhash:8].js'</span></div><div class="line">&#125;,</div><div class="line"><span class="comment">//...</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>针对第二点，可以通过<code>html-webpack-plugin</code>这个官方插件解决<br>  修改webpack配置</p>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> HTMLWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</div><div class="line"><span class="comment">//...</span></div><div class="line"><span class="built_in">module</span>.exports = &#123;</div><div class="line">    <span class="comment">//...</span></div><div class="line">    plugins: [</div><div class="line">        <span class="keyword">new</span> HTMLWebpackPlugin(&#123;</div><div class="line">          <span class="attr">filename</span>: <span class="string">'index.html'</span>,            <span class="comment">//自动在dist目录下生成入口文件的名称（不能直接生成到项目根目录下）</span></div><div class="line">          template: <span class="string">'./index_template.html'</span>, <span class="comment">//以根目录下的`index_template.html`文件为模板</span></div><div class="line">        &#125;),</div><div class="line">        <span class="comment">//...</span></div><div class="line">    ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>针对第三点，下面稍微解释下为什么会有这个问题</p>
+<p>  本地<code>npm run dev</code>开发时，<code>webpack-dev-server</code>默认是以项目根目录下的<code>index.html</code>为项目入口文件，除了手动更改外，请求的静态文件是不变的；<br>  而之前的两点中重中之重是<strong>变化的文件名称</strong>，这样就找不到入口js文件了。</p>
+<p>  So，解决方案来了，同一个设置，两个环境不能兼容，那就分开设置吧^_^</p>
+<p>  webpack.config.js</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'development'</span>) &#123;</div><div class="line">    <span class="keyword">module</span>.<span class="keyword">exports</span>.output.publicPath = <span class="string">'/dist/'</span>;</div><div class="line">    <span class="keyword">module</span>.<span class="keyword">exports</span>.output.filename = <span class="string">'[name].build.js'</span>;</div><div class="line">&#125;</div><div class="line"><span class="keyword">if</span> (process.env.NODE_ENV === <span class="string">'production'</span>) &#123;</div><div class="line">    <span class="keyword">module</span>.<span class="keyword">exports</span>.output.filename = `[name]-$&#123;Date.parse(<span class="keyword">new</span> Date())&#125;.build.js`;</div><div class="line">    <span class="keyword">module</span>.<span class="keyword">exports</span>.plugins = (<span class="keyword">module</span>.<span class="keyword">exports</span>.plugins || []).concat([</div><div class="line">        <span class="keyword">new</span> HTMLWebpackPlugin(&#123;</div><div class="line">          filename: <span class="string">'index.html'</span>,</div><div class="line">          template: <span class="string">'./index_template.html'</span>,</div><div class="line">        &#125;),</div><div class="line">        <span class="comment">//...</span></div><div class="line">    ])</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>  到此，问题全部解决，结果很赞、很完美。</p>
+<p>  需要注意</p>
+<pre><code>1.`html-webpack-plugin`自动生成的入口文件只能是在设置的公共资源目录下
+2.打包后的代码的入口文件由原来的 `project_name/index.html` 变成了 `project_name/dist/index.html`,
+  一定要记得更改服务器nginx的项目目录配置
+</code></pre></li>
+</ul>
+<p>修改之后的项目目录<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">project_name</div><div class="line">├── dist                #编译好的资源目录</div><div class="line">│   ├── index<span class="selector-class">.html</span>      #线上打包入口文件</div><div class="line">│   ├── main-<span class="number">1531500891000</span><span class="selector-class">.bundle</span><span class="selector-class">.js</span></div><div class="line">│   ├── common-<span class="number">1531500891000</span><span class="selector-class">.bundle</span><span class="selector-class">.js</span></div><div class="line">│   ├── chunks      #模块化的js文件</div><div class="line">│   │      │── <span class="number">1</span>-xx<span class="selector-class">.js</span></div><div class="line">│   │      ...</div><div class="line">├── index<span class="selector-class">.html</span>              #本地开发入口文件</div><div class="line">├── index_template<span class="selector-class">.html</span>     #项目入口模板</div><div class="line">├── webpack<span class="selector-class">.config</span><span class="selector-class">.js</span>       #webpack配置</div><div class="line">...</div></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>解决微信SPA强缓存的问题，可以通过修改入口文件的js文件名称来彻底解决。除此之外，就是考虑工程化的问题，如何以更少的人工代价来实现了。</p>
+<p>此方案也有个弊端，就是每次更新版本后，用户请求网页时需要重新加载入口js文件，会耗些流量。鉴于此，可以尽量避免小功能多次更新，版本周期过短。</p>
+<ul>
+<li>话外音</li>
+</ul>
+<p>微信为什么会有这么强的缓存机制，或许有机会研读了微信内置qq浏览器后才会有答案。<br>感谢我们能够站在牛人的肩膀上，不用从头来实现底层的东西，只要简单几行来配置就可以了。</p>
+<p>此次解决完问题后，有种蜕变的感觉，出现问题后，看待问题的角度也有些变化，很有成就感。<br>之前疲于业务逻辑，没有时间好好的沉淀下来，以后要多些时间来自我总结。</p>
+<p>参考: <a href="https://webpack.js.org/plugins/html-webpack-plugin/" target="_blank" rel="external">https://webpack.js.org/plugins/html-webpack-plugin/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      解决公众号SPA的微信缓存问题
+    
+    </summary>
+    
+      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="笔记" scheme="http://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>用ES6写jquery语法时的this绑定问题</title>
@@ -1575,7 +1640,7 @@
 <h2 id="开始新段落"><a href="#开始新段落" class="headerlink" title="开始新段落"></a>开始新段落</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">想要开始一个新的段落，</div><div class="line"></div><div class="line"></div><div class="line">乖乖的按两下回车吧</div></pre></td></tr></table></figure>
 <p>想要开始一个新的段落，</p>
 <p>乖乖的按两下回车吧</p>
-<h2 id="粗体"><a href="#粗体" class="headerlink" title="粗体"></a>粗体</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="strong">**两个星号包围的是粗体**</span></div><div class="line"><span class="emphasis">*一个星号包围的是斜体*</span></div></pre></td></tr></table></figure>
+<h2 id="粗体"><a href="#粗体" class="headerlink" title="粗体"></a>粗体</h2><figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">*<span class="strong">*两个星号包围的是粗体*</span>*</div><div class="line"><span class="strong">*一个星号包围的是斜体*</span></div></pre></td></tr></table></figure>
 <p><strong>两个星号包围的是粗体</strong><br><em>一个星号包围的是斜体</em></p>
 <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span><span class="bash"> 引用内容，多行的话，</span></div><div class="line">直接一个回车</div></pre></td></tr></table></figure>
 <blockquote>
@@ -1625,57 +1690,6 @@
     
     
       <category term="标记语言" scheme="http://blog.oulafen.com/tags/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo 快速入门</title>
-    <link href="http://blog.oulafen.com/2015/12/29/hexo-quick-start/"/>
-    <id>http://blog.oulafen.com/2015/12/29/hexo-quick-start/</id>
-    <published>2015-12-29T09:56:19.000Z</published>
-    <updated>2016-04-25T03:41:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直想有个github的博客，今天终于得空整好了，都说hexo很好用，今日一试，果然爱不释手。<br><a id="more"></a><br>@Zippera对hexo的介绍已经相当详细，没看过的戳<a href="http://zipperary.com/categories/hexo/" target="_blank" rel="external">这里</a>。</p>
-<p><a href="https://hexo.io/docs/" target="_blank" rel="external">hexo官方文档戳这里</a></p>
-<p>这里只精简的总结一下，方便自己以后查阅。</p>
-<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>hexo是一个基于Node.js的静态博客程序，可以方便的生成静态网页托管在github和Heroku上。作者是来自台湾的@tommy351。</p>
-<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>快速、支持 Markdown、已移植 Octopress 插件、高扩展性、自订性、兼容于 Windows, Mac &amp; Linux、易用、轻、用户多。</p>
-<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>1、安装nodejs；windows平台nodejs下载地址: <a href="https://nodejs.org/en/" target="_blank" rel="external">下载</a><br>2、用npm安装hexo<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g hexo</div></pre></td></tr></table></figure></p>
-<p>3、创建hexo文件，并在其文件下init初始化<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo init</div></pre></td></tr></table></figure></p>
-<p>4、安装依赖包<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install</div></pre></td></tr></table></figure></p>
-<p>5、生成静态文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo generate</div></pre></td></tr></table></figure></p>
-<p>6、开启本地服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo server</div></pre></td></tr></table></figure></p>
-<p>7、Install hexo-deployer-git.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install hexo-deployer-git --save</div></pre></td></tr></table></figure></p>
-<p>8、配置(前提是有自己的xxx.github.io仓库，若没有请参考 <a href="https://pages.github.com/" target="_blank" rel="external">这里-github-pages-link</a><br>编辑<code>\hexo\_config.yml</code>:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/oulafen/oulafen.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
-<p>9、执行deploy，更新本地静态页面到自己的博客仓库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo generate</div><div class="line">hexo deploy</div></pre></td></tr></table></figure></p>
-<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>站点配置用到两个文件，一个是对整站的配置..\hexo\_config.yml，另一个是对主题的配置..\hexo\themes\_config.yml，基本都是见文知意，就不多解释。</p>
-<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>发表博客<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo new "my new post"</div></pre></td></tr></table></figure></p>
-<p>在..\hexo\source\_posts中打开这个文件，配置开头。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">title: my new post #可以改成中文的，如“新文章”</div><div class="line">date: 2013-05-29 07:56:29 #发表日期，一般不改动</div><div class="line">categories: blog #文章文类</div><div class="line">tags: [博客，文章] #文章标签，多于一项时用这种格式</div><div class="line">---</div></pre></td></tr></table></figure></p>
-<p>之后是正文，用markdown写，使用方法可参照博客<a href="http://zipperary.com/2013/05/22/introduction-to-markdown/" target="_blank" rel="external">Introduction to markdown</a></p>
-<h2 id="添加“多说”评论"><a href="#添加“多说”评论" class="headerlink" title="添加“多说”评论"></a>添加“多说”评论</h2><p>1、在<a href="http://duoshuo.com/" target="_blank" rel="external">多说</a>进行注册-创建站点后，在后台管理-（站点）-工具中获取通用代码。<br>2、将通用代码复制到<code>themes\light\layout\_partial\comment.ejs</code>里，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;% if ( page.comments)&#123; %&gt;</div><div class="line">&lt;section id=&quot;comment&quot;&gt;</div><div class="line">&lt;!-- 多说评论框 start --&gt;</div><div class="line">	&lt;div class=&quot;ds-thread&quot; data-thread-key=&quot;&lt;%- page.path %&gt;&quot; data-title=&quot;&lt;%- page.title %&gt;&quot; data-url=&quot;&lt;%- config.root %&gt;&lt;%- page.path %&gt;&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;!-- 多说评论框 end --&gt;</div><div class="line">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</div><div class="line">......</div><div class="line">&lt;!-- 多说公共JS代码 end --&gt;</div><div class="line">&lt;/section&gt;</div><div class="line">&lt;% &#125; %&gt;</div></pre></td></tr></table></figure></p>
-<p>其中data-thread-key的值为<code>文章的唯一标识</code>即可，我这里是用的path，也可用其他，注意必须是唯一的，否则很可能会出现不同文章间的评论错乱。</p>
-<h2 id="添加页面导航"><a href="#添加页面导航" class="headerlink" title="添加页面导航"></a>添加页面导航</h2><p>先检查文件夹<code>themes\light\layout\_partial\</code>中是否有pagination.ejs文件，若有，直接在添加评论代码前加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%- partial(&apos;pagination&apos;) %&gt;</div></pre></td></tr></table></figure></p>
-<p>且保证pagination.ejs中的内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&lt;nav id=&quot;pagination&quot; &gt;</div><div class="line">    &lt;% if (page.prev) &#123; %&gt;</div><div class="line">    &lt;a href=&quot;&lt;%- config.root %&gt;&lt;%- page.prev.path %&gt;&quot; class=&quot;alignleft prev&quot; &gt;&lt;%= __(&apos;prev&apos;) %&gt;&lt;/a&gt;</div><div class="line">    &lt;% &#125; %&gt;</div><div class="line">    &lt;% if (page.next) &#123; %&gt;</div><div class="line">    &lt;a href=&quot;&lt;%- config.root %&gt;&lt;%- page.next.path %&gt;&quot; class=&quot;alignright next&quot; &gt;&lt;%= __(&apos;next&apos;) %&gt;&lt;/a&gt;</div><div class="line">    &lt;% &#125; %&gt;</div><div class="line">    &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;</div><div class="line">&lt;/nav&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="导航栏添加”关于”"><a href="#导航栏添加”关于”" class="headerlink" title="导航栏添加”关于”"></a>导航栏添加”关于”</h2><p>1、执行<code>hexo new page &quot;about&quot;</code><br>2、在themes/light/_config.yml中，添加如下：<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">menu</span>:</div><div class="line">  关于: /<span class="keyword">about</span></div></pre></td></tr></table></figure></p>
-<p>3、到<code>source/about/index.md</code>中写关于你的内容。</p>
-<h2 id="导航栏添加”RSS”"><a href="#导航栏添加”RSS”" class="headerlink" title="导航栏添加”RSS”"></a>导航栏添加”RSS”</h2><p>1、安装RSS插件到本地：<code>npm install hexo-generator-feed</code><br>2、开启RSS功能：编辑hexo/_config.yml，添加如下代码：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">plugins:</div><div class="line"><span class="bullet">- </span>hexo-generator-feed</div></pre></td></tr></table></figure></p>
-<p>3、在站点添加链接<br>在<code>themes/light/_config.yml</code>中，编辑 <code>rss: /atom.xml</code>;<br>在<code>themes/light/layout/_partial/header.ejs</code>中，<code>&lt;ul&gt;&lt;/ul&gt;</code>之间，添加代码<code>&lt;li&gt;&lt;a href=&quot;/atom.xml&quot;&gt;RSS&lt;/a&gt;&lt;/li&gt;</code>。</p>
-<h2 id="添加sitemap"><a href="#添加sitemap" class="headerlink" title="添加sitemap"></a>添加sitemap</h2><p>方法同rss类似。<br>1、安装sitemap到本地：<code>npm install hexo-generator-sitemap</code><br>2、开启sitemap功能：编辑<code>hexo/_config.yml</code>，添加如下代码：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">plugins:</div><div class="line"><span class="bullet">- </span>hexo-generator-sitemap</div></pre></td></tr></table></figure></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>hexo命令简写<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">hexo clean #清除缓存 网页正常情况下可以忽略此条命令</div><div class="line">hexo generate  #可简写成 hexo g</div><div class="line">hexo deploy  #可简写成 hexo d</div><div class="line">hexo server  #可简写成 hexo s</div><div class="line">hexo new #可简写成 hexo n</div><div class="line"></div><div class="line">hexo new "postName" #新建文章</div><div class="line">hexo new page "pageName" #新建页面</div></pre></td></tr></table></figure></p>
-<p>由于hexo是基于nodejs的，所以若了解一些nodejs的用法，则有很多可以自由发挥的地方，甚至可以写一个自己的主题。<br>而作为web前端的妹子，自己的主题是一定会有的。</p>
-<p>还在不断更新中，敬请关注……    </p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;一直想有个github的博客，今天终于得空整好了，都说hexo很好用，今日一试，果然爱不释手。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
-    
-    
-      <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
     
   </entry>
   
