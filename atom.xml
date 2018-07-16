@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.oulafen.com/"/>
-  <updated>2018-07-14T01:08:13.000Z</updated>
+  <updated>2018-07-16T07:59:17.000Z</updated>
   <id>http://blog.oulafen.com/</id>
   
   <author>
@@ -14,6 +14,64 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Github Pages博客域名如何设置HTTPS</title>
+    <link href="http://blog.oulafen.com/2018/07/16/github-pages-link-https/"/>
+    <id>http://blog.oulafen.com/2018/07/16/github-pages-link-https/</id>
+    <published>2018-07-16T07:00:00.000Z</published>
+    <updated>2018-07-16T07:59:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近更新博客，发现被糊了一堆广告，实在是不忍直视，就找了下如何给本站加上HTTPS的方案。<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>背景介绍</p>
+<p>本站是基于Github Pages服务搭建的静态博客，官网<a href="https://pages.github.com/" target="_blank" rel="external">戳这里</a><br>如果是直接使用 username.github.io 这样的域名的话，是默认就支持了 HTTPS 的, 直接访问 <code>https://username.github.io</code> 即可，自定义域名就需要自己折腾一下了。</p>
+<p>在寻找解决方案的过程中，认识了<a href="https://app.netlify.com/" target="_blank" rel="external">Netlify</a></p>
+<pre><code>什么是Netlify?
+1、Netlify是一个现代网站自动化系统，其JAM架构代表了现代网站的发展趋势。所谓JAM，就是指基于客户端JavaScript、可重用API和预构建Markup标记语言的三者结合。
+2、有了Netlify，我们只要在本机Git中写前端代码，然后推送它，网站就能完美地对外呈现，并且附送大量好功能：全球CDN、持续部署、一键HTTPS和更多…
+</code></pre><p>简直要飞起的节奏。<br>下面介绍如何在Netlify上配置github pages博客的自定义域名。</p>
+<ul>
+<li>使用github注册<a href="https://app.netlify.com/" target="_blank" rel="external">Netlify</a>账号</li>
+<li>新建站点<br>  <img alt="新建站点0" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-0.jpg"><br>  选择代码托管平台<br>  <img alt="选中代码托管平台" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-1.jpg"><br>  选择代码仓库<br>  <img alt="选择代码仓库" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-2.jpg"><br>  选择代码分支及构建命令<br>  <img alt="选择代码分支及构建命令" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-3.jpg"></li>
+<li><p>更改站点默认名称<br>  <img alt="更改站点默认名称0" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-4.jpg"><br>  <img alt="更改站点默认名称1" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-5.jpg"><br>  <img alt="更改站点默认名称2" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-6.jpg"></p>
+<p>  保存成功后，到此可以通过<code>https://username.netlify.com</code>来访问，如 <a href="https://oulafen.netlify.com" target="_blank" rel="external">https://oulafen.netlify.com</a><br>  想使用自己的域名的话，还需以下步骤</p>
+</li>
+<li><p>绑定域名<br>  <img alt="绑定域名0" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-7.jpg"><br>  <img alt="绑定域名1" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-8.jpg"></p>
+</li>
+<li><p>添加域名解析<br>  <img alt="添加域名解析" style="width:100%" src="http://statics.oulafen.com/blog_https_netlify.jpg"></p>
+</li>
+</ul>
+<p>至此，大功告成</p>
+<p>访问<a href="https://blog.oulafen.com">https://blog.oulafen.com</a>是不是溜得飞起，哈哈，再也不怕被莫名劫持贴广告了。</p>
+<h2 id="补坑思考中的升华"><a href="#补坑思考中的升华" class="headerlink" title="补坑思考中的升华"></a>补坑思考中的升华</h2><p>除了使用netlify的方式外，还有没有其他的了呢？</p>
+<p>先说下使用netlify这类方式遇到的问题</p>
+<pre><code>github page的子项目链接，默认是`主项目域名/项目名称`进行访问，比如，我的一个项目`h5_my_home`，想通过外链直接看效果的话，之前直接通过http://blog.oulafen.com/h5_my_home来访问。
+现在改成https后，域名解析里找不到与username.github.io的对应关系，所以就不能通过原来的方式直接访问项目了。
+</code></pre><p>细细查看了项目的设置后，发现个更简单的方式<br>可以直接单独设置项目的domain<br>    <img alt="设置domain" style="width:100%" src="http://statics.oulafen.com/blog-https-domain-0.jpg"></p>
+<p>在域名解析里再加一条解析，就又大功告成了，^_^<br>    <img alt="添加域名解析1" style="width:100%" src="http://statics.oulafen.com/blog-https-domain-1.jpg"></p>
+<p>无独有偶，还看到了 Enforce HTTPS 的设置项，选中后，访问https的链接也是完美很。（需要添加域名24小时后才能选中）</p>
+<p>还有个小问题的解决方案，这里提一下</p>
+<pre><code>当有n多项目都需要展示时，按以上的方案，也得添加n条域名解析?
+这个肯定不是这样的，想想正则，立马有了眉目，直接在解析里加一条带*的即可，如
+</code></pre><p><img alt="添加域名解析2" style="width:100%" src="http://statics.oulafen.com/blog-https-domain-2.jpg"></p>
+<p>N多项目只需在github上设置下自定义域名即可<br><a href="https://10kpreheatingh5.coder.oulafen.com/" target="_blank" rel="external">https://10kpreheatingh5.coder.oulafen.com/</a><br><a href="https://drawmapcolorfully.coder.oulafen.com/" target="_blank" rel="external">https://drawmapcolorfully.coder.oulafen.com/</a><br><a href="https://rmbplus20.coder.oulafen.com/" target="_blank" rel="external">https://rmbplus20.coder.oulafen.com/</a><br><a href="https://lemoncitymedal.coder.oulafen.com/" target="_blank" rel="external">https://lemoncitymedal.coder.oulafen.com/</a><br><a href="https://scratchcardberlin.coder.oulafen.com/" target="_blank" rel="external">https://scratchcardberlin.coder.oulafen.com/</a><br>…</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>给github pages博客域名设置https，目前最简单直接的是，直接在项目<strong>setting</strong>里设置<code>custom domain</code>，并且24小时后选中<code>Enforce HTTPS</code>即可</p>
+<p>虽然解决过程中饶了一圈，不过有幸认识了Netlify，并对多个子项目的域名设置有了更多的思考，也算是涨了点知识。</p>
+<p>参考：<br>    <a href="https://jaeger.itscoder.com/web/2017/08/30/github-page-https.html" target="_blank" rel="external">https://jaeger.itscoder.com/web/2017/08/30/github-page-https.html</a><br>    <a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/" target="_blank" rel="external">https://help.github.com/articles/using-a-custom-domain-with-github-pages/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      Github Pages博客域名如何设置HTTPS
+    
+    </summary>
+    
+      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="git" scheme="http://blog.oulafen.com/tags/git/"/>
+    
+  </entry>
   
   <entry>
     <title>解决公众号SPA的微信缓存问题</title>
@@ -169,33 +227,6 @@
   </entry>
   
   <entry>
-    <title>js格式化日期</title>
-    <link href="http://blog.oulafen.com/2017/01/20/js-func-2/"/>
-    <id>http://blog.oulafen.com/2017/01/20/js-func-2/</id>
-    <published>2017-01-20T13:00:28.000Z</published>
-    <updated>2017-01-20T08:09:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根据时间戳格式化日期<br><a id="more"></a></p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
-<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</div><div class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</div><div class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</div><div class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += h.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += min.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += s.toString();</div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      js格式化日期
-    
-    </summary>
-    
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
-    
-    
-      <category term="笔记" scheme="http://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
     <title>js字符操作</title>
     <link href="http://blog.oulafen.com/2017/01/20/js-func-1/"/>
     <id>http://blog.oulafen.com/2017/01/20/js-func-1/</id>
@@ -216,6 +247,33 @@
     <summary type="html">
     
       js操作字符
+    
+    </summary>
+    
+      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="笔记" scheme="http://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js格式化日期</title>
+    <link href="http://blog.oulafen.com/2017/01/20/js-func-2/"/>
+    <id>http://blog.oulafen.com/2017/01/20/js-func-2/</id>
+    <published>2017-01-20T13:00:28.000Z</published>
+    <updated>2017-01-20T08:09:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根据时间戳格式化日期<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
+<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</div><div class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</div><div class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</div><div class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += h.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += min.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += s.toString();</div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      js格式化日期
     
     </summary>
     
@@ -1210,13 +1268,14 @@
     <link href="http://blog.oulafen.com/2016/01/12/npm-to-cnpm/"/>
     <id>http://blog.oulafen.com/2016/01/12/npm-to-cnpm/</id>
     <published>2016-01-12T12:58:29.000Z</published>
-    <updated>2018-07-14T08:08:06.000Z</updated>
+    <updated>2018-07-14T08:25:56.000Z</updated>
     
-    <content type="html"><![CDATA[<a id="more"></a>
-<h1 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h1><p>npm全称：<code>node package manager</code>，即“node包管理器”；见名知意，还不晓得的，快谷歌。</p>
-<h1 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h1><p>国内使用 npm 速度很慢，so我们可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> install -g cnpm --registry=https:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</div></pre></td></tr></table></figure></p>
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>不翻墙的情况下，使用npm直接安装依赖时，有没有很让人捉急，那么在有没有什么办法呢？</p>
+<a id="more"></a>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="npm"><a href="#npm" class="headerlink" title="npm"></a>npm</h3><p>npm全称：<code>node package manager</code>，即“node包管理器”；见名知意，还不晓得的，快谷歌。</p>
+<h3 id="cnpm"><a href="#cnpm" class="headerlink" title="cnpm"></a>cnpm</h3><p>国内使用 npm 速度很慢，so我们可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm<br><figure class="highlight coffeescript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">npm</span> install -g cnpm --registry=https:<span class="regexp">//</span>registry.<span class="built_in">npm</span>.taobao.org</div></pre></td></tr></table></figure></p>
 <p>或者直接通过添加 npm 参数 alias 一个新命令:<br><figure class="highlight haml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">alias cnpm="npm --registry=https://registry.npm.taobao.org \</div><div class="line">-<span class="ruby">-cache=$HOME/.npm/.cache/cnpm \</span></div><div class="line">-<span class="ruby">-disturl=<span class="symbol">https:</span>/<span class="regexp">/npm.taobao.org/dist</span> \</span></div><div class="line">-<span class="ruby">-userconfig=$HOME/.cnpmrc<span class="string">"</span></span></div><div class="line"></div><div class="line"># Or alias it in .bashrc or .zshrc</div><div class="line">$ echo '\n#alias for cnpm\nalias cnpm="npm --registry=https://registry.npm.taobao.org \</div><div class="line">  -<span class="ruby"><span class="string">-cache=$HOME/.npm/.cache/cnpm \</span></span></div><div class="line">  -<span class="ruby"><span class="string">-disturl=https://npm.taobao.org/dist \</span></span></div><div class="line">  -<span class="ruby"><span class="string">-userconfig=$HOME/.cnpmrc"</span><span class="string">' &gt;&gt; ~/.zshrc &amp;&amp; source ~/.zshrc</span></span></div></pre></td></tr></table></figure></p>
-<h1 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h1><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm <span class="keyword">install</span> [<span class="keyword">name</span>]</div></pre></td></tr></table></figure>
+<h3 id="安装模块"><a href="#安装模块" class="headerlink" title="安装模块"></a>安装模块</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cnpm <span class="keyword">install</span> [<span class="keyword">name</span>]</div></pre></td></tr></table></figure>
 <p>更多请看<a href="https://npm.taobao.org/" target="_blank" rel="external">淘宝NPM镜像</a></p>
 ]]></content>
     
@@ -1585,9 +1644,9 @@
       <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
-    
       <category term="git" scheme="http://blog.oulafen.com/tags/git/"/>
+    
+      <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
     
   </entry>
   
@@ -1620,77 +1679,6 @@
     
     
       <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>markdown 语法规则</title>
-    <link href="http://blog.oulafen.com/2015/12/30/markdown/"/>
-    <id>http://blog.oulafen.com/2015/12/30/markdown/</id>
-    <published>2015-12-30T10:38:54.000Z</published>
-    <updated>2016-07-01T04:03:19.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>借维基百科的描述：<br> Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。[1]这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。</p>
-<a id="more"></a> 
-<p>更多简介戳<a href="http://www.jianshu.com/p/17fdcf17bbb4" target="_blank" rel="external">这里</a></p>
-<h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">为了页面版式好看，只演示四、六级标题</div><div class="line"># 这里是一级标题(注意#号后面有个空格)</div><div class="line">### 这里是三级标题</div><div class="line">###### 这里是六级标题，就到这里了，木有七级！</div></pre></td></tr></table></figure>
-<h4 id="这里是四级标题"><a href="#这里是四级标题" class="headerlink" title="这里是四级标题"></a>这里是四级标题</h4><h6 id="这里是六级标题，就到这里了，木有七级！"><a href="#这里是六级标题，就到这里了，木有七级！" class="headerlink" title="这里是六级标题，就到这里了，木有七级！"></a>这里是六级标题，就到这里了，木有七级！</h6><h2 id="缩进"><a href="#缩进" class="headerlink" title="缩进"></a>缩进</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">段落前面没有缩进，看到了吧。</div><div class="line">要想使用缩进，在中文输入法中改成「全角」输入，再按两个空格</div></pre></td></tr></table></figure>
-<p>段落前面没有缩进，看到了吧。<br>　　要想使用缩进，在中文输入法中改成「全角」输入，再按两个空格</p>
-<h2 id="换行"><a href="#换行" class="headerlink" title="换行"></a>换行</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">行尾一个回车</div><div class="line">即可换行。</div><div class="line">若不起作用，则在行末加两个空格</div></pre></td></tr></table></figure>
-<p>行尾一个回车<br>即可换行。</p>
-<h2 id="开始新段落"><a href="#开始新段落" class="headerlink" title="开始新段落"></a>开始新段落</h2><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">想要开始一个新的段落，</div><div class="line"></div><div class="line"></div><div class="line">乖乖的按两下回车吧</div></pre></td></tr></table></figure>
-<p>想要开始一个新的段落，</p>
-<p>乖乖的按两下回车吧</p>
-<h2 id="粗体"><a href="#粗体" class="headerlink" title="粗体"></a>粗体</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="strong">**两个星号包围的是粗体**</span></div><div class="line"><span class="emphasis">*一个星号包围的是斜体*</span></div></pre></td></tr></table></figure>
-<p><strong>两个星号包围的是粗体</strong><br><em>一个星号包围的是斜体</em></p>
-<h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;</span><span class="bash"> 引用内容，多行的话，</span></div><div class="line">直接一个回车</div></pre></td></tr></table></figure>
-<blockquote>
-<p>引用内容，多行的话，<br>直接一个回车</p>
-</blockquote>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">`反引号包围的是行内代码`</div><div class="line">``嵌套的话，可以使用`两个双引号`嵌套在外面``</div><div class="line">```html</div><div class="line">三个反引号包围的是代码块。</div><div class="line">会显示行号。</div><div class="line">也有高亮显示</div><div class="line">我上面加了html，你也可以不加。如果不能高亮，那么还是加上吧。</div><div class="line">另外，如果你的代码块包围的是js，那你应该写javascript而不是html</div><div class="line">&lt;div&gt;</div><div class="line">   &lt;h5&gt;标题5&lt;/h5&gt;</div><div class="line">&lt;/div&gt;</div><div class="line">嵌套的话，可以使用六个反引号嵌套在外面。</div></pre></td></tr></table></figure>
-<p><code>反引号</code>包围的是行内代码</p>
-<p><code>嵌套的话，可以使用`两个双引号`嵌套在</code>外面</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">#三个反引号包围的是代码块。</div><div class="line">#会显示行号。</div><div class="line">#也有高亮显示</div><div class="line">#我上面加了html，你也可以不加。如果不能高亮，那么还是加上吧。</div><div class="line">#另外，如果你的代码块包围的是js，那你应该写javascript而不是html</div><div class="line"><span class="tag">&lt;<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">h5</span>&gt;</span>标题5<span class="tag">&lt;/<span class="name">h5</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">1. 有序列表1，注意点之后的空格。</div><div class="line">2. 有序列表2.</div><div class="line">1. 我这里写成1，在显示时还是3，厉害不。  </div><div class="line">1. 有序列表1</div><div class="line"> 详细内容，注意前面有一个空格</div><div class="line">2. 有序列表2</div><div class="line"> 详细内容</div></pre></td></tr></table></figure>
-<ol>
-<li>有序列表1，注意点之后的空格。</li>
-<li>有序列表2.</li>
-<li><p>我这里写成1，在显示时还是3，厉害不。</p>
-</li>
-<li><p>有序列表1<br>详细内容，注意前面有一个空格</p>
-</li>
-<li>有序列表2<br>详细内容</li>
-</ol>
-<h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">- 无序列表1</div><div class="line">- 无序列表2</div><div class="line">- 无序列表3</div><div class="line"> - 小1，注意前面有一个空格</div><div class="line"> - 小2</div></pre></td></tr></table></figure>
-<ul>
-<li>无序列表1</li>
-<li>无序列表2</li>
-<li>无序列表3<ul>
-<li>小1，注意前面有一个空格</li>
-<li>小2</li>
-</ul>
-</li>
-</ul>
-<h2 id="插入链接"><a href="#插入链接" class="headerlink" title="插入链接"></a>插入链接</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">超级链接：[<span class="string">我的博客</span>](<span class="link">http://oulafen.github.com</span>)</div></pre></td></tr></table></figure>
-<p>超级链接：<a href="http://oulafen.github.com" target="_blank" rel="external">我的博客</a></p>
-<h2 id="插入图片"><a href="#插入图片" class="headerlink" title="插入图片"></a>插入图片</h2><figure class="highlight markdown"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">插入图片：</div><div class="line">![<span class="string">mua</span>](<span class="link">http://statics.oulafen.com/gitblog-mua.jpg</span>)</div></pre></td></tr></table></figure>
-<p>插入图片：<br><img src="http://statics.oulafen.com/gitblog-mua.jpg" alt="mua"><br>另外，markdown完全兼容html，可以直接写html，也可以写样式，例如：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;<span class="selector-tag">img</span> alt=<span class="string">"mua"</span> style=<span class="string">"width:100px;"</span> src=<span class="string">"http://statics.oulafen.com/gitblog-mua.jpg"</span>&gt;</div></pre></td></tr></table></figure></p>
-<p><img alt="mua" style="width:100px;" src="http://statics.oulafen.com/gitblog-mua.jpg"></p>
-<h2 id="插入各种线"><a href="#插入各种线" class="headerlink" title="插入各种线"></a>插入各种线</h2><figure class="highlight yaml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">~~删除线~~，可在行内显示</span></div><div class="line"><span class="string">分割线用`---`，必须单独一行，并且在前面要有一空行</span></div><div class="line"></div><div class="line"><span class="meta">---</span></div></pre></td></tr></table></figure>
-<p><del>删除线</del>删除线外<br>分割线</p>
-<hr>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h2 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h2&gt;&lt;p&gt;借维基百科的描述：&lt;br&gt; Markdown 是一种轻量级标记语言，创始人为约翰·格鲁伯（John Gruber）。它允许人们“使用易读易写的纯文本格式编写文档，然后转换成有效的XHTML(或者HTML)文档”。[1]这种语言吸收了很多在电子邮件中已有的纯文本标记的特性。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
-    
-    
-      <category term="标记语言" scheme="http://blog.oulafen.com/tags/%E6%A0%87%E8%AE%B0%E8%AF%AD%E8%A8%80/"/>
     
   </entry>
   
