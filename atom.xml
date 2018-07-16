@@ -4,9 +4,9 @@
   <subtitle>Stay hungry, stay foolish...</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://blog.oulafen.com/"/>
+  <link href="https://blog.oulafen.com/"/>
   <updated>2018-07-16T07:59:17.000Z</updated>
-  <id>http://blog.oulafen.com/</id>
+  <id>https://blog.oulafen.com/</id>
   
   <author>
     <name>oulafen</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Github Pages博客域名如何设置HTTPS</title>
-    <link href="http://blog.oulafen.com/2018/07/16/github-pages-link-https/"/>
-    <id>http://blog.oulafen.com/2018/07/16/github-pages-link-https/</id>
+    <link href="https://blog.oulafen.com/2018/07/16/github-pages-link-https/"/>
+    <id>https://blog.oulafen.com/2018/07/16/github-pages-link-https/</id>
     <published>2018-07-16T07:00:00.000Z</published>
     <updated>2018-07-16T07:59:17.000Z</updated>
     
@@ -66,17 +66,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="git" scheme="http://blog.oulafen.com/tags/git/"/>
+      <category term="git" scheme="https://blog.oulafen.com/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>解决公众号SPA的微信缓存问题</title>
-    <link href="http://blog.oulafen.com/2018/07/14/spa_wechat_cache/"/>
-    <id>http://blog.oulafen.com/2018/07/14/spa_wechat_cache/</id>
+    <link href="https://blog.oulafen.com/2018/07/14/spa_wechat_cache/"/>
+    <id>https://blog.oulafen.com/2018/07/14/spa_wechat_cache/</id>
     <published>2018-07-13T16:23:28.000Z</published>
     <updated>2018-07-14T01:08:13.000Z</updated>
     
@@ -131,17 +131,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="笔记" scheme="http://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>用ES6写jquery语法时的this绑定问题</title>
-    <link href="http://blog.oulafen.com/2017/11/22/es6-jq-this/"/>
-    <id>http://blog.oulafen.com/2017/11/22/es6-jq-this/</id>
+    <link href="https://blog.oulafen.com/2017/11/22/es6-jq-this/"/>
+    <id>https://blog.oulafen.com/2017/11/22/es6-jq-this/</id>
     <published>2017-11-22T12:58:29.000Z</published>
     <updated>2017-11-23T02:31:43.000Z</updated>
     
@@ -185,17 +185,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="ES6" scheme="http://blog.oulafen.com/tags/ES6/"/>
+      <category term="ES6" scheme="https://blog.oulafen.com/tags/ES6/"/>
     
   </entry>
   
   <entry>
     <title>mysql相关命令操作</title>
-    <link href="http://blog.oulafen.com/2017/04/01/mysql-command/"/>
-    <id>http://blog.oulafen.com/2017/04/01/mysql-command/</id>
+    <link href="https://blog.oulafen.com/2017/04/01/mysql-command/"/>
+    <id>https://blog.oulafen.com/2017/04/01/mysql-command/</id>
     <published>2017-04-01T13:00:29.000Z</published>
     <updated>2017-10-20T03:28:06.000Z</updated>
     
@@ -219,17 +219,44 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="sql" scheme="http://blog.oulafen.com/tags/sql/"/>
+      <category term="sql" scheme="https://blog.oulafen.com/tags/sql/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>js格式化日期</title>
+    <link href="https://blog.oulafen.com/2017/01/20/js-func-2/"/>
+    <id>https://blog.oulafen.com/2017/01/20/js-func-2/</id>
+    <published>2017-01-20T13:00:28.000Z</published>
+    <updated>2017-01-20T08:09:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根据时间戳格式化日期<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
+<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</div><div class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</div><div class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</div><div class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += h.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += min.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += s.toString();</div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      js格式化日期
+    
+    </summary>
+    
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="笔记" scheme="https://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>js字符操作</title>
-    <link href="http://blog.oulafen.com/2017/01/20/js-func-1/"/>
-    <id>http://blog.oulafen.com/2017/01/20/js-func-1/</id>
+    <link href="https://blog.oulafen.com/2017/01/20/js-func-1/"/>
+    <id>https://blog.oulafen.com/2017/01/20/js-func-1/</id>
     <published>2017-01-20T13:00:28.000Z</published>
     <updated>2017-01-20T08:09:35.000Z</updated>
     
@@ -250,44 +277,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="笔记" scheme="http://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>js格式化日期</title>
-    <link href="http://blog.oulafen.com/2017/01/20/js-func-2/"/>
-    <id>http://blog.oulafen.com/2017/01/20/js-func-2/</id>
-    <published>2017-01-20T13:00:28.000Z</published>
-    <updated>2017-01-20T08:09:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根据时间戳格式化日期<br><a id="more"></a></p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
-<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</div><div class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</div><div class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</div><div class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += h.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += min.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += s.toString();</div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      js格式化日期
-    
-    </summary>
-    
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
-    
-    
-      <category term="笔记" scheme="http://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
+      <category term="笔记" scheme="https://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
     
   </entry>
   
   <entry>
     <title>vue2.0-快速构建高性能的SPA(结合webpack, router, 组件)</title>
-    <link href="http://blog.oulafen.com/2016/11/18/vue-2-spa-start/"/>
-    <id>http://blog.oulafen.com/2016/11/18/vue-2-spa-start/</id>
+    <link href="https://blog.oulafen.com/2016/11/18/vue-2-spa-start/"/>
+    <id>https://blog.oulafen.com/2016/11/18/vue-2-spa-start/</id>
     <published>2016-11-18T12:58:29.000Z</published>
     <updated>2017-01-18T02:10:19.000Z</updated>
     
@@ -390,17 +390,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="vue" scheme="http://blog.oulafen.com/tags/vue/"/>
+      <category term="vue" scheme="https://blog.oulafen.com/tags/vue/"/>
     
   </entry>
   
   <entry>
     <title>nodejs之redis的安装与使用</title>
-    <link href="http://blog.oulafen.com/2016/10/17/node-redis/"/>
-    <id>http://blog.oulafen.com/2016/10/17/node-redis/</id>
+    <link href="https://blog.oulafen.com/2016/10/17/node-redis/"/>
+    <id>https://blog.oulafen.com/2016/10/17/node-redis/</id>
     <published>2016-10-17T13:00:29.000Z</published>
     <updated>2016-10-17T03:46:42.000Z</updated>
     
@@ -423,17 +423,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="node" scheme="http://blog.oulafen.com/tags/node/"/>
+      <category term="node" scheme="https://blog.oulafen.com/tags/node/"/>
     
   </entry>
   
   <entry>
     <title>vue.js-快速构建webpack项目模板</title>
-    <link href="http://blog.oulafen.com/2016/10/11/vue-webpack/"/>
-    <id>http://blog.oulafen.com/2016/10/11/vue-webpack/</id>
+    <link href="https://blog.oulafen.com/2016/10/11/vue-webpack/"/>
+    <id>https://blog.oulafen.com/2016/10/11/vue-webpack/</id>
     <published>2016-10-11T12:58:29.000Z</published>
     <updated>2016-11-10T09:44:53.000Z</updated>
     
@@ -489,19 +489,19 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="vue" scheme="http://blog.oulafen.com/tags/vue/"/>
+      <category term="vue" scheme="https://blog.oulafen.com/tags/vue/"/>
     
-      <category term="webpack" scheme="http://blog.oulafen.com/tags/webpack/"/>
+      <category term="webpack" scheme="https://blog.oulafen.com/tags/webpack/"/>
     
   </entry>
   
   <entry>
     <title>整理vue-1.0之旅</title>
-    <link href="http://blog.oulafen.com/2016/09/16/vue-1/"/>
-    <id>http://blog.oulafen.com/2016/09/16/vue-1/</id>
+    <link href="https://blog.oulafen.com/2016/09/16/vue-1/"/>
+    <id>https://blog.oulafen.com/2016/09/16/vue-1/</id>
     <published>2016-09-16T13:00:28.000Z</published>
     <updated>2017-01-17T02:28:56.000Z</updated>
     
@@ -543,17 +543,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="vue" scheme="http://blog.oulafen.com/tags/vue/"/>
+      <category term="vue" scheme="https://blog.oulafen.com/tags/vue/"/>
     
   </entry>
   
   <entry>
     <title>判断密码强度</title>
-    <link href="http://blog.oulafen.com/2016/08/25/judge-password-strength/"/>
-    <id>http://blog.oulafen.com/2016/08/25/judge-password-strength/</id>
+    <link href="https://blog.oulafen.com/2016/08/25/judge-password-strength/"/>
+    <id>https://blog.oulafen.com/2016/08/25/judge-password-strength/</id>
     <published>2016-08-25T13:00:29.000Z</published>
     <updated>2016-08-24T08:33:28.000Z</updated>
     
@@ -566,17 +566,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>js和node中的正则验证总结</title>
-    <link href="http://blog.oulafen.com/2016/08/24/validate-summary/"/>
-    <id>http://blog.oulafen.com/2016/08/24/validate-summary/</id>
+    <link href="https://blog.oulafen.com/2016/08/24/validate-summary/"/>
+    <id>https://blog.oulafen.com/2016/08/24/validate-summary/</id>
     <published>2016-08-24T13:00:29.000Z</published>
     <updated>2016-08-24T08:36:13.000Z</updated>
     
@@ -600,17 +600,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="正则" scheme="http://blog.oulafen.com/tags/%E6%AD%A3%E5%88%99/"/>
+      <category term="正则" scheme="https://blog.oulafen.com/tags/%E6%AD%A3%E5%88%99/"/>
     
   </entry>
   
   <entry>
     <title>nodejs中的base64转码/解码</title>
-    <link href="http://blog.oulafen.com/2016/07/07/node-base64-encoding-decoding/"/>
-    <id>http://blog.oulafen.com/2016/07/07/node-base64-encoding-decoding/</id>
+    <link href="https://blog.oulafen.com/2016/07/07/node-base64-encoding-decoding/"/>
+    <id>https://blog.oulafen.com/2016/07/07/node-base64-encoding-decoding/</id>
     <published>2016-07-07T13:00:29.000Z</published>
     <updated>2016-11-10T09:43:26.000Z</updated>
     
@@ -641,17 +641,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="node" scheme="http://blog.oulafen.com/tags/node/"/>
+      <category term="node" scheme="https://blog.oulafen.com/tags/node/"/>
     
   </entry>
   
   <entry>
     <title>使用canvas绘制虚线</title>
-    <link href="http://blog.oulafen.com/2016/07/05/canvas-dashed-line/"/>
-    <id>http://blog.oulafen.com/2016/07/05/canvas-dashed-line/</id>
+    <link href="https://blog.oulafen.com/2016/07/05/canvas-dashed-line/"/>
+    <id>https://blog.oulafen.com/2016/07/05/canvas-dashed-line/</id>
     <published>2016-07-05T13:00:28.000Z</published>
     <updated>2016-08-23T06:33:40.000Z</updated>
     
@@ -667,17 +667,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>关于grunt的一二三</title>
-    <link href="http://blog.oulafen.com/2016/06/12/grunt/"/>
-    <id>http://blog.oulafen.com/2016/06/12/grunt/</id>
+    <link href="https://blog.oulafen.com/2016/06/12/grunt/"/>
+    <id>https://blog.oulafen.com/2016/06/12/grunt/</id>
     <published>2016-06-12T13:00:29.000Z</published>
     <updated>2016-11-10T09:44:20.000Z</updated>
     
@@ -704,19 +704,19 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="node" scheme="http://blog.oulafen.com/tags/node/"/>
+      <category term="node" scheme="https://blog.oulafen.com/tags/node/"/>
     
-      <category term="构建工具" scheme="http://blog.oulafen.com/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/"/>
+      <category term="构建工具" scheme="https://blog.oulafen.com/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/"/>
     
   </entry>
   
   <entry>
     <title>nodejs之不可或缺的forever模块</title>
-    <link href="http://blog.oulafen.com/2016/06/03/node-forever/"/>
-    <id>http://blog.oulafen.com/2016/06/03/node-forever/</id>
+    <link href="https://blog.oulafen.com/2016/06/03/node-forever/"/>
+    <id>https://blog.oulafen.com/2016/06/03/node-forever/</id>
     <published>2016-06-03T13:00:29.000Z</published>
     <updated>2016-06-06T02:20:09.000Z</updated>
     
@@ -774,17 +774,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="node" scheme="http://blog.oulafen.com/tags/node/"/>
+      <category term="node" scheme="https://blog.oulafen.com/tags/node/"/>
     
   </entry>
   
   <entry>
     <title>centos服务器nodejs相关环境搭建</title>
-    <link href="http://blog.oulafen.com/2016/06/03/node-centos/"/>
-    <id>http://blog.oulafen.com/2016/06/03/node-centos/</id>
+    <link href="https://blog.oulafen.com/2016/06/03/node-centos/"/>
+    <id>https://blog.oulafen.com/2016/06/03/node-centos/</id>
     <published>2016-06-03T12:00:29.000Z</published>
     <updated>2016-06-06T02:20:24.000Z</updated>
     
@@ -854,19 +854,19 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="node" scheme="http://blog.oulafen.com/tags/node/"/>
+      <category term="node" scheme="https://blog.oulafen.com/tags/node/"/>
     
-      <category term="环境" scheme="http://blog.oulafen.com/tags/%E7%8E%AF%E5%A2%83/"/>
+      <category term="环境" scheme="https://blog.oulafen.com/tags/%E7%8E%AF%E5%A2%83/"/>
     
   </entry>
   
   <entry>
     <title>移动端h5技巧总结</title>
-    <link href="http://blog.oulafen.com/2016/05/03/frontend-mobile-h5-skills/"/>
-    <id>http://blog.oulafen.com/2016/05/03/frontend-mobile-h5-skills/</id>
+    <link href="https://blog.oulafen.com/2016/05/03/frontend-mobile-h5-skills/"/>
+    <id>https://blog.oulafen.com/2016/05/03/frontend-mobile-h5-skills/</id>
     <published>2016-05-03T05:03:32.000Z</published>
     <updated>2016-05-03T07:59:53.000Z</updated>
     
@@ -907,17 +907,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>关于rem</title>
-    <link href="http://blog.oulafen.com/2016/05/03/frontend-rem/"/>
-    <id>http://blog.oulafen.com/2016/05/03/frontend-rem/</id>
+    <link href="https://blog.oulafen.com/2016/05/03/frontend-rem/"/>
+    <id>https://blog.oulafen.com/2016/05/03/frontend-rem/</id>
     <published>2016-05-03T02:31:32.000Z</published>
     <updated>2017-08-03T03:58:12.000Z</updated>
     
@@ -947,17 +947,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>mac 锁屏快捷键设置</title>
-    <link href="http://blog.oulafen.com/2016/04/27/mac-sock-screen-setting/"/>
-    <id>http://blog.oulafen.com/2016/04/27/mac-sock-screen-setting/</id>
+    <link href="https://blog.oulafen.com/2016/04/27/mac-sock-screen-setting/"/>
+    <id>https://blog.oulafen.com/2016/04/27/mac-sock-screen-setting/</id>
     <published>2016-04-27T11:32:25.000Z</published>
     <updated>2016-07-01T04:03:19.000Z</updated>
     
@@ -978,17 +978,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="mac" scheme="http://blog.oulafen.com/tags/mac/"/>
+      <category term="mac" scheme="https://blog.oulafen.com/tags/mac/"/>
     
   </entry>
   
   <entry>
     <title>Mac中搭建Apache+PHP+Mysql环境</title>
-    <link href="http://blog.oulafen.com/2016/04/24/mac-apache-php-mysql/"/>
-    <id>http://blog.oulafen.com/2016/04/24/mac-apache-php-mysql/</id>
+    <link href="https://blog.oulafen.com/2016/04/24/mac-apache-php-mysql/"/>
+    <id>https://blog.oulafen.com/2016/04/24/mac-apache-php-mysql/</id>
     <published>2016-04-24T13:52:29.000Z</published>
     <updated>2016-06-06T02:20:09.000Z</updated>
     
@@ -1075,17 +1075,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="环境" scheme="http://blog.oulafen.com/tags/%E7%8E%AF%E5%A2%83/"/>
+      <category term="环境" scheme="https://blog.oulafen.com/tags/%E7%8E%AF%E5%A2%83/"/>
     
   </entry>
   
   <entry>
     <title>mac 常用命令速查</title>
-    <link href="http://blog.oulafen.com/2016/04/23/mac-commands/"/>
-    <id>http://blog.oulafen.com/2016/04/23/mac-commands/</id>
+    <link href="https://blog.oulafen.com/2016/04/23/mac-commands/"/>
+    <id>https://blog.oulafen.com/2016/04/23/mac-commands/</id>
     <published>2016-04-23T12:03:07.000Z</published>
     <updated>2016-04-27T08:09:17.000Z</updated>
     
@@ -1193,17 +1193,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="mac" scheme="http://blog.oulafen.com/tags/mac/"/>
+      <category term="mac" scheme="https://blog.oulafen.com/tags/mac/"/>
     
   </entry>
   
   <entry>
     <title>Mac快速搭建前端开发环境</title>
-    <link href="http://blog.oulafen.com/2016/02/24/frontend-mac-installing/"/>
-    <id>http://blog.oulafen.com/2016/02/24/frontend-mac-installing/</id>
+    <link href="https://blog.oulafen.com/2016/02/24/frontend-mac-installing/"/>
+    <id>https://blog.oulafen.com/2016/02/24/frontend-mac-installing/</id>
     <published>2016-02-24T14:52:29.000Z</published>
     <updated>2016-07-01T04:03:19.000Z</updated>
     
@@ -1256,17 +1256,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>快速安装npm安装包</title>
-    <link href="http://blog.oulafen.com/2016/01/12/npm-to-cnpm/"/>
-    <id>http://blog.oulafen.com/2016/01/12/npm-to-cnpm/</id>
+    <link href="https://blog.oulafen.com/2016/01/12/npm-to-cnpm/"/>
+    <id>https://blog.oulafen.com/2016/01/12/npm-to-cnpm/</id>
     <published>2016-01-12T12:58:29.000Z</published>
     <updated>2018-07-14T08:25:56.000Z</updated>
     
@@ -1285,17 +1285,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="node" scheme="http://blog.oulafen.com/tags/node/"/>
+      <category term="node" scheme="https://blog.oulafen.com/tags/node/"/>
     
   </entry>
   
   <entry>
     <title>前端实现截图并预览的效果</title>
-    <link href="http://blog.oulafen.com/2016/01/07/crop-image/"/>
-    <id>http://blog.oulafen.com/2016/01/07/crop-image/</id>
+    <link href="https://blog.oulafen.com/2016/01/07/crop-image/"/>
+    <id>https://blog.oulafen.com/2016/01/07/crop-image/</id>
     <published>2016-01-07T02:53:14.000Z</published>
     <updated>2016-11-01T06:59:34.000Z</updated>
     
@@ -1314,7 +1314,7 @@
 <p>预览裁后结果：<br><img alt="预览裁后结果" src="http://statics.oulafen.com/gitblog-crop-3.jpg"></p>
 <h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="例："><a href="#例：" class="headerlink" title="例："></a>例：</h3><p>配置html：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"display:none"</span> <span class="attr">type</span>=<span class="string">"file"</span></span></div><div class="line">       <span class="attr">id</span>=<span class="string">"imgInput"</span></div><div class="line">       <span class="attr">onchange</span>=<span class="string">"imgCrop.change(this)"</span></div><div class="line">       <span class="attr">data-width</span>=<span class="string">"380"</span></div><div class="line">       <span class="attr">data-height</span>=<span class="string">"380"</span></div><div class="line">       <span class="attr">data-previd</span>=<span class="string">"imgPrev"</span></div><div class="line">       <span class="attr">data-maxsize</span>=<span class="string">"2"</span>&gt;</div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span></span></div><div class="line">   <span class="attr">class</span>=<span class="string">"image-show J-upload-img-btn"</span></div><div class="line">   <span class="attr">data-target</span>=<span class="string">"imgInput"</span>&gt;</div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"upload-img-box"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>上传图片<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"img-desc"</span>&gt;</span>支持小于2M，格式为jpg、png的图片，分辨率为380*380px<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"img-prev"</span> <span class="attr">id</span>=<span class="string">"imgPrev"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>裁切框：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal fade crop-modal J-crop-modal"</span> <span class="attr">data-backdrop</span>=<span class="string">"static"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-dialog"</span>&gt;</span></div><div class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-content"</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-body"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"image-box"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">img</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"preview-box"</span> <span class="attr">style</span>=<span class="string">"width:150px;"</span>&gt;</span></div><div class="line">                    <span class="tag">&lt;<span class="name">img</span>&gt;</span></div><div class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">class</span>=<span class="string">"J-canvas"</span> <span class="attr">style</span>=<span class="string">"overflow:hidden; display:none"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"crop-btns"</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">class</span>=<span class="string">"btn confirm-btn J-confirm-btn"</span> <span class="attr">onclick</span>=<span class="string">"imgCrop.confirm()"</span>&gt;</span>确定<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">class</span>=<span class="string">"btn cancel-btn"</span>  <span class="attr">onclick</span>=<span class="string">"imgCrop.cancel()"</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure></p>
-<p>在dom底部加载js：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/jquery-1.11.3.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--用到了模态框--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/jquery.imgareaselect.pack.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>     <span class="comment">&lt;!--imgAreaSelect文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/img-crop.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--实现crop的功能文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        imgCrop.init(<span class="string">'.J-upload-img-btn'</span>);   <span class="comment">//初始化crop事件</span></div><div class="line">    &#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>在dom底部加载js：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/jquery-1.11.3.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/bootstrap.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--用到了模态框--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/jquery.imgareaselect.pack.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>     <span class="comment">&lt;!--imgAreaSelect文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/img-crop.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--实现crop的功能文件--&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></div><div class="line">    $(function()&#123;</div><div class="line">        imgCrop.init('.J-upload-img-btn');   //初始化crop事件</div><div class="line">    &#125;)</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure></p>
 <p>说明：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="section">#html设置</span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"display:none"</span> <span class="attr">type</span>=<span class="string">"file"</span></span></span></div><div class="line">       <span class="attr">id</span>=<span class="string">"文件输入ID"</span></div><div class="line">       <span class="attr">onchange</span>=<span class="string">"imgCrop.change(this)"</span></div><div class="line">       <span class="attr">data-width</span>=<span class="string">"要裁切的宽度，/px"</span></div><div class="line">       <span class="attr">data-height</span>=<span class="string">"要裁切的高度，/px"</span></div><div class="line">       <span class="attr">data-previd</span>=<span class="string">"裁切后要显示在哪儿的ID"</span></div><div class="line">       <span class="attr">data-maxsize</span>=<span class="string">"图片大小设置，/M"</span>&gt;</div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span></span></span></div><div class="line">   <span class="attr">class</span>=<span class="string">"image-show J-upload-img-btn"</span></div><div class="line">   <span class="attr">data-target</span>=<span class="string">"文件输入ID"</span>&gt;</div><div class="line"><span class="code">    &lt;div class="upload-img-box"&gt;</span></div><div class="line"><span class="code">        &lt;span&gt;上传图片&lt;/span&gt;</span></div><div class="line"><span class="code">    &lt;/div&gt;</span></div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"img-desc"</span>&gt;</span></span>支持小于2M，格式为jpg、png的图片，分辨率为380*380px<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></div><div class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"img-prev"</span> <span class="attr">id</span>=<span class="string">"裁切后要显示在哪儿的ID"</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></div></pre></td></tr></table></figure></p>
 <p>原理：</p>
 <ul>
@@ -1344,17 +1344,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>一段好用的代码，瞬间解决html复用问题</title>
-    <link href="http://blog.oulafen.com/2016/01/06/tpl-html-reuse/"/>
-    <id>http://blog.oulafen.com/2016/01/06/tpl-html-reuse/</id>
+    <link href="https://blog.oulafen.com/2016/01/06/tpl-html-reuse/"/>
+    <id>https://blog.oulafen.com/2016/01/06/tpl-html-reuse/</id>
     <published>2016-01-06T09:28:40.000Z</published>
     <updated>2016-07-01T04:03:19.000Z</updated>
     
@@ -1389,17 +1389,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>网站性能优化的那些事儿</title>
-    <link href="http://blog.oulafen.com/2016/01/06/frontend-performance/"/>
-    <id>http://blog.oulafen.com/2016/01/06/frontend-performance/</id>
+    <link href="https://blog.oulafen.com/2016/01/06/frontend-performance/"/>
+    <id>https://blog.oulafen.com/2016/01/06/frontend-performance/</id>
     <published>2016-01-06T02:31:32.000Z</published>
     <updated>2016-04-22T06:26:43.000Z</updated>
     
@@ -1519,17 +1519,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="前端" scheme="http://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
+      <category term="前端" scheme="https://blog.oulafen.com/tags/%E5%89%8D%E7%AB%AF/"/>
     
   </entry>
   
   <entry>
     <title>git 命令速查</title>
-    <link href="http://blog.oulafen.com/2016/01/04/git-commands/"/>
-    <id>http://blog.oulafen.com/2016/01/04/git-commands/</id>
+    <link href="https://blog.oulafen.com/2016/01/04/git-commands/"/>
+    <id>https://blog.oulafen.com/2016/01/04/git-commands/</id>
     <published>2016-01-04T07:03:07.000Z</published>
     <updated>2016-07-01T04:03:19.000Z</updated>
     
@@ -1603,17 +1603,17 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="git" scheme="http://blog.oulafen.com/tags/git/"/>
+      <category term="git" scheme="https://blog.oulafen.com/tags/git/"/>
     
   </entry>
   
   <entry>
     <title>在gitcafe中搭建自己的博客，以及在hexo中的配置</title>
-    <link href="http://blog.oulafen.com/2015/12/31/hexo-gitcafe-page/"/>
-    <id>http://blog.oulafen.com/2015/12/31/hexo-gitcafe-page/</id>
+    <link href="https://blog.oulafen.com/2015/12/31/hexo-gitcafe-page/"/>
+    <id>https://blog.oulafen.com/2015/12/31/hexo-gitcafe-page/</id>
     <published>2015-12-31T09:24:49.000Z</published>
     <updated>2016-11-01T06:59:34.000Z</updated>
     
@@ -1641,19 +1641,19 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="git" scheme="http://blog.oulafen.com/tags/git/"/>
+      <category term="git" scheme="https://blog.oulafen.com/tags/git/"/>
     
-      <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
+      <category term="hexo" scheme="https://blog.oulafen.com/tags/hexo/"/>
     
   </entry>
   
   <entry>
     <title>hexo常用命令总结</title>
-    <link href="http://blog.oulafen.com/2015/12/31/hexo-commands/"/>
-    <id>http://blog.oulafen.com/2015/12/31/hexo-commands/</id>
+    <link href="https://blog.oulafen.com/2015/12/31/hexo-commands/"/>
+    <id>https://blog.oulafen.com/2015/12/31/hexo-commands/</id>
     <published>2015-12-31T06:45:38.000Z</published>
     <updated>2016-04-22T06:26:43.000Z</updated>
     
@@ -1675,10 +1675,10 @@
     
     </summary>
     
-      <category term="blog" scheme="http://blog.oulafen.com/categories/blog/"/>
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
     
     
-      <category term="hexo" scheme="http://blog.oulafen.com/tags/hexo/"/>
+      <category term="hexo" scheme="https://blog.oulafen.com/tags/hexo/"/>
     
   </entry>
   
