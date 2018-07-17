@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.oulafen.com/"/>
-  <updated>2018-07-16T07:59:17.000Z</updated>
+  <updated>2018-07-16T09:48:32.000Z</updated>
   <id>https://blog.oulafen.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://blog.oulafen.com/2018/07/16/github-pages-link-https/"/>
     <id>https://blog.oulafen.com/2018/07/16/github-pages-link-https/</id>
     <published>2018-07-16T07:00:00.000Z</published>
-    <updated>2018-07-16T07:59:17.000Z</updated>
+    <updated>2018-07-16T09:48:32.000Z</updated>
     
     <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近更新博客，发现被糊了一堆广告，实在是不忍直视，就找了下如何给本站加上HTTPS的方案。<br><a id="more"></a></p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>背景介绍</p>
@@ -139,6 +139,54 @@
   </entry>
   
   <entry>
+    <title>oh-my-zsh[mac终端高逼格的选择]</title>
+    <link href="https://blog.oulafen.com/2018/06/22/mac-oh-my-zsh/"/>
+    <id>https://blog.oulafen.com/2018/06/22/mac-oh-my-zsh/</id>
+    <published>2018-06-22T13:00:29.000Z</published>
+    <updated>2018-07-17T03:12:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>Mac OSX默认使用bash shell，在耍命令的时候，文件的显示没有带颜色，也没有自动补全。<br>而使用zsh shell+Oh My Zsh主题，就能让我们的终端瞬间高大上<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>Oh My Zsh 的官网地址：<a href="http://ohmyz.sh/" target="_blank" rel="external">http://ohmyz.sh/</a></p>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><p>via curl<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh -c <span class="string">"<span class="variable">$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)</span>"</span></div></pre></td></tr></table></figure></p>
+<p>via wget<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sh -c <span class="string">"<span class="variable">$(wget https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh -O -)</span>"</span></div></pre></td></tr></table></figure></p>
+<p>切换到zsh<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chsh -s <span class="regexp">/bin/</span>zsh</div></pre></td></tr></table></figure></p>
+<p>若按照官网的安装方法总是提示连接超时,可以在终端中使用如下命令来安装<br><figure class="highlight vim"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">curl -L http<span class="variable">s:</span>//raw.github.<span class="keyword">com</span>/robbyrussell/oh-my-zsh/master/tools/install.<span class="keyword">sh</span> | <span class="keyword">sh</span></div></pre></td></tr></table></figure></p>
+<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><ul>
+<li><p>打开配置文件</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vi ~<span class="string">/.zshrc</span></div></pre></td></tr></table></figure>
+</li>
+<li><p>搜索ZSH_THEME找到主题配置<br>  <img src="http://statics.oulafen.com/blog/ohmyzsh-0.jpg" style="width: 100%;"></p>
+</li>
+<li><p>可打开Oh My Zsh主题展示网站<a href="https://github.com/robbyrussell/oh-my-zsh/wiki/Themes" target="_blank" rel="external">https://github.com/robbyrussell/oh-my-zsh/wiki/Themes</a>，选择喜欢的注意进行更改。这里使用的是vim来打开的配置文件，所以需要按字母i进行插入，然后把光标移动到ZSH_THEME这行，更改主题键值对,例如: <code>ZSH_THEME=&quot;agnoster&quot;</code>，按ESC键后，键入<code>:wq</code>保存并退出</p>
+</li>
+<li><p>关闭终端，重新打开，输入几个常用的命令，即可查看效果</p>
+</li>
+<li><p>设置其他，可打开终端-&gt;Preferences里进行各种设置<br>  <img src="http://statics.oulafen.com/blog/ohmyzsh-1.jpg" style="width: 100%;"></p>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>今天指导新同事，跟他提mac上好用的东西，<code>oh my zsh</code>怎么少的了，也在自己的地盘做个笔记吧，免得张口半天忘了叫什么名字[尴尬]</p>
+<p>阅读参考:</p>
+<ul>
+<li><a href="https://ohmyz.sh/" target="_blank" rel="external">https://ohmyz.sh/</a></li>
+<li><a href="https://github.com/robbyrussell/oh-my-zsh" target="_blank" rel="external">https://github.com/robbyrussell/oh-my-zsh</a></li>
+<li><a href="http://yijiebuyi.com/blog/b9b5e1ebb719f22475c38c4819ab8151.html" target="_blank" rel="external">http://yijiebuyi.com/blog/b9b5e1ebb719f22475c38c4819ab8151.html</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      oh-my-zsh
+    
+    </summary>
+    
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="mac" scheme="https://blog.oulafen.com/tags/mac/"/>
+    
+  </entry>
+  
+  <entry>
     <title>用ES6写jquery语法时的this绑定问题</title>
     <link href="https://blog.oulafen.com/2017/11/22/es6-jq-this/"/>
     <id>https://blog.oulafen.com/2017/11/22/es6-jq-this/</id>
@@ -227,6 +275,33 @@
   </entry>
   
   <entry>
+    <title>js格式化日期</title>
+    <link href="https://blog.oulafen.com/2017/01/20/js-func-2/"/>
+    <id>https://blog.oulafen.com/2017/01/20/js-func-2/</id>
+    <published>2017-01-20T13:00:28.000Z</published>
+    <updated>2017-01-20T08:09:35.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根据时间戳格式化日期<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
+<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</div><div class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</div><div class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</div><div class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += h.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += min.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += s.toString();</div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      js格式化日期
+    
+    </summary>
+    
+      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
+    
+    
+      <category term="笔记" scheme="https://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
+    
+  </entry>
+  
+  <entry>
     <title>js字符操作</title>
     <link href="https://blog.oulafen.com/2017/01/20/js-func-1/"/>
     <id>https://blog.oulafen.com/2017/01/20/js-func-1/</id>
@@ -247,33 +322,6 @@
     <summary type="html">
     
       js操作字符
-    
-    </summary>
-    
-      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
-    
-    
-      <category term="笔记" scheme="https://blog.oulafen.com/tags/%E7%AC%94%E8%AE%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>js格式化日期</title>
-    <link href="https://blog.oulafen.com/2017/01/20/js-func-2/"/>
-    <id>https://blog.oulafen.com/2017/01/20/js-func-2/</id>
-    <published>2017-01-20T13:00:28.000Z</published>
-    <updated>2017-01-20T08:09:35.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>根据时间戳格式化日期<br><a id="more"></a></p>
-<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><ul>
-<li>时间戳转为持续时间<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/** 格式化持续时间 秒时间戳--&gt; 01:10:20**/</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">formatDuration</span> (<span class="params">value</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> seconds = <span class="built_in">parseInt</span>(value);</div><div class="line">    <span class="keyword">var</span> h = <span class="built_in">parseInt</span>(seconds / <span class="number">3600</span>);</div><div class="line">    <span class="keyword">var</span> min = <span class="built_in">parseInt</span>((seconds - h * <span class="number">3600</span>) / <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> s = <span class="built_in">parseInt</span>(seconds - h * <span class="number">3600</span> - min * <span class="number">60</span>);</div><div class="line">    <span class="keyword">var</span> string = <span class="string">''</span>;</div><div class="line">    h.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += h.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    min.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += min.toString();</div><div class="line">    string += <span class="string">':'</span>;</div><div class="line">    s.toString().length == <span class="number">1</span> ? string += <span class="string">'0'</span> : <span class="string">''</span>;</div><div class="line">    string += s.toString();</div><div class="line">    <span class="keyword">return</span> string;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      js格式化日期
     
     </summary>
     
@@ -1645,38 +1693,6 @@
     
     
       <category term="git" scheme="https://blog.oulafen.com/tags/git/"/>
-    
-      <category term="hexo" scheme="https://blog.oulafen.com/tags/hexo/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>hexo常用命令总结</title>
-    <link href="https://blog.oulafen.com/2015/12/31/hexo-commands/"/>
-    <id>https://blog.oulafen.com/2015/12/31/hexo-commands/</id>
-    <published>2015-12-31T06:45:38.000Z</published>
-    <updated>2016-04-22T06:26:43.000Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="hexo"><a href="#hexo" class="headerlink" title="hexo"></a>hexo</h2><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">npm install hexo -g #安装  </div><div class="line">npm update hexo -g #升级  </div><div class="line">hexo init #初始化</div></pre></td></tr></table></figure>
-<a id="more"></a>
-<h2 id="简写"><a href="#简写" class="headerlink" title="简写"></a>简写</h2><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">hexo n "我的博客" == hexo new "我的博客"  #新建文章</div><div class="line">hexo p == hexo publish</div><div class="line">hexo g == hexo generate #生成</div><div class="line">hexo s == hexo server #启动服务预览</div><div class="line">hexo d == hexo deploy #部署</div></pre></td></tr></table></figure>
-<h2 id="服务器"><a href="#服务器" class="headerlink" title="服务器"></a>服务器</h2><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">hexo server #Hexo 会监视文件变动并自动更新，您无须重启服务器。</div><div class="line">hexo server -s #静态模式</div><div class="line">hexo server -p 5000 #更改端口</div><div class="line">hexo server -i 192.168.1.1 #自定义 IP</div><div class="line"></div><div class="line">hexo clean #清除缓存 网页正常情况下可以忽略此条命令</div><div class="line">hexo g #生成静态网页</div><div class="line">hexo d #开始部署</div></pre></td></tr></table></figure>
-<h2 id="监视文件变动"><a href="#监视文件变动" class="headerlink" title="监视文件变动"></a>监视文件变动</h2><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo generate #使用 Hexo 生成静态文件快速而且简单</div><div class="line">hexo generate --watch #监视文件变动</div></pre></td></tr></table></figure>
-<h2 id="完成后部署"><a href="#完成后部署" class="headerlink" title="完成后部署"></a>完成后部署</h2><p><code>hexo generate --deploy</code> == <code>hexo deploy --generate</code></p>
-<h2 id="保存草稿"><a href="#保存草稿" class="headerlink" title="保存草稿"></a>保存草稿</h2><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo publish [layout] <span class="xml"><span class="tag">&lt;<span class="name">title</span>&gt;</span></span></div></pre></td></tr></table></figure>
-<h2 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h2><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">hexo new "postName" #新建文章</div><div class="line">hexo new page "pageName" #新建页面</div><div class="line">hexo generate #生成静态页面至public目录</div><div class="line">hexo server #开启预览访问端口（默认端口4000，'ctrl + c'关闭server）</div><div class="line">hexo deploy #将.deploy目录部署到GitHub</div><div class="line"></div><div class="line">hexo new [layout] <span class="xml"><span class="tag">&lt;<span class="name">title</span>&gt;</span></span> #layout是布局，title是标题</div><div class="line">hexo new photo "My Gallery"</div><div class="line">hexo new "Hello World" --lang tw</div></pre></td></tr></table></figure>
-<p>文章头部参数：</p>
-<figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">title: 使用Hexo搭建个人博客</div><div class="line">layout: post</div><div class="line">date: 2014-03-03 19:07:43 #文件建立日期</div><div class="line">comments: true</div><div class="line">categories: Blog</div><div class="line">tags: [Hexo]</div><div class="line">keywords: Hexo, Blog</div><div class="line">description: 生命在于折腾，又把博客折腾到Hexo了。给Hexo点赞。</div></pre></td></tr></table></figure>
-]]></content>
-    
-    <summary type="html">
-    
-      hexo常用命令总结
-    
-    </summary>
-    
-      <category term="blog" scheme="https://blog.oulafen.com/categories/blog/"/>
-    
     
       <category term="hexo" scheme="https://blog.oulafen.com/tags/hexo/"/>
     
