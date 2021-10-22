@@ -1,0 +1,296 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>用ES6写jquery语法时的this绑定问题 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="用ES6写jquery语法时的事件this绑定问题">
+  
+  <meta name="keywords" content="es6 jquery this">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="用ES6写jquery语法时的this绑定问题">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2017-11-22T12:58:29.000Z"><a href="/2017/11/22/es6-jq-this/">2017-11-22</a></time>
+      
+      
+  
+    <h1 class="title">用ES6写jquery语法时的this绑定问题</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在es6里使用jquery时，习惯用es5中直接获取dom元素，如<code>$(&#39;selector&#39;)</code>, 绑定<code>click</code>或<code>hover</code>等事件; 若你也追求潮流，在选择器事件中使用箭头函数来定义，并用到<code>$(this)</code>的话， 那一定像我一样遇到了小小的困扰吧。<br><a id="more"></a></p>
+<h2 id="问题重现"><a href="#问题重现" class="headerlink" title="问题重现"></a>问题重现</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>).hover(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            !Base.browser.mobile &amp;&amp; $(<span class="keyword">this</span>).find(<span class="string">'.qr-code'</span>).css(&#123;</span><br><span class="line">                <span class="string">'height'</span>: ( $(<span class="keyword">this</span>).find(<span class="string">'.img'</span>).height() + <span class="number">2</span> ) + <span class="string">'px'</span>,</span><br><span class="line">                <span class="string">'opacity'</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="string">'z-index'</span>: <span class="number">1</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            $(<span class="keyword">this</span>).find(<span class="string">'.qr-code'</span>).css(&#123;<span class="string">'opacity'</span>: <span class="number">0</span>, <span class="string">'z-index'</span>: <span class="number">-1</span>&#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">        .click(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(Base.browser.mobile)&#123;</span><br><span class="line">                location.href = $(<span class="keyword">this</span>).data(<span class="string">'href'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<p>乍一看，这段代码没什么问题，逻辑也很简单，就是在所有属性有<code>data-action=&quot;imgQRCodeCtrl&quot;</code>的列表元素上绑定<code>hover</code>及<code>click</code>事件，实现pc端hover时能够使内部的一个块显示或隐藏，移动端点击时获取当前属性上的href并进行跳转；</p>
+<p>当然so easy，在过去的es5上按这种逻辑写完全么有问题；but ES6里解析后，会重新定义this，</p>
+<p>如下是真实浏览器上加载的解析后的代码：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> $ = __webpack_require__(<span class="string">"./node_modules/jquery/dist/jquery.js"</span>);</span><br><span class="line">$(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</span><br><span class="line">    <span class="comment">//....</span></span><br><span class="line">    $(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>).hover(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        !_base2.default.browser.mobile &amp;&amp; $(_this).find(<span class="string">'.qr-code'</span>).css(&#123;</span><br><span class="line">            <span class="string">'height'</span>: $(_this).find(<span class="string">'.img'</span>).height() + <span class="number">2</span> + <span class="string">'px'</span>,</span><br><span class="line">            <span class="string">'opacity'</span>: <span class="number">1</span>,</span><br><span class="line">            <span class="string">'z-index'</span>: <span class="number">1</span></span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        $(_this).find(<span class="string">'.qr-code'</span>).css(&#123; <span class="string">'opacity'</span>: <span class="number">0</span>, <span class="string">'z-index'</span>: <span class="number">-1</span> &#125;);</span><br><span class="line">    &#125;).click(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(_base2.default.browser.mobile)&#123;</span><br><span class="line">            location.href = $(_this).data(<span class="string">'href'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>看<code>this</code>发生了什么！</p>
+<p>即便没有真实运行这段代码，有点基础的，肯定能预见到页面上发生了什么。。。</p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><blockquote>
+<p>This has nothing to do with Traceur and turning something off, this is simply how ES6 works. It’s the specific functionality you’re asking for by using =&gt; instead of function () { }.</p>
+</blockquote>
+<blockquote>
+<p>If you want to write ES6, you need to write ES6 all the time, you can’t switch in and out of it on certain lines of code, and you definitely cannot suppress or alter the way =&gt; works. Even if you could, you would just wind up with some bizarre version of JavaScript that only you understand and which would never work correctly outside of your customized Traceur, which definitely isn’t the point of Traceur.</p>
+</blockquote>
+<p>我理解的大意是说 “ES6的工作方式就是这样，跟编译无关，与写法有关；若想用ES6，最好全用ES6的写法，不能改变它原本的定义…”（英文不好，欢迎大神指正 &gt;_&lt; ）</p>
+<p>看到这儿，吓得我赶紧查了查文档</p>
+<p>原来箭头函数，不绑定自己的this，这一下就说通了；好好看看下面这句吧，不遇到问题时永远记忆模糊，哈哈</p>
+<blockquote>
+<p>箭头函数表达式的语法比函数表达式更短，并且不绑定自己的this，arguments，super或 new.target。这些函数表达式最适合用于非方法函数，并且它们不能用作构造函数。</p>
+</blockquote>
+<h2 id="问题解决"><a href="#问题解决" class="headerlink" title="问题解决"></a>问题解决</h2><ul>
+<li>方法一：弄清除原理后，就很简单了，绑定<code>this</code>的函数不使用箭头函数不就行了，如下试验果然ok：</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>)</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        .click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (Base.browser.mobile) &#123;</span><br><span class="line">                location.href = $(<span class="keyword">this</span>).data(<span class="string">'href'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法二：不使用<code>this</code>, 使用<code>event.currentTarget</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>)</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">        .click(<span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (Base.browser.mobile) &#123;</span><br><span class="line">                location.href = $(event.currentTarget).data(<span class="string">'href'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法三：利用each函数循环绑定到每一个小元素上，如此就不需要<code>this</code>了</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>).each(<span class="function">(<span class="params">index, element</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> _this = element;</span><br><span class="line">        $(_this).click(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">                <span class="keyword">if</span> (Base.browser.mobile) &#123;</span><br><span class="line">                    location.href = $(_this).data(<span class="string">'href'</span>);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>以上的解决方法都能得到想要的效果，不过还是提议使用 <em>方法一</em> 来解决，更简单直白，在维护和团队合作上会起很大作用，因为没人愿意读别人写的拐了十八个弯弯的代码</p>
+<p>这个问题挺小的，可能某些大牛看到后会鄙视我，不过喜欢这种遇到问题自己一步步解决并完美解释清楚的感觉，还在路上，有问题欢迎交流指正，以后还会多多以这种方式总结下。。。</p>
+<p>参考链接<br><a href="https://stackoverflow.com/questions/27670401/using-jquery-this-with-es6-arrow-functions-lexical-this-binding" target="_blank" rel="noopener">https://stackoverflow.com/questions/27670401/using-jquery-this-with-es6-arrow-functions-lexical-this-binding</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/ES6/">ES6</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2018/06/22/mac-oh-my-zsh/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2017/04/01/mysql-command/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

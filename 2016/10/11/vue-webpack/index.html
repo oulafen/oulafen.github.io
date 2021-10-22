@@ -1,0 +1,306 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>vue.js-快速构建webpack项目模板 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="vue.js-快速构建webpack项目模板">
+  
+  <meta name="keywords" content="vue webpack">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="vue.js-快速构建webpack项目模板">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-10-11T12:58:29.000Z"><a href="/2016/10/11/vue-webpack/">2016-10-11</a></time>
+      
+      
+  
+    <h1 class="title">vue.js-快速构建webpack项目模板</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方基于webpack提供了两种项目模板，分别是vue-webpack-simple模板和vue-webpack模板，今天我们将介绍官方提供的这两种项目模板，并用vue-webpack-simple模板创建一个简单的示例。<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="环境准备："><a href="#环境准备：" class="headerlink" title="环境准备："></a>环境准备：</h3><ul>
+<li>node环境 和 基于shell的命令行工具，如windows下的git bash, mac 和 linux下的terminal，以下统称为终端。</li>
+<li>npm包管理工具，最好在3.x以上，npm 3.x提供了更有效的包依赖管理。</li>
+<li>安装<code>vue-li</code>, 命令如下：<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g vue-<span class="keyword">cli</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>安装完vue cli后，我们就可以基于vue-webpack-simple模板和vue-webpack模板创建项目了。</p>
+<h3 id="使用vue-webpack-simple模板"><a href="#使用vue-webpack-simple模板" class="headerlink" title="使用vue-webpack-simple模板"></a>使用vue-webpack-simple模板</h3><ul>
+<li><p>在终端中运行如下命令，其中<code>webpack-simple</code>是项目模板的名称，<code>my-webpack-simple-demo</code>是你要生成的项目名称。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack-<span class="built_in">simple</span> my-webpack-<span class="built_in">simple</span>-demo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>执行完成之后，生成的文件目录结构：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">├─<span class="selector-class">.babelrc</span>        <span class="comment">// babel配置文件</span></span><br><span class="line">├─<span class="selector-class">.gitignore</span>    </span><br><span class="line">├─index<span class="selector-class">.html</span>        <span class="comment">// 主页</span></span><br><span class="line">├─package<span class="selector-class">.json</span>      <span class="comment">// 项目配置文件</span></span><br><span class="line">├─README<span class="selector-class">.md</span>  </span><br><span class="line">├─webpack<span class="selector-class">.config</span><span class="selector-class">.js</span> <span class="comment">// webpack配置文件</span></span><br><span class="line">├─dist          <span class="comment">// 发布目录</span></span><br><span class="line">│   ├─<span class="selector-class">.gitkeep</span>       </span><br><span class="line">├─src           <span class="comment">// 开发目录 </span></span><br><span class="line">│   ├─App<span class="selector-class">.vue</span>       <span class="comment">// App.vue组件</span></span><br><span class="line">│   ├─main<span class="selector-class">.js</span>       <span class="comment">// 预编译入口</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>进到项目文件目录下安装依赖</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd my-webpack-simple-demo</span><br><span class="line">cnpm install   </span><br><span class="line"><span class="meta">#在国内使用cnpm的来安装依赖速度快的不止一倍，安装方法： npm install -g cnpm --registry=https:<span class="comment">//registry.npm.taobao.org，</span></span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>运行示例：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">run</span><span class="bash"> dev</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>打开<code>http://localhost:8080/</code>：<br><img src="http://statics.oulafen.com/github-webpack-sample.png" alt style="max-width:100%; margin: auto;"><br>注意：执行<code>npm run dev</code>命令后并不会在dist目录下生成build.js文件，开发环境下build.js是在运行内存中的。</p>
+</li>
+<li>执行以下命令会生成发布时的build.js，并且是经过压缩的。<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm <span class="keyword">run</span><span class="bash"> build</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="使用vue-webpack模板"><a href="#使用vue-webpack模板" class="headerlink" title="使用vue-webpack模板"></a>使用vue-webpack模板</h3><p>过程与使用<code>webpack-simple</code>模板时类似</p>
+<ul>
+<li><p>生成项目文件</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack <span class="keyword">my</span>-webpack-demo</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>目录结构如下：(参考：<a href="https://vuejs-templates.github.io/webpack/structure.html" target="_blank" rel="noopener">Project Structure</a>)</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">├── build/                      # webpack<span class="built_in"> config </span>files</span><br><span class="line">│   └── <span class="built_in">..</span>.</span><br><span class="line">├── config/                     </span><br><span class="line">│   ├── index.js                # main project config</span><br><span class="line">│   └── <span class="built_in">..</span>.</span><br><span class="line">├── src/</span><br><span class="line">│   ├── main.js                 # app entry file</span><br><span class="line">│   ├── App.vue                 # main app component</span><br><span class="line">│   ├── components/             # ui components</span><br><span class="line">│   │   └── <span class="built_in">..</span>.</span><br><span class="line">│   └── assets/                 # module assets (processed by webpack)</span><br><span class="line">│       └── <span class="built_in">..</span>.</span><br><span class="line">├── static/                     # pure static assets (directly copied)</span><br><span class="line">├── test/</span><br><span class="line">│   └── unit/                   # unit tests</span><br><span class="line">│   │   ├── specs/              # test spec files</span><br><span class="line">│   │   ├── index.js            # test build entry file</span><br><span class="line">│   │   └── karma.conf.js       # test runner<span class="built_in"> config </span>file</span><br><span class="line">│   └── e2e/                    # e2e tests</span><br><span class="line">│   │   ├── specs/              # test spec files</span><br><span class="line">│   │   ├── custom-assertions/  # custom assertions <span class="keyword">for</span> e2e tests</span><br><span class="line">│   │   ├── runner.js           # test runner script</span><br><span class="line">│   │   └── nightwatch.conf.js  # test runner<span class="built_in"> config </span>file</span><br><span class="line">├── .babelrc                    # babel config</span><br><span class="line">├── .editorconfig.js            # editor config</span><br><span class="line">├── .eslintrc.js                # eslint config</span><br><span class="line">├── index.html                  # index.html template</span><br><span class="line">└── package.json                # build scripts <span class="keyword">and</span> dependencies</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>安装依赖 <code>npm install</code></p>
+</li>
+<li>执行以下命令运行示例：<code>npm run dev</code></li>
+<li>打开<code>http://localhost:8080/</code>：<br><img src="http://statics.oulafen.com/github-webpack.png" alt style="max-width:100%; margin: auto;"></li>
+<li>生成发布：<code>npm run build</code><br>和<code>vue-simple-webpack</code>模板不同的是，所有的静态资源，包括<code>index.html</code>都生成到<code>dist</code>目录下了。<br>这意味着你可以直接拿着dist目录去发布应用，例如在IIS下将dist目录发布为一个网站。</li>
+</ul>
+<p>阅读参考:</p>
+<ul>
+<li><a href="http://www.cnblogs.com/keepfool/p/5678427.html" target="_blank" rel="noopener">Vue.js——60分钟webpack项目模板快速入门</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/vue/">vue</a>, <a href="/tags/webpack/">webpack</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/10/17/node-redis/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/09/16/vue-1/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

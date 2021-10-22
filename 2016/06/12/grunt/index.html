@@ -1,0 +1,277 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>关于grunt的一二三 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="如何使用grunt来处理前端代码">
+  
+  <meta name="keywords" content="grunt">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="关于grunt的一二三">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-06-12T13:00:29.000Z"><a href="/2016/06/12/grunt/">2016-06-12</a></time>
+      
+      
+  
+    <h1 class="title">关于grunt的一二三</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <p>grunt是一套前端自动化工具，一个基于nodeJs的命令行工具，一般用于：<br>      ① 压缩文件<br>      ② 合并文件<br>      ③ 简单语法检查<br><a id="more"></a></p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g grunt-cli</span><br></pre></td></tr></table></figure>
+<h2 id="设置配置文件"><a href="#设置配置文件" class="headerlink" title="设置配置文件"></a>设置配置文件</h2><p>在使用grunt的项目中, 都有个<code>Gruntfile.js</code>的配置文件</p>
+<ul>
+<li><p>参考如下:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = <span class="function"><span class="keyword">function</span> (<span class="params">grunt</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// Project configuration.</span></span><br><span class="line">    grunt.initConfig(&#123;</span><br><span class="line">        <span class="comment">//Read the package.json (optional)</span></span><br><span class="line">        pkg: grunt.file.readJSON(<span class="string">'package.json'</span>),</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// Metadata.</span></span><br><span class="line">        meta: &#123;</span><br><span class="line">            basePath: <span class="string">'./'</span>,</span><br><span class="line">            srcJsPath: <span class="string">'./public/js/'</span>,  <span class="comment">//js目录地址</span></span><br><span class="line">            srcSassPath: <span class="string">'./public/css/'</span>,  <span class="comment">//sass文件目录地址</span></span><br><span class="line">            srcImgPath: <span class="string">'./public/images/'</span>,  <span class="comment">//images目录地址</span></span><br><span class="line">            destPath: <span class="string">'./public/dist/'</span>  <span class="comment">//目标目录地址</span></span><br><span class="line">        &#125;,</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// js文件合并与压缩</span></span><br><span class="line">        uglify: &#123;</span><br><span class="line">            compressjs: &#123;</span><br><span class="line">                files: &#123;</span><br><span class="line">                    <span class="string">'&lt;%= meta.destPath %&gt;base.min.js'</span>: [<span class="string">'&lt;%= meta.srcJsPath %&gt;zepto.min.js'</span>, <span class="string">'&lt;%= meta.srcJsPath %&gt;base.js'</span>]</span><br><span class="line">                   &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// sass编译与压缩</span></span><br><span class="line">        sass: &#123;</span><br><span class="line">            dist: &#123;</span><br><span class="line">                options: &#123;</span><br><span class="line">                    style: <span class="string">'compressed'</span>,</span><br><span class="line">                    sourcemap: <span class="string">'none'</span>  <span class="comment">//是否生成sass map</span></span><br><span class="line">                &#125;,</span><br><span class="line">                files: [</span><br><span class="line">                    &#123;<span class="string">'&lt;%= meta.destPath %&gt;style.min.css'</span>: <span class="string">'&lt;%= meta.srcSassPath %&gt;style.scss'</span>&#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 自动雪碧图</span></span><br><span class="line">        sprite: &#123;</span><br><span class="line">           options: &#123;</span><br><span class="line">               <span class="comment">// sprite背景图源文件夹，只有匹配此路径才会处理，默认 images/slice/</span></span><br><span class="line">               imagepath: <span class="string">'&lt;%= meta.srcImgPath %&gt;slice/'</span>,</span><br><span class="line">               <span class="comment">// 映射CSS中背景路径，支持函数和数组，默认为 null</span></span><br><span class="line">               imagepath_map: <span class="literal">null</span>,</span><br><span class="line">               <span class="comment">// 雪碧图输出目录，注意，会覆盖之前文件！默认 images/</span></span><br><span class="line">               spritedest: <span class="string">'&lt;%= meta.destPath %&gt;/images/'</span>,</span><br><span class="line">               <span class="comment">// 替换后的背景路径，默认 ../images/</span></span><br><span class="line">               spritepath: <span class="string">'../images/'</span>,</span><br><span class="line">               <span class="comment">// 各图片间间距，如果设置为奇数，会强制+1以保证生成的2x图片为偶数宽高，默认 0</span></span><br><span class="line">               padding: <span class="number">0</span>,</span><br><span class="line">               <span class="comment">// 是否使用 image-set 作为2x图片实现，默认不使用</span></span><br><span class="line">               useimageset: <span class="literal">false</span>,</span><br><span class="line">               <span class="comment">// 是否以时间戳为文件名生成新的雪碧图文件，如果启用请注意清理之前生成的文件，默认不生成新文件</span></span><br><span class="line">               newsprite: <span class="literal">false</span>,</span><br><span class="line">               <span class="comment">// 给雪碧图追加时间戳，默认不追加</span></span><br><span class="line">               spritestamp: <span class="literal">false</span>,</span><br><span class="line">               <span class="comment">// 在CSS文件末尾追加时间戳，默认不追加</span></span><br><span class="line">               cssstamp: <span class="literal">true</span>,</span><br><span class="line">               <span class="comment">// 默认使用二叉树最优排列算法</span></span><br><span class="line">               algorithm: <span class="string">'binary-tree'</span>,</span><br><span class="line">               <span class="comment">// 默认使用`pixelsmith`图像处理引擎</span></span><br><span class="line">               engine: <span class="string">'pixelsmith'</span></span><br><span class="line">           &#125;,</span><br><span class="line">           autoSprite: &#123;</span><br><span class="line">               files: [&#123;</span><br><span class="line">                   <span class="comment">// 启用动态扩展</span></span><br><span class="line">                   expand: <span class="literal">true</span>,</span><br><span class="line">                   <span class="comment">// css文件源的文件夹</span></span><br><span class="line">                   cwd: <span class="string">'&lt;%= meta.destPath %&gt;'</span>,</span><br><span class="line">                   <span class="comment">// 匹配规则</span></span><br><span class="line">                   src: <span class="string">'*.css'</span>,</span><br><span class="line">                   <span class="comment">// 导出css和sprite的路径地址</span></span><br><span class="line">                   dist: <span class="string">'&lt;%= meta.destPath %&gt;css/'</span>,</span><br><span class="line">                   <span class="comment">// 导出的css名</span></span><br><span class="line">                   ext: <span class="string">'.sprite.css'</span></span><br><span class="line">               &#125;]</span><br><span class="line">           &#125;</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 监听文件变化, 自动编译</span></span><br><span class="line">        watch: &#123;</span><br><span class="line">            build: &#123;</span><br><span class="line">                files: [</span><br><span class="line">                    <span class="string">'&lt;%= meta.srcJsPath %&gt;*.js'</span>, <span class="string">'&lt;%= meta.srcSassPath %&gt;*.scss'</span></span><br><span class="line">                ],</span><br><span class="line">                tasks: [<span class="string">'uglify'</span>, <span class="string">'sass'</span>, <span class="string">'sprite'</span>]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//添加任务依赖</span></span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-uglify'</span>);</span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-sass'</span>);</span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-contrib-watch'</span>);</span><br><span class="line">    grunt.loadNpmTasks(<span class="string">'grunt-css-sprite'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 默认被执行的任务列表。</span></span><br><span class="line">    grunt.registerTask(<span class="string">'default'</span>, [<span class="string">'uglify'</span>, <span class="string">'sass'</span>, <span class="string">'sprite'</span>, <span class="string">'watch'</span>]);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>类似的文件目录结构</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">├── public/</span><br><span class="line">│   ├── dist/                   <span class="comment"># build files</span></span><br><span class="line">│   │   └── <span class="string">...</span></span><br><span class="line">│   ├── css/                    <span class="comment"># scss files</span></span><br><span class="line">│   │   └── <span class="string">...</span></span><br><span class="line">│   ├── js/                     <span class="comment"># js files  </span></span><br><span class="line">│   │   └── <span class="string">...</span></span><br><span class="line">│   └── images/                 <span class="comment"># images files</span></span><br><span class="line">│       └── <span class="string">...</span></span><br><span class="line">├── Gruntfile.js/               <span class="comment"># grunt setting</span></span><br><span class="line">├── index.html                  <span class="comment"># index.html template</span></span><br><span class="line">├── package.json                <span class="comment"># build scripts and dependencies</span></span><br><span class="line">└── <span class="string">...</span>                         <span class="comment"># others</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>阅读参考:</p>
+<ul>
+<li><a href></a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/node/">node</a>, <a href="/tags/构建工具/">构建工具</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/07/05/canvas-dashed-line/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/06/03/node-forever/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>网站性能优化的那些事儿 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="前端性能优化详解">
+  
+  <meta name="keywords" content="前端 优化">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="网站性能优化的那些事儿">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-06T02:31:32.000Z"><a href="/2016/01/06/frontend-performance/">2016-01-06</a></time>
+      
+      
+  
+    <h1 class="title">网站性能优化的那些事儿</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>关于前端优化，前辈们的挖掘从未停止，本文站在巨人的肩膀上，做个整理笔记。<br><a id="more"></a></p>
+<h2 id="常识"><a href="#常识" class="headerlink" title="常识"></a>常识</h2><p>终端用户80%到90%的响应时间都花在了下载页面组件上：图片，样式，脚本，Flash等等，这是 业绩黄金法则 。所以尽可能的减少下载时间，是网站优化的首要任务。</p>
+<ul>
+<li><p>压缩 JavaScript 和 CSS </p>
+</li>
+<li><p>把 JavaScript 和 CSS 放到外面</p>
+</li>
+<li><p>将样式表放在文档的顶部，将 JavaScript 放在底部<br>也就是所有的样式放在<code>&lt;head&gt;</code>中，所有的脚本放到最下边的<code>&lt;/body&gt;</code>之前。这真的是一条最最基本的规则了，以前只知道别人这么写比较标准，殊不知标准是有标准的道理的。<br>因为浏览器总是试图渐进式的渲染页面；它们想按元素到达的时间顺序的进行渲染。而我们打开网页时最想第一时间看到它的页面，所以，将css放到前面最先渲染出来，以至于网站不那么丑也就不足为奇了。<br>将js放到底部是因为，浏览器在处理脚本时会中断渲染，所以，要使页面被尽可能快的渲染，将styles放在顶部。为了阻止JS的阻塞影响到渲染，将scripts放在底部。</p>
+</li>
+<li><p>尽可能减少 HTTP 请求<br>这也就是为什么我们要尽可能的把网站的小图标放到一张图上，否则每个小图标都要进行一次 http 请求，而每一次 http 请求都可能引发 DNS 查询，重定向，404，等等。不要小看这些，这可都是需要时间的。<br>所以合并css、js、images是前端可以做的最快的优化方法之一。</p>
+</li>
+<li><p>从多个域名提供资源服务能增加浏览器并行下载的资源数量。<br>简单的说，浏览器会从一个单一的域名并行的尽可能多的下载资源。它从越多的域名下载，就能在一瞬间并行的获得更多的资源。比如，浏览器只能一次从一个域名获取两个资源，那么由两个域名提供服务意味着它可以一次性获取四个资源；三个域名意味着六个并行下载。当然，若再加上实际的CDN技术就会更好，CDN技术通过从一个更加合适的物理位置提供资源服务的方法来减少延迟。</p>
+</li>
+</ul>
+<h2 id="首屏耗时优化"><a href="#首屏耗时优化" class="headerlink" title="首屏耗时优化"></a>首屏耗时优化</h2><p>说起前端性能优化，在谈论的内容，无非是：加载性能、渲染速度、用户交互响应速度、动画流畅性、DOM操作无闪动…..但重中之重的还是<strong>首屏时间</strong>，首屏时间就是给用户的第一印象，这个 1 没有做好，后面再多的 0 ，也留不住用户。</p>
+<ul>
+<li><p>localStorage 缓存数据优先展示<br>加快首屏数据展示</p>
+</li>
+<li><p>jsonp 预拉取数据<br>减少二次渲染，加快首屏 cgi 数据显示</p>
+</li>
+<li><p>按需延时加载非必须资源<br>减少首屏资源体积</p>
+</li>
+<li><p>通用数据/图片内容共享<br>加快可通用部分数据渲染</p>
+</li>
+<li><p>跨 webview 预拉取数据<br>利用 webview 创建时间加载首屏数据，加快首屏数据显示</p>
+</li>
+<li><p>图片懒加载<br>对于 图片/视频 多的网站，使用lazy load，延迟加载。比如在很多电商平台，下拉页面时可以看到图片上的loading标志就是用lazy load原理啦。 </p>
+<ul>
+<li>模板渲染时，不赋值src</li>
+<li>插入DOM树时进行可视区域计算</li>
+<li>如果图片在可视区内，赋值src</li>
+<li>如果图片在可视区外，留着scroll处理  </li>
+</ul>
+</li>
+</ul>
+<h2 id="css-优化"><a href="#css-优化" class="headerlink" title="css 优化"></a>css 优化</h2><ul>
+<li><p>避免使用 CSS 表达式</p>
+</li>
+<li><p>避免使用滤镜</p>
+</li>
+</ul>
+<h2 id="js-优化"><a href="#js-优化" class="headerlink" title="js 优化"></a>js 优化</h2><ul>
+<li><p>去除重复脚本</p>
+</li>
+<li><p>js尽量减少 DOM 访问</p>
+</li>
+<li><p>用智能的事件处理器</p>
+</li>
+</ul>
+<h2 id="图片优化"><a href="#图片优化" class="headerlink" title="图片优化"></a>图片优化</h2><ul>
+<li><p>优化图片</p>
+</li>
+<li><p>优化 CSS Sprite</p>
+</li>
+<li><p>不要用HTML缩放图片</p>
+</li>
+<li><p>用小的可缓存的 favicon.ico（P.S. 收藏夹图标）</p>
+</li>
+</ul>
+<h2 id="内容优化"><a href="#内容优化" class="headerlink" title="内容优化"></a>内容优化</h2><ul>
+<li><p>尽量减少HTTP请求数<br>常用方法：合并文件、<a href="http://alistapart.com/article/sprites" target="_blank" rel="noopener">CSS Sprites</a> 、<a href="http://www.w3.org/TR/html401/struct/objects.html#h-13.6" target="_blank" rel="noopener">图像映射</a></p>
+</li>
+<li><p>减少DNS查找</p>
+</li>
+<li><p>避免重定向</p>
+</li>
+<li><p>让Ajax可缓存</p>
+</li>
+<li><p>延迟加载组件</p>
+</li>
+<li><p>预加载组件</p>
+</li>
+<li><p>减少DOM元素的数量</p>
+</li>
+<li><p>跨域分离组件</p>
+</li>
+<li><p>尽量少用iframe</p>
+</li>
+<li><p>杜绝404</p>
+</li>
+</ul>
+<h2 id="服务器端优化"><a href="#服务器端优化" class="headerlink" title="服务器端优化"></a>服务器端优化</h2><ul>
+<li><p>使用CDN（Content Delivery Network）<br>对刚刚起步的公司和个人网站来说，CDN服务的成本是很高的（需要money），但如果你的用户群越来越大，越来越全球化，那么用CDN来换取更快的响应时间还是很有必要的。</p>
+</li>
+<li><p>添上Expires或者Cache-Control HTTP头</p>
+</li>
+<li><p>Gzip组件</p>
+</li>
+<li><p>配置ETags</p>
+</li>
+<li><p>尽早清空缓冲区</p>
+</li>
+<li><p>对Ajax用GET请求</p>
+</li>
+<li><p>避免图片src属性为空</p>
+</li>
+</ul>
+<h2 id="原理解释"><a href="#原理解释" class="headerlink" title="原理解释"></a>原理解释</h2><ul>
+<li><p><strong>HTTP请求与DNS 查询</strong><br>每当你从任何域名请求一个资源，会发出一个带有相关头部，被访问资源的 HTTP请求，并且会返回一个响应。这是对该过程的一个极端简化，但它基本就是事实上你需要知道的。这是一个HTTP请求，而且所有涉及的资源都从属于这个往返的旅行。当提到前端性能，这些请求正是主要的瓶颈所在，因为如我们谈到的，浏览器受限于有多少请求可以并行发生。这也是为什么我们经常要使用子域名；以便允许这些请求在数个域名上发生，允许同时发生多得多数量的请求。<br>然而关于这还有个问题，DNS查询。每次（从一个空缓存）一个新的域名被引用，HTTP请求会受制于一个耗时的DNS查询（某个介于20到120毫秒之间的值），在DNS查询中，发出的请求会查询资源实际存在的地点；互联网通过IP地址被绑定在一起，这些地址由DNS管理的主机名引用。<br>如果每个引用的新域名具有DNS查询的前端代价，你必须确保这个代价确实是值得的。如果是一个小网站（例如像CSS魔法），那么由子域名提供资源可能并不值得；相比执行多个域名的DNS查询并将其并行化来说，从一个域名非并行的获取若干资源，浏览器可能更快。<br>如果你或许有一打资源，你可能会考虑从一个子域名提供它们的资源服务；为了更好的并行化那许多资源，额外的DNS查询可能是值得的。如果说你有40个资源，可能将那些资源切分到两个子域名是值得的；为了由总数为三个的域名提供你的网站服务，两个额外的DNS查询会是值得的。<br>DNS查询代价很高，因此你需要决定什么才是对你的网站更合适的；承担查询的消耗或者只是由一个域名提供所有服务。<br>很重要的需要记得的是，比方说一旦HTML被请求于foo.com，对那个主机的DNS查询就立即发生了，所以后续的任何对foo.com的请求不再受制于DNS查询。</p>
+</li>
+<li><p><strong>DNS预取</strong><br>DNS预取所做的恰恰就是凭证领餐(on the tin)，它不能被简单实现。比方说，如果你需要请求来自widget.foo.com的资源，那么你可以通过简单的在页面的<head><meta name="generator" content="Hexo 3.9.0">里先增加下面这个来预取那个主机的DNS：<link rel="alternate" href="/atom.xml" title="Oulafen's blog" type="application/atom+xml">
+</head></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"dns-prefetch"</span> <span class="attr">href</span>=<span class="string">"//widget.foo.com"</span>&gt;</span></span><br><span class="line">    ...</span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>这行简单的内容将会告诉支持的浏览器去开始预取那个域名的DNS，这要稍稍早于它实际需要的时刻。它意味着DNS查询过程，在浏览器<code>&lt;script&gt;</code>元素真正请求小程序的时候就已经在进行中了。<br>关于prefetch的更多介绍戳<a href="http://calendar.perfplanet.com/2012/speed-up-your-site-using-prefetching/" target="_blank" rel="noopener">这里</a></p>
+</li>
+<li><p><strong>CDN</strong><br>内容分发网络（CDN）是一组分散在不同地理位置的web服务器，用来给用户更高效地发送内容。典型地，选择用来发送内容的服务器是基于网络距离的衡量标准的。例如：选跳数（hop）最少的或者响应时间最快的服务器。</p>
+</li>
+</ul>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="http://csswizardry.com/2013/01/front-end-performance-for-web-designers-and-front-end-developers/" target="_blank" rel="noopener">Front-end performance for web designers and front-end developers</a><br><a href="https://developer.yahoo.com/performance/rules.html" target="_blank" rel="noopener">雅虎军规</a><br><a href="http://www.alloyteam.com/2015/12/ac2015/" target="_blank" rel="noopener">AC2015前端技术大会</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/前端/">前端</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/01/06/tpl-html-reuse/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/01/04/git-commands/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

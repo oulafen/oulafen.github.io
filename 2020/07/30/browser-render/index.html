@@ -1,0 +1,313 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>浏览器渲染流程 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="browser-浏览器原理">
+  
+  <meta name="keywords" content="browser">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="浏览器渲染流程">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2020-07-30T03:02:34.000Z"><a href="/2020/07/30/browser-render/">2020-07-30</a></time>
+      
+      
+  
+    <h1 class="title">浏览器渲染流程</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文整理了渲染的整个过程细节介绍：HTML-&gt;DOM树、样式计算、布局、图层、图层绘制、光栅化、合成和显示<br>以及重排和重绘触发原理及优化<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><h3 id="渲染流程"><a href="#渲染流程" class="headerlink" title="渲染流程"></a>渲染流程</h3><p><img src="https://statics.oulafen.com/browser-render-002.png" alt="image"></p>
+<ul>
+<li>渲染进程将HTML内容转换为能够读懂的DOM树结构。</li>
+<li>渲染引擎将CSS样式表转化为浏览器可以理解的styleSheets，计算出DOM节点的样式。</li>
+<li>创建布局树，并计算元素的布局信息。</li>
+<li>对布局树进行分层，并生成分层树。</li>
+<li>为每个图层生成绘制列表，并将其提交到合成线程。</li>
+<li>合成线程将图层分成图块，并在光栅化线程池中将图块转换成位图。</li>
+<li>合成线程发送绘制图块命令DrawQuad给浏览器进程。</li>
+<li>浏览器进程根据DrawQuad消息生成页面，并显示到显示器上</li>
+</ul>
+<h3 id="重排（回流）和重绘"><a href="#重排（回流）和重绘" class="headerlink" title="重排（回流）和重绘"></a>重排（回流）和重绘</h3><ul>
+<li><p>更新了元素的几何属性（重排reflow）<br><img src="https://statics.oulafen.com/browser-render-001.png" alt="image"><br>从上图可以看出，如果你通过JavaScript或者CSS修改元素的几何位置属性，例如改变元素的宽度、高度等，那么浏览器会触发重新布局，解析之后的一系列子阶段，这个过程就叫重排。无疑，重排需要更新完整的渲染流水线，所以开销也是最大的。</p>
+</li>
+<li><p>更新元素的绘制属性（重绘repaint）<br><img src="https://statics.oulafen.com/browser-render-0010.png" alt="image"><br>从图中可以看出，如果修改了元素的背景颜色，那么布局阶段将不会被执行，因为并没有引起几何位置的变换，所以就直接进入了绘制阶段，然后执行之后的一系列子阶段，这个过程就叫重绘。相较于重排操作，重绘省去了布局和分层阶段，所以执行效率会比重排操作要高一些。</p>
+</li>
+<li><p>3D变化直接合成阶段<br><img src="https://statics.oulafen.com/browser-render-0011.png" alt="image"><br>在上图中，我们使用了CSS的transform来实现动画效果，这可以避开重排和重绘阶段，直接在非主线程上执行合成动画操作。这样的效率是最高的，因为是在非主线程上合成，并没有占用主线程的资源，另外也避开了布局和绘制两个子阶段，所以相对于重绘和重排，合成能大大提升绘制效率。</p>
+</li>
+</ul>
+<h4 id="优化-减少重排和重绘"><a href="#优化-减少重排和重绘" class="headerlink" title="优化-减少重排和重绘"></a>优化-减少重排和重绘</h4><ul>
+<li>触发repaint reflow的操作尽量放在一起，比如改变dom高度和设置margin分开写，可能会出发两次重排</li>
+<li>通过虚拟dom层计算出操作总得差异，一起提交给浏览器。比如使用createdocumentfragment来汇总append的dom,来减少触发重排重绘次数。</li>
+</ul>
+<h2 id="具体细节的原理"><a href="#具体细节的原理" class="headerlink" title="具体细节的原理"></a>具体细节的原理</h2><h3 id="样式计算生成CSSOM"><a href="#样式计算生成CSSOM" class="headerlink" title="样式计算生成CSSOM"></a>样式计算生成CSSOM</h3><p>样式计算的目的是为了计算出DOM节点中每个元素的具体样式，这个阶段大体可分为三步：</p>
+<ol>
+<li>把CSS转换为浏览器能够理解的结构styleSheets</li>
+<li>转换样式表中的属性值，使其标准化<br> <img src="https://statics.oulafen.com/browser-render-style-01.png" alt="image"></li>
+<li>计算出DOM树中每个节点的具体样式<br> <img src="https://statics.oulafen.com/browser-render-style-02.png" alt="image"></li>
+</ol>
+<h3 id="布局树LayoutTree"><a href="#布局树LayoutTree" class="headerlink" title="布局树LayoutTree"></a>布局树LayoutTree</h3><ul>
+<li>创建布局树</li>
+</ul>
+<ol>
+<li>遍历DOM树中的所有可见节点，并把这些节点加到布局中；</li>
+<li>而不可见的节点会被布局树忽略掉，如head标签下面的全部内容，再比如属性包含 dispaly:none的元素，所以这个元素也没有被包进布局树</li>
+</ol>
+<ul>
+<li>布局计算<br>计算布局树节点的坐标位置</li>
+</ul>
+<h3 id="分层树LayerTree"><a href="#分层树LayerTree" class="headerlink" title="分层树LayerTree"></a>分层树LayerTree</h3><p>满足以下任意条件，渲染引擎就会为特定的节点创建新的层。</p>
+<ol>
+<li>拥有层叠上下文属性的元素会被提升为单独的一层<br>如：明确定位属性的元素、定义透明属性的元素、使用CSS滤镜的元素<br><img src="https://statics.oulafen.com/browser-render-layer-00.png" alt="image"></li>
+<li>需要剪裁（clip）的地方也会被创建为图层<br>如：<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span></span><br><span class="line">div &#123;</span><br><span class="line">    width: 200;</span><br><span class="line">    height: 200;</span><br><span class="line"><span class="css">    <span class="selector-tag">overflow</span><span class="selector-pseudo">:auto</span>;</span></span><br><span class="line">    background: gray;</span><br><span class="line">&#125; </span><br><span class="line"><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>出现这种裁剪情况的时候，渲染引擎会为文字部分单独创建一个层，如果出现滚动条，滚动条也会被提升为单独的层。<br><img src="https://statics.oulafen.com/browser-render-layer-01.png" alt="image"></p>
+<h3 id="栅格化"><a href="#栅格化" class="headerlink" title="栅格化"></a>栅格化</h3><p>在有些情况下，有的图层可以很大，比如有的页面你使用滚动条要滚动好久才能滚动到底部，但是通过视口，用户只能看到页面的很小一部分，所以在这种情况下，要绘制出所有图层内容的话，就会产生太大的开销，而且也没有必要。</p>
+<p>基于这个原因，合成线程会将图层划分为图块（tile），这些图块的大小通常是256x256或者512x512，如下图所示：<br><img src="https://statics.oulafen.com/browser-render-raster-01.png" alt="image"></p>
+<p>所谓栅格化，是指将图块转换为位图。而图块是栅格化执行的最小单位。渲染进程维护了一个栅格化的线程池，所有的图块栅格化都是在线程池内执行的。</p>
+<p>通常，栅格化过程都会使用GPU来加速生成，使用GPU生成位图的过程叫快速栅格化/GPU栅格化，生成的位图被保存在GPU内存中<br><img src="https://statics.oulafen.com/browser-render-raster-01.png" alt="image"></p>
+<h3 id="合成与显示"><a href="#合成与显示" class="headerlink" title="合成与显示"></a>合成与显示</h3><p>一旦所有图块都被光栅化，合成线程就会生成一个绘制图块的命令——“DrawQuad”，然后将该命令提交给浏览器进程。</p>
+<p>浏览器进程里面有一个叫viz的组件，用来接收合成线程发过来的DrawQuad命令，然后根据DrawQuad命令，将其页面内容绘制到内存中，最后再将内存显示在屏幕上。</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/browser/">browser</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    
+    <a href="/2020/07/25/browser-url/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

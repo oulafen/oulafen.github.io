@@ -1,0 +1,298 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>Github Pages博客域名如何设置HTTPS | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="Github Pages博客域名如何设置HTTPS">
+  
+  <meta name="keywords" content="github-pages https">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Github Pages博客域名如何设置HTTPS">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2018-07-16T07:00:00.000Z"><a href="/2018/07/16/github-pages-link-https/">2018-07-16</a></time>
+      
+      
+  
+    <h1 class="title">Github Pages博客域名如何设置HTTPS</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近更新博客，发现被糊了一堆广告，实在是不忍直视，就找了下如何给本站加上HTTPS的方案。<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>背景介绍</p>
+<p>本站是基于Github Pages服务搭建的静态博客，官网<a href="https://pages.github.com/" target="_blank" rel="noopener">戳这里</a><br>如果是直接使用 username.github.io 这样的域名的话，是默认就支持了 HTTPS 的, 直接访问 <code>https://username.github.io</code> 即可，自定义域名就需要自己折腾一下了。</p>
+<p>在寻找解决方案的过程中，认识了<a href="https://app.netlify.com/" target="_blank" rel="noopener">Netlify</a></p>
+<pre><code>什么是Netlify?
+1、Netlify是一个现代网站自动化系统，其JAM架构代表了现代网站的发展趋势。所谓JAM，就是指基于客户端JavaScript、可重用API和预构建Markup标记语言的三者结合。
+2、有了Netlify，我们只要在本机Git中写前端代码，然后推送它，网站就能完美地对外呈现，并且附送大量好功能：全球CDN、持续部署、一键HTTPS和更多…
+</code></pre><p>简直要飞起的节奏。<br>下面介绍如何在Netlify上配置github pages博客的自定义域名。</p>
+<ul>
+<li>使用github注册<a href="https://app.netlify.com/" target="_blank" rel="noopener">Netlify</a>账号</li>
+<li>新建站点<br>  <img alt="新建站点0" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-0.jpg"><br>  选择代码托管平台<br>  <img alt="选中代码托管平台" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-1.jpg"><br>  选择代码仓库<br>  <img alt="选择代码仓库" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-2.jpg"><br>  选择代码分支及构建命令<br>  <img alt="选择代码分支及构建命令" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-3.jpg"></li>
+<li><p>更改站点默认名称<br>  <img alt="更改站点默认名称0" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-4.jpg"><br>  <img alt="更改站点默认名称1" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-5.jpg"><br>  <img alt="更改站点默认名称2" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-6.jpg"></p>
+<p>  保存成功后，到此可以通过<code>https://username.netlify.com</code>来访问，如 <a href="https://oulafen.netlify.com" target="_blank" rel="noopener">https://oulafen.netlify.com</a><br>  想使用自己的域名的话，还需以下步骤</p>
+</li>
+<li><p>绑定域名<br>  <img alt="绑定域名0" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-7.jpg"><br>  <img alt="绑定域名1" style="width:100%" src="http://statics.oulafen.com/blog-https-netlify-step-8.jpg"></p>
+</li>
+<li><p>添加域名解析<br>  <img alt="添加域名解析" style="width:100%" src="http://statics.oulafen.com/blog_https_netlify.jpg"></p>
+</li>
+</ul>
+<p>至此，大功告成</p>
+<p>访问<a href="https://blog.oulafen.com">https://blog.oulafen.com</a>是不是溜得飞起，哈哈，再也不怕被莫名劫持贴广告了。</p>
+<h2 id="补坑思考中的升华"><a href="#补坑思考中的升华" class="headerlink" title="补坑思考中的升华"></a>补坑思考中的升华</h2><p>除了使用netlify的方式外，还有没有其他的了呢？</p>
+<p>先说下使用netlify这类方式遇到的问题</p>
+<pre><code>github page的子项目链接，默认是`主项目域名/项目名称`进行访问，比如，我的一个项目`h5_my_home`，想通过外链直接看效果的话，之前直接通过http://blog.oulafen.com/h5_my_home来访问。
+现在改成https后，域名解析里找不到与username.github.io的对应关系，所以就不能通过原来的方式直接访问项目了。
+</code></pre><p>细细查看了项目的设置后，发现个更简单的方式<br>可以直接单独设置项目的domain<br>    <img alt="设置domain" style="width:100%" src="http://statics.oulafen.com/blog-https-domain-0.jpg"></p>
+<p>在域名解析里再加一条解析，就又大功告成了，^_^<br>    <img alt="添加域名解析1" style="width:100%" src="http://statics.oulafen.com/blog-https-domain-1.jpg"></p>
+<p>无独有偶，还看到了 Enforce HTTPS 的设置项，选中后，访问https的链接也是完美很。（需要添加域名24小时后才能选中）</p>
+<p>还有个小问题的解决方案，这里提一下</p>
+<pre><code>当有n多项目都需要展示时，按以上的方案，也得添加n条域名解析?
+这个肯定不是这样的，想想正则，立马有了眉目，直接在解析里加一条带*的即可，如
+</code></pre><p><img alt="添加域名解析2" style="width:100%" src="http://statics.oulafen.com/blog-https-domain-2.jpg"></p>
+<p>N多项目只需在github上设置下自定义域名即可<br><a href="https://10kpreheatingh5.coder.oulafen.com/" target="_blank" rel="noopener">https://10kpreheatingh5.coder.oulafen.com/</a><br><a href="https://drawmapcolorfully.coder.oulafen.com/" target="_blank" rel="noopener">https://drawmapcolorfully.coder.oulafen.com/</a><br><a href="https://rmbplus20.coder.oulafen.com/" target="_blank" rel="noopener">https://rmbplus20.coder.oulafen.com/</a><br><a href="https://lemoncitymedal.coder.oulafen.com/" target="_blank" rel="noopener">https://lemoncitymedal.coder.oulafen.com/</a><br><a href="https://scratchcardberlin.coder.oulafen.com/" target="_blank" rel="noopener">https://scratchcardberlin.coder.oulafen.com/</a><br>…</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>给github pages博客域名设置https，目前最简单直接的是，直接在项目<strong>setting</strong>里设置<code>custom domain</code>，并且24小时后选中<code>Enforce HTTPS</code>即可</p>
+<p>虽然解决过程中饶了一圈，不过有幸认识了Netlify，并对多个子项目的域名设置有了更多的思考，也算是涨了点知识。</p>
+<p>参考：<br>    <a href="https://jaeger.itscoder.com/web/2017/08/30/github-page-https.html" target="_blank" rel="noopener">https://jaeger.itscoder.com/web/2017/08/30/github-page-https.html</a><br>    <a href="https://help.github.com/articles/using-a-custom-domain-with-github-pages/" target="_blank" rel="noopener">https://help.github.com/articles/using-a-custom-domain-with-github-pages/</a></p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/git/">git</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2020/07/23/browser-history/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2018/07/14/spa_wechat_cache/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

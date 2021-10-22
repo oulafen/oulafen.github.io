@@ -1,0 +1,299 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>前端实现截图并预览的效果 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="前端截图功能详解">
+  
+  <meta name="keywords" content="前端 截图">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="前端实现截图并预览的效果">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-07T02:53:14.000Z"><a href="/2016/01/07/crop-image/">2016-01-07</a></time>
+      
+      
+  
+    <h1 class="title">前端实现截图并预览的效果</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>关于截图，已有不少插件，比如Jcrop、imageAreaSelect等等，但功能都不是很全，本文在 imageAreaSelect 的基础上做了一些改进，具体实现如下功能（纯前端）：</p>
+<ul>
+<li>在标签中自定义裁切后的长宽，方便代码复用</li>
+<li>在裁切框中，图片自适应</li>
+<li>可连续选择同一张图片</li>
+<li>前端进行裁图并显示出来</li>
+<li>限制图片大小<a id="more"></a>
+</li>
+</ul>
+<h2 id="效果图："><a href="#效果图：" class="headerlink" title="效果图："></a>效果图：</h2><p>演示地址 戳<a href="http://blog.oulafen.com/demo/crop-image/">这里</a></p>
+<p>点击上传图片：<br><img alt="点击上传图片" src="http://statics.oulafen.com/gitblog-crop-2.jpg"></p>
+<p>裁图：<br><img alt="裁图" src="http://statics.oulafen.com/gitblog-crop-1.jpg"></p>
+<p>预览裁后结果：<br><img alt="预览裁后结果" src="http://statics.oulafen.com/gitblog-crop-3.jpg"></p>
+<h2 id="用法"><a href="#用法" class="headerlink" title="用法"></a>用法</h2><h3 id="例："><a href="#例：" class="headerlink" title="例："></a>例：</h3><p>配置html：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"display:none"</span> <span class="attr">type</span>=<span class="string">"file"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">id</span>=<span class="string">"imgInput"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">onchange</span>=<span class="string">"imgCrop.change(this)"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">data-width</span>=<span class="string">"380"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">data-height</span>=<span class="string">"380"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">data-previd</span>=<span class="string">"imgPrev"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">data-maxsize</span>=<span class="string">"2"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">class</span>=<span class="string">"image-show J-upload-img-btn"</span></span></span><br><span class="line"><span class="tag">   <span class="attr">data-target</span>=<span class="string">"imgInput"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"upload-img-box"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">span</span>&gt;</span>上传图片<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"img-desc"</span>&gt;</span>支持小于2M，格式为jpg、png的图片，分辨率为380*380px<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"img-prev"</span> <span class="attr">id</span>=<span class="string">"imgPrev"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>裁切框：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal fade crop-modal J-crop-modal"</span> <span class="attr">data-backdrop</span>=<span class="string">"static"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-dialog"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-content"</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"modal-body"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"image-box"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">p</span>&gt;</span><span class="tag">&lt;<span class="name">img</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"preview-box"</span> <span class="attr">style</span>=<span class="string">"width:150px;"</span>&gt;</span></span><br><span class="line">                    <span class="tag">&lt;<span class="name">img</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">class</span>=<span class="string">"J-canvas"</span> <span class="attr">style</span>=<span class="string">"overflow:hidden; display:none"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"crop-btns"</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">class</span>=<span class="string">"btn confirm-btn J-confirm-btn"</span> <span class="attr">onclick</span>=<span class="string">"imgCrop.confirm()"</span>&gt;</span>确定<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">                <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">class</span>=<span class="string">"btn cancel-btn"</span>  <span class="attr">onclick</span>=<span class="string">"imgCrop.cancel()"</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>在dom底部加载js：<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/jquery-1.11.3.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/bootstrap.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--用到了模态框--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/jquery.imgareaselect.pack.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>     <span class="comment">&lt;!--imgAreaSelect文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/img-crop.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span>      <span class="comment">&lt;!--实现crop的功能文件--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    $(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        imgCrop.init(<span class="string">'.J-upload-img-btn'</span>);   <span class="comment">//初始化crop事件</span></span></span><br><span class="line">    &#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>说明：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">#html设置</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"display:none"</span> <span class="attr">type</span>=<span class="string">"file"</span></span></span></span><br><span class="line"><span class="xml">       id="文件输入ID"</span></span><br><span class="line"><span class="xml">       onchange="imgCrop.change(this)"</span></span><br><span class="line"><span class="xml">       data-width="要裁切的宽度，/px"</span></span><br><span class="line"><span class="xml">       data-height="要裁切的高度，/px"</span></span><br><span class="line"><span class="xml">       data-previd="裁切后要显示在哪儿的ID"</span></span><br><span class="line"><span class="xml">       data-maxsize="图片大小设置，/M"&gt;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span></span></span></span><br><span class="line"><span class="xml">   class="image-show J-upload-img-btn"</span></span><br><span class="line"><span class="xml">   data-target="文件输入ID"&gt;</span></span><br><span class="line"><span class="code">    &lt;div class="upload-img-box"&gt;</span></span><br><span class="line"><span class="code">        &lt;span&gt;上传图片&lt;/span&gt;</span></span><br><span class="line"><span class="code">    &lt;/div&gt;</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">p</span> <span class="attr">class</span>=<span class="string">"img-desc"</span>&gt;</span></span>支持小于2M，格式为jpg、png的图片，分辨率为380*380px<span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"img-prev"</span> <span class="attr">id</span>=<span class="string">"裁切后要显示在哪儿的ID"</span>&gt;</span></span><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure></p>
+<p>原理：</p>
+<ul>
+<li><p>裁切原理：<br>其实是用canvas根据尺寸重绘一张图</p>
+</li>
+<li><p>预览原理：<br>将图片转成base64，直接载到img的src中</p>
+</li>
+<li><p>连续选择同一张图片进行裁切的原理：<br>裁切时用到的的重要的事件是change，而两次连续相同的选择是不会触发这个事件的，而直接重新绑定change事件，本银试过了，不行，应为value值不能真正的被清空，还涉及到兼容性问题，妈呀，头好大，怎么办呢？其实~~~很简单，用replace重新替换下，然后再重绑change就可以了。</p>
+</li>
+</ul>
+<h2 id="分解"><a href="#分解" class="headerlink" title="分解"></a>分解</h2><h3 id="获取文件大小"><a href="#获取文件大小" class="headerlink" title="获取文件大小"></a>获取文件大小</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">getFileSize : <span class="function"><span class="keyword">function</span>(<span class="params">o</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> self = <span class="keyword">this</span>;</span><br><span class="line">    <span class="keyword">var</span> fileSize = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">if</span> (self.isIE &amp;&amp; !o.files) &#123;    <span class="comment">// IE浏览器</span></span><br><span class="line">        <span class="keyword">var</span> filePath = o.value; <span class="comment">// 获得上传文件的绝对路径</span></span><br><span class="line">        <span class="keyword">var</span> fileSystem = <span class="keyword">new</span> ActiveXObject(<span class="string">"Scripting.FileSystemObject"</span>);</span><br><span class="line">        <span class="comment">// GetFile(path) 方法从磁盘获取一个文件并返回。</span></span><br><span class="line">        <span class="keyword">var</span> file = fileSystem.GetFile(filePath);</span><br><span class="line">        fileSize = file.Size;    <span class="comment">// 文件大小，单位：b</span></span><br><span class="line">    &#125;<span class="keyword">else</span> &#123;    <span class="comment">// 非IE浏览器</span></span><br><span class="line">        fileSize = o.files[<span class="number">0</span>].size;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> fileSize / <span class="number">1024</span> / <span class="number">1024</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="使用canvas模拟裁图"><a href="#使用canvas模拟裁图" class="headerlink" title="使用canvas模拟裁图"></a>使用canvas模拟裁图</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> size = cropImgSize;</span><br><span class="line"><span class="keyword">var</span> cropModalObj = $(<span class="string">".J-crop-modal"</span>);</span><br><span class="line"><span class="keyword">var</span> primary_width = cropModalObj.find(<span class="string">".image-box img"</span>).width();</span><br><span class="line"><span class="keyword">var</span> sourseImg = <span class="keyword">new</span> Image();</span><br><span class="line">sourseImg.src = cropModalObj.find(<span class="string">".image-box img"</span>).attr(<span class="string">'src'</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> R = sourseImg.width / primary_width;</span><br><span class="line"><span class="keyword">var</span> canvas = cropModalObj.find(<span class="string">".J-canvas"</span>)[<span class="number">0</span>];</span><br><span class="line"><span class="keyword">var</span> context = canvas.getContext(<span class="string">"2d"</span>);</span><br><span class="line">context.drawImage(sourseImg, size.x1 * R, size.y1 * R, size.w * R, size.h * R, <span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#'</span>+prevID)</span><br><span class="line">    .html(<span class="string">''</span>)</span><br><span class="line">    .append(<span class="string">"&lt;img src='"</span> + canvas.toDataURL(<span class="string">'image/jpeg'</span>,<span class="number">0.8</span>) + <span class="string">"'/&gt;"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="图片转base64渲染"><a href="#图片转base64渲染" class="headerlink" title="图片转base64渲染"></a>图片转base64渲染</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!self.isIE) &#123;</span><br><span class="line">    <span class="keyword">var</span> file = o.files[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">    reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">        img.src = reader.result;</span><br><span class="line">        self.setCropImgSize(img.width, img.height);</span><br><span class="line">        imgModalObj.find(<span class="string">'.image-box img'</span>).attr(<span class="string">'src'</span>, reader.result);</span><br><span class="line">        imgModalObj.find(<span class="string">'.preview-box img'</span>).attr(<span class="string">'src'</span>, reader.result);</span><br><span class="line">    &#125;;</span><br><span class="line">    reader.readAsDataURL(file);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="http://www.cnblogs.com/fsjohnhuang/p/3925827.html" target="_blank" rel="noopener">阅读更多</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>代码地址，戳<a href="https://gitcafe.com/oulafen/demo/tree/gitcafe-pages/crop-image" target="_blank" rel="noopener">这里</a></p>
+<p>修改<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"display:none"</span> <span class="attr">type</span>=<span class="string">"file"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">id</span>=<span class="string">"imgInput"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">onchange</span>=<span class="string">"imgCrop.change(this)"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">data-width</span>=<span class="string">"380"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">data-height</span>=<span class="string">"380"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">data-previd</span>=<span class="string">"imgPrev"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">data-maxsize</span>=<span class="string">"2"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>为<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">style</span>=<span class="string">"display:none"</span> <span class="attr">type</span>=<span class="string">"file"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">id</span>=<span class="string">"imgInput"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">onchange</span>=<span class="string">"imgCrop.change(this)"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">data-width</span>=<span class="string">"540"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">data-height</span>=<span class="string">"300"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">data-previd</span>=<span class="string">"imgPrev"</span></span></span><br><span class="line"><span class="tag">          <span class="attr">data-maxsize</span>=<span class="string">"2"</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>后，裁切效果如下：</p>
+<p>裁图：<br><img alt="修改尺寸后裁图" src="http://statics.oulafen.com/gitblog-crop-4.jpg"></p>
+<p>预览裁后结果：<br><img alt="修改尺寸后预览裁后结果" src="http://statics.oulafen.com/gitblog-crop-5.jpg"></p>
+<p>O(∩_∩)O哈哈~~~~是不是很好玩。。。<br>还在路上，欢迎指正</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/前端/">前端</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/01/12/npm-to-cnpm/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/01/06/tpl-html-reuse/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

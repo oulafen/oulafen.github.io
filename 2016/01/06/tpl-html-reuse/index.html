@@ -1,0 +1,285 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>一段好用的代码，瞬间解决html复用问题 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="解决前端js插入html复用问题">
+  
+  <meta name="keywords" content="前端 复用">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="一段好用的代码，瞬间解决html复用问题">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-06T09:28:40.000Z"><a href="/2016/01/06/tpl-html-reuse/">2016-01-06</a></time>
+      
+      
+  
+    <h1 class="title">一段好用的代码，瞬间解决html复用问题</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文旨在解决js中插入dom时的html复用问题<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>如下图这样：<br><img width="100%" src="http://statics.oulafen.com/gitblog-tpl-add-member.jpg"><br>点击添加新成员按钮时，在页面中再插入一块成员表单，一般的做法可能是这样的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.box'</span>).append(<span class="string">'&lt;div class="row"&gt;&lt;div class="col-xs-2 form-label"&gt;成员姓名&lt;/div&gt;&lt;div class="col-xs-5"&gt;&lt;input class="form-control" type="text" name="" &gt;&lt;/div&gt;&lt;div class="col-xs-5 tip J-tip"&gt;&lt;div class="tip-box"&gt;&lt;p class="J-tip-content"&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;'</span>);</span><br></pre></td></tr></table></figure></p>
+<p>尤其是内容很长并且还有动态变化的内容时，想想都头疼吧。</p>
+<p><strong>重点 重点 重点：</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.tpl = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cache = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">tmpl</span>(<span class="params">str, data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> fn = !<span class="regexp">/\W/</span>.test(str) ?</span><br><span class="line">            cache[str] = cache[str] ||</span><br><span class="line">                tpl(<span class="built_in">document</span>.getElementById(str).innerHTML) :</span><br><span class="line">            <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"obj"</span>,</span><br><span class="line">                <span class="string">"var p=[],print=function()&#123;p.push.apply(p,arguments);&#125;;"</span> +</span><br><span class="line">                <span class="string">"with(obj)&#123;p.push('"</span> +</span><br><span class="line">                str</span><br><span class="line">                    .replace(<span class="regexp">/[\r\t\n]/g</span>, <span class="string">" "</span>)</span><br><span class="line">                    .split(<span class="string">"&lt;%"</span>).join(<span class="string">"\t"</span>)</span><br><span class="line">                    .replace(<span class="regexp">/((^|%&gt;)[^\t]*)'/g</span>, <span class="string">"$1\r"</span>)</span><br><span class="line">                    .replace(<span class="regexp">/\t=(.*?)%&gt;/g</span>, <span class="string">"',$1,'"</span>)</span><br><span class="line">                    .split(<span class="string">"\t"</span>).join(<span class="string">"');"</span>)</span><br><span class="line">                    .split(<span class="string">"%&gt;"</span>).join(<span class="string">"p.push('"</span>)</span><br><span class="line">                    .split(<span class="string">"\r"</span>).join(<span class="string">"\\'"</span>)</span><br><span class="line">                + <span class="string">"');&#125;return p.join('');"</span>);</span><br><span class="line">        <span class="keyword">return</span> data ? fn(data) : fn;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
+<p>这可是段神奇的代码，有了它js中再也见不到 html 的身影了。</p>
+<p><strong>用法：</strong></p>
+<p>将要复用的 html 写在 dom 流中，用 <code>&lt;script&gt;</code> 标签包上，定义一个非官方定义的 type 及 id，如下：<br> <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"tpl"</span> <span class="attr">id</span>=<span class="string">"memberTpl"</span>&gt;</span></span><br><span class="line"><span class="javascript">    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"block-box J-member-box"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"javascript:void(0);"</span> <span class="attr">class</span>=<span class="string">"delete-btn J-delete-member-btn"</span> <span class="attr">title</span>=<span class="string">"删除"</span>&gt;</span><span class="symbol">&amp;times;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-2 form-label"</span>&gt;成员姓名&lt;<span class="regexp">/div&gt;</span></span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-5"</span>&gt;</span></span><br><span class="line"><span class="javascript">                &lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-control"</span> type=<span class="string">"text"</span> name=<span class="string">""</span> &gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-5 tip J-tip"</span>&gt;</span></span><br><span class="line"><span class="javascript">                &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tip-box"</span>&gt;</span></span><br><span class="line"><span class="javascript">                    &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"J-tip-content"</span>&gt;&lt;<span class="regexp">/p&gt;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-2 form-label"</span>&gt;成员职位&lt;<span class="regexp">/div&gt;</span></span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-5"</span>&gt;</span></span><br><span class="line"><span class="javascript">                &lt;input <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-control"</span> type=<span class="string">"text"</span> name=<span class="string">""</span> &gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-5 tip J-tip"</span>&gt;</span></span><br><span class="line"><span class="javascript">                &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tip-box"</span>&gt;</span></span><br><span class="line"><span class="javascript">                    &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"J-tip-content"</span>&gt;&lt;<span class="regexp">/p&gt;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"row"</span>&gt;</span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-2 form-label"</span>&gt;个人简介&lt;<span class="regexp">/div&gt;</span></span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-5"</span>&gt;</span></span><br><span class="line"><span class="javascript">                &lt;textarea <span class="class"><span class="keyword">class</span></span>=<span class="string">"form-control"</span> name=<span class="string">""</span> &gt;&lt;<span class="regexp">/textarea&gt;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-5 tip tip-h J-tip "</span>&gt;</span></span><br><span class="line"><span class="javascript">                &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tip-box"</span>&gt;</span></span><br><span class="line"><span class="javascript">                    &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"J-tip-content"</span>&gt;&lt;<span class="regexp">/p&gt;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">        &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"row image"</span>&gt;</span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-2 form-label"</span>&gt;个人头像&lt;<span class="regexp">/div&gt;</span></span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-5"</span>&gt;</span></span><br><span class="line"><span class="javascript">                &lt;a href=<span class="string">"javascript:void(0);"</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"image-show J-upload-img-btn"</span> id=<span class="string">"memberImgPrev"</span> data-target=<span class="string">"memberImgInput"</span>&gt;</span></span><br><span class="line"><span class="javascript">                    &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"upload-img-box"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">                        <span class="tag">&lt;<span class="name">span</span>&gt;</span>上传图片<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                <span class="tag">&lt;/<span class="name">a</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">                &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"img-desc"</span>&gt;支持小于<span class="number">2</span>M，格式为jpg、png的图片，分辨率为<span class="number">540</span>*<span class="number">300</span>px&lt;<span class="regexp">/p&gt;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"hidden"</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="javascript">            &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"col-xs-5 tip tip-h J-tip"</span>&gt;</span></span><br><span class="line"><span class="javascript">                &lt;div <span class="class"><span class="keyword">class</span></span>=<span class="string">"tip-box"</span>&gt;</span></span><br><span class="line"><span class="javascript">                    &lt;p <span class="class"><span class="keyword">class</span></span>=<span class="string">"J-tip-content"</span>&gt;&lt;<span class="regexp">/p&gt;</span></span></span><br><span class="line"><span class="handlebars"><span class="xml">                <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>然后把那段<strong>重点代码</strong>贴到 js 中，并在 js 中调用定义好的 tpl 接口：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tplHtml = tpl(<span class="string">'memberTpl'</span>);      <span class="comment">//生成html代码</span></span><br><span class="line">$(<span class="string">'.J-members-box'</span>).append(tplHtml);  <span class="comment">//追加到dom块中</span></span><br></pre></td></tr></table></figure></p>
+<p>至此基本用法就完成了。<br>查看在线显示？ <a href="http://oulafen.gitcafe.io/demo/tpl/" target="_blank" rel="noopener">戳戳戳</a><br>要源码？ <a href="https://gitcafe.com/oulafen/demo/tree/gitcafe-pages/tpl" target="_blank" rel="noopener">戳戳戳</a> </p>
+<h2 id="升级用法"><a href="#升级用法" class="headerlink" title="升级用法"></a>升级用法</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"cityBox"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"tpl"</span> <span class="attr">id</span>=<span class="string">"cityModal"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span>  <span class="attr">data-id</span>=<span class="string">"&lt;%=id%&gt;"</span> <span class="attr">data-code</span>=<span class="string">"&lt;%=code%&gt;"</span> <span class="attr">value</span>=<span class="string">"&lt;%=name%&gt;"</span>/&gt;</span></span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如上<code>&lt;%=变量%&gt;</code>中的变量可以动态赋值；<br>这常用于使用 ajax 获取到多个想似的子资源后，动态渲染到页面上；<br>也常出现在for循环中；<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> cityHtml = tpl(<span class="string">'cityModal'</span>, &#123;<span class="attr">id</span>: <span class="number">0</span>, <span class="attr">code</span>: <span class="number">111</span>, <span class="attr">value</span>: <span class="string">"北京"</span>&#125;);</span><br><span class="line">$(<span class="string">'#cityBox'</span>).append(cityHtml);</span><br></pre></td></tr></table></figure></p>
+<p><strong>优点：</strong></p>
+<ul>
+<li>便于修改模板</li>
+<li>使 js 与 html 分离，代码清晰</li>
+<li>这还不够？对于追求美感的攻城狮来讲，可帮大忙了。。。</li>
+</ul>
+<p><strong>注意：</strong></p>
+<ul>
+<li>定义的 html 模版中不能出现单引号，否则会报错</li>
+<li>变量也可以用 hash，如：<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"tpl"</span> <span class="attr">id</span>=<span class="string">"cityModal"</span>&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span>  <span class="attr">data-id</span>=<span class="string">"&lt;%=city.id%&gt;"</span> <span class="attr">data-code</span>=<span class="string">"&lt;%=city.code%&gt;"</span> <span class="attr">value</span>=<span class="string">"&lt;%=city.name%&gt;"</span>/&gt;</span></span></span></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/前端/">前端</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/01/07/crop-image/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/01/06/frontend-performance/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,281 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>nodejs中的base64转码/解码 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="nodejs中的base64转码和解码方法">
+  
+  <meta name="keywords" content="base64">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="nodejs中的base64转码/解码">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-07-07T13:00:29.000Z"><a href="/2016/07/07/node-base64-encoding-decoding/">2016-07-07</a></time>
+      
+      
+  
+    <h1 class="title">nodejs中的base64转码/解码</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在nodejs中怎么将字符串转化为base64呢? 是不是也像php中的<code>base64_encode()</code>一样简单呢?<br><a id="more"></a><br>作为<code>javascript</code>的nodejs, 对于编码字符串有个更合乎逻辑的方法, 而不是设置各种不一样的全局方法.</p>
+<p>入题吧, 看如下的实现方法:</p>
+<h3 id="编码-encode-将正常的字符串转为base64串"><a href="#编码-encode-将正常的字符串转为base64串" class="headerlink" title="编码(encode)-将正常的字符串转为base64串"></a>编码(encode)-将正常的字符串转为base64串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="keyword">new</span> Buffer(<span class="string">'JavaScript'</span>);</span><br><span class="line"><span class="keyword">var</span> base_str = str.toString(<span class="string">'base64'</span>);</span><br><span class="line"><span class="comment">// base_str = SmF2YVNjcmlwdA==</span></span><br></pre></td></tr></table></figure>
+<h3 id="解码-decode-将base64串转为正常的字符串"><a href="#解码-decode-将base64串转为正常的字符串" class="headerlink" title="解码(decode)-将base64串转为正常的字符串"></a>解码(decode)-将base64串转为正常的字符串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> base_str = <span class="keyword">new</span> Buffer(<span class="string">'SmF2YVNjcmlwdA=='</span>, <span class="string">'base64'</span>)</span><br><span class="line"><span class="keyword">var</span> str = base_str.toString();</span><br><span class="line"><span class="comment">// str = JavaScript</span></span><br></pre></td></tr></table></figure>
+<h2 id="关于Buffer的种种"><a href="#关于Buffer的种种" class="headerlink" title="关于Buffer的种种"></a>关于<code>Buffer</code>的种种</h2><ul>
+<li>什么时候该用buffer，什么时候不该用<br>  有测试证明: 我们在保存字符串的时候，该用string还是要用string，就算大字符串拼接string的速度也不会比buffer慢。<br>  那什么时候我们又需要用buffer呢？没办法的时候，当我们保存非utf-8字符串，2进制等等其他格式的时候，我们就必须得使用了。</li>
+<li>buffer不得不提的8KB<br>  buffer著名的8KB载体，举个例子好比，node把一幢大房子分成很多小房间，每个房间能容纳8个人，为了保证房间的充分使用，只有当一个房间塞满8个人后才会去开新的房间，但是当一次性有多个人来入住，node会保证要把这些人放到一个房间中，比如当前房间A有4个人住，但是一下子来了5个人，所以node不得不新开一间房间B，把这5个人安顿下来，此时又来了4个人，发现5个人的B房间也容纳不下了，只能再开一间房间C了，这样所有人都安顿下来了。但是之前的两间房A和B都各自浪费了4个和3个位置，而房间C就成为了当前的房间。<br>  具体点说就是当我们实例化一个新的Buffer类，会根据实例化时的大小去申请内存空间，如果需要的空间小于8KB，则会多一次判定，判定当前的8KB载体剩余容量是否够新的buffer实例，如果够用，则将新的buffer实例保存在当前的8KB载体中，并且更新剩余的空间。</li>
+<li>独享的空间<br>  如果你想创建一个独享的空间，独立的对这块内存空间进行读写，有两种办法，1是实例化一个超过8KB长度的buffer，另外一个就是使用slowbuffer类。</li>
+<li>清空buffer<br>  刷掉一块buffer上的数据最快的办法是buffer.fill</li>
+</ul>
+<p>阅读参考:</p>
+<ul>
+<li><a href="http://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html" target="_blank" rel="noopener">Base64 Encoding / Decoding in Node.js</a></li>
+</ul>
+<p>关于Buffer类的详细介绍参见:</p>
+<ul>
+<li><a href="http://javascript.ruanyifeng.com/nodejs/buffer.html" target="_blank" rel="noopener">《JavaScript 标准参考教程（alpha）》-Buffer对象</a></li>
+<li><a href="https://cnodejs.org/topic/5189ff4f63e9f8a54207f60c" target="_blank" rel="noopener">浅析nodejs的buffer类</a></li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/node/">node</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/08/24/validate-summary/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/07/05/canvas-dashed-line/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

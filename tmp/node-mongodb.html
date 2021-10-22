@@ -1,0 +1,14 @@
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><a id="more"></a>
+<h2 id="安装mongodb"><a href="#安装mongodb" class="headerlink" title="安装mongodb"></a>安装mongodb</h2><p>安装很简单</p>
+<ul>
+<li>到官网下载对应平台的数据包,<a href="https://www.mongodb.com/download-center#community" target="_blank" rel="noopener">下载地址</a></li>
+<li>解压下载下来的数据包,重新命名,例如命名为’mongodb’,并拷贝到指定的安装目录下,例如<code>~/db/</code>;</li>
+<li>在<code>~/db/mongodb/</code>目录下新建一个文件夹,用来存放mongodb的数据,这里取名为’db’.如图<br>  <img src="http://7sbpfo.com1.z0.glb.clouddn.com/blog-db-file.png"></li>
+<li>在终端执行  <figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">cd</span> ~<span class="string">/db/mongodb/bin/</span></span><br><span class="line"><span class="string">./mongod</span> <span class="params">--dbpath</span> <span class="string">../db/</span>    <span class="comment">#启动</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>以下演示的是 64 位 Linux上的安装<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">curl -O https:<span class="regexp">//</span>fastdl.mongodb.org<span class="regexp">/linux/m</span>ongodb-linux-x86_64-<span class="number">3.0</span>.<span class="number">6</span>.tgz    <span class="comment"># 下载</span></span><br><span class="line">tar -zxvf mongodb-linux-x86_64-<span class="number">3.0</span>.<span class="number">6</span>.tgz                                   <span class="comment"># 解压</span></span><br><span class="line">mv  mongodb-linux-x86_64-<span class="number">3.0</span>.<span class="number">6</span><span class="regexp">/ /u</span>sr<span class="regexp">/local/m</span>ongodb                         <span class="comment"># 将解压包拷贝到指定目录</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="设置数据库权限"><a href="#设置数据库权限" class="headerlink" title="设置数据库权限"></a>设置数据库权限</h2><h2 id="可视化管理工具robomongo"><a href="#可视化管理工具robomongo" class="headerlink" title="可视化管理工具robomongo"></a>可视化管理工具<a href="https://robomongo.org/" target="_blank" rel="noopener">robomongo</a></h2><p>阅读参考:</p>
+<ul>
+<li><a href="http://liubin.org/promises-book/" target="_blank" rel="noopener">JavaScript Promise迷你书（中文版）</a></li>
+</ul>

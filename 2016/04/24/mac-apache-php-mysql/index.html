@@ -1,0 +1,337 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>Mac中搭建Apache+PHP+Mysql环境 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="在Mac中搭建Apache+PHP+Mysql环境">
+  
+  <meta name="keywords" content="后端 php apache mysql">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Mac中搭建Apache+PHP+Mysql环境">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-04-24T13:52:29.000Z"><a href="/2016/04/24/mac-apache-php-mysql/">2016-04-24</a></time>
+      
+      
+  
+    <h1 class="title">Mac中搭建Apache+PHP+Mysql环境</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>虽作为前端，web后端的知识也少不了啊，那就先从php开始开始吧。</p>
+<p>首先是环境的配置，在mac OS X系统中已集成了 Apache+PHP ，只需在命令行里设置一下就ok了，至于mySql，就得手动装一下，废话不多说，Let’s go.<br><a id="more"></a></p>
+<h2 id="Apache"><a href="#Apache" class="headerlink" title="Apache"></a>Apache</h2><h3 id="常用命令："><a href="#常用命令：" class="headerlink" title="常用命令："></a>常用命令：</h3><ul>
+<li>启动 Apache： <code>sudo apachectl start</code></li>
+<li>关闭 Apache： <code>sudo apachectl stop</code></li>
+<li>重启 Apache： <code>sudo apachectl restart</code></li>
+<li>查看 Apache 版本：<code>httpd -v</code></li>
+</ul>
+<h3 id="设置root目录："><a href="#设置root目录：" class="headerlink" title="设置root目录："></a>设置root目录：</h3><p>OS X 中默认有两个目录可以直接运行你的 Web 程序</p>
+<ul>
+<li>一个是系统级的 Web 根目录<ul>
+<li>根目录及对应网址是<code>/Library/WebServer/Documents/</code>  <code>http://localhost</code></li>
+</ul>
+</li>
+<li><p>一个是用户级的根目录(以用户名oulafen为例)</p>
+<ul>
+<li>根目录及对应网址是<code>~/Sites</code>  <code>http://localhost/~oulafen/</code> </li>
+<li><code>~/Sites</code> 也就是用户目录下面的”站点”目录，在OS X 中，这个目录可能没有，所以需要手动建立一个同名目录。在终端运行<code>sudo mkdir ~/Sites</code>即可建立站点文件夹</li>
+<li><p>建立站点文件夹后，检查 <code>/etc</code> 下是否有 <code>oulafen.conf</code> 这个文件，若没有则新键，并插入如下内容</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">Directory</span> "/<span class="attr">Users</span>/<span class="attr">oulafen</span>/<span class="attr">Sites</span>/"&gt;</span></span><br><span class="line">    Options Indexes MultiViews</span><br><span class="line">    AllowOverride All</span><br><span class="line">    Order allow,deny</span><br><span class="line">    Allow from all</span><br><span class="line"><span class="tag">&lt;/<span class="name">Directory</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件保存之后，赋予读写权限 <code>sudo chmod 755 /etc/apache2/users/oulafen.conf</code></p>
+</li>
+<li>然后重启Apache，使该文件生效, <code>sudo apachectl restart</code></li>
+<li>在<code>~/Sites</code>文件夹中放入测试网页，访问<code>http://localhost/~oulafen/</code> 试一下是否配置成功。</li>
+</ul>
+</li>
+</ul>
+<h3 id="更改根目录："><a href="#更改根目录：" class="headerlink" title="更改根目录："></a>更改根目录：</h3><ul>
+<li>把<code>/etc/apache2/httpd.conf</code>文件里的 <code>/Library/WebServer/Documents/</code> 都替换成自己的路径，比如 <code>~/Sites</code></li>
+<li>重启Apache，再次访问 <code>http://localhost</code>，即可显示修改后的文件路径中的内容。</li>
+</ul>
+<h3 id="配置虚拟主机："><a href="#配置虚拟主机：" class="headerlink" title="配置虚拟主机："></a>配置虚拟主机：</h3><ul>
+<li><code>sudo vi /etc/apache2/httpd.conf</code>，</li>
+<li>在 httpd.conf 中找到 <code>#Include /private/etc/apache2/extra/httpd-vhosts.conf</code> ，去掉前面的<code>#</code> ，重启Apache <code>sudo apachectl restart</code></li>
+<li><p>配置虚拟主机文件 <code>httpd-vhost.conf</code></p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi <span class="regexp">/etc/</span>apache2<span class="regexp">/extra/</span>httpd-vhosts.conf</span><br></pre></td></tr></table></figure>
+<p>  在文件中加入类似如下代码</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></span><br><span class="line">        <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/oulafen/Sites"</span></span><br><span class="line">        <span class="attribute"><span class="nomarkup">ServerName</span></span> localhost</span><br><span class="line">        <span class="attribute">DirectoryIndex</span> index.php</span><br><span class="line">        <span class="section">&lt;Directory /&gt;</span></span><br><span class="line">            <span class="attribute"><span class="nomarkup">Options</span></span> Indexes FollowSymLinks</span><br><span class="line">            <span class="attribute">AllowOverride</span> None</span><br><span class="line">            <span class="attribute"><span class="nomarkup">Order</span></span> allow,deny</span><br><span class="line">            <span class="attribute"><span class="nomarkup">Allow</span></span> from <span class="literal">all</span></span><br><span class="line">        <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br><span class="line"><span class="section">&lt;VirtualHost *:80&gt;</span></span><br><span class="line">        <span class="attribute"><span class="nomarkup">DocumentRoot</span></span> <span class="string">"/Users/oulafen/Sites/mysite"</span>  ##项目根目录</span><br><span class="line">        <span class="attribute"><span class="nomarkup">ServerName</span></span> mysite.com              ##在本地访问的域名，最好不要与线上的冲突 </span><br><span class="line">        <span class="attribute">DirectoryIndex</span> index.php</span><br><span class="line">        <span class="section">&lt;Directory /&gt;</span></span><br><span class="line">            <span class="attribute"><span class="nomarkup">Options</span></span> Indexes FollowSymLinks</span><br><span class="line">            <span class="attribute">AllowOverride</span> None</span><br><span class="line">            <span class="attribute"><span class="nomarkup">Order</span></span> allow,deny</span><br><span class="line">            <span class="attribute"><span class="nomarkup">Allow</span></span> from <span class="literal">all</span></span><br><span class="line">        <span class="section">&lt;/Directory&gt;</span></span><br><span class="line"><span class="section">&lt;/VirtualHost&gt;</span></span><br></pre></td></tr></table></figure>
+<p>  保存并退出后，重启Apache，访问 <code>http://localhost/mysite/</code> 或 <code>http://mysite.com</code> 查看效果。</p>
+</li>
+</ul>
+<h2 id="php"><a href="#php" class="headerlink" title="php"></a>php</h2><p>OS X Mavericks 中已经集成了 PHP 5.4.30 版本，需要手动开启。</p>
+<ul>
+<li>可以用 vi 或者 nano 编辑器打开下面这个文件：<code>sudo nano /etc/apache2/httpd.conf</code> </li>
+<li>然后按 <code>ctl+W</code> 进行查找，搜索<code>php</code>，第一条匹配的应该是下面这句代码：<code>LoadModule php5_module libexec/apache2/libphp5.so</code>,请将这句代码前面的<code>#</code>去掉，然后保存文件。</li>
+<li>重启 Apache：<code>sudo apachectl restart</code></li>
+<li>现在 PHP 应该已经开始工作了，你可以在用户级根目录下(~/Sites/)放一个PHP测试文件，代码如下：<code>&lt;?php phpinfo(); ?&gt;</code></li>
+</ul>
+<p>关于 <code>php.ini</code>:</p>
+<ul>
+<li>先复制一份 <code>php.ini</code>，<code>sudo cp /etc/php.ini.default /etc/php.ini</code></li>
+<li>然后就可以通过<code>php.ini</code>来配置各种PHP功能了。<br>  例如修改 <code>upload_max_filesize</code>、<code>memory_limit</code>、<code>post_max_size</code>三项值，来调整PHP提交文件的最大值，比如<code>phpMyAdmin</code>中导入数据的最大值。</li>
+</ul>
+<h2 id="mySql"><a href="#mySql" class="headerlink" title="mySql"></a>mySql</h2><ul>
+<li>OS X Mavericks 中并没有集成 Mysql，需要手动安装。可以点击 <a href="http://dev.mysql.com/downloads/mysql/" target="_blank" rel="noopener">http://dev.mysql.com/downloads/mysql/</a> 去官网下载 MySQL 的安装包。建议下载稳定版。</li>
+<li>安装。安装过程中会提示初始密码，切记要记住此密码。</li>
+<li>安装成功后，从‘系统偏好设置 → 拉到最下边看到 MySQL → 点击进入可以看到MySQL状态’，最终让其保持在开启状态即可。</li>
+<li>设置 <code>mysql</code>命令<ul>
+<li><code>vi ~/.bash_profile</code></li>
+<li>然后按字母 i 进入编辑模式，将下面的这句代码贴进去：<br>  <code>export PATH=&quot;/usr/local/mysql/bin:$PATH&quot;</code> </li>
+<li>保存并退出</li>
+<li>重新加载一下 Shell 以让上面的环境变量生效：<code>source ~/.bash_profile</code></li>
+<li>之后你就可以在终端的任意目录使用 mysql 命令了，可运行 <code>mysql -v</code> 测试</li>
+</ul>
+</li>
+<li>下载workbench 或 phpmyadmin安装，进行mysql的可视化操作。</li>
+</ul>
+<p>常见问题：</p>
+<ul>
+<li>2002 socket 错误<ul>
+<li>杀掉mysql进程后再进行操作<br><code>sudo mkdir /var/mysql</code><br><code>sudo ln -s /tmp/mysql.sock /var/mysql/mysql.sock</code></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/环境/">环境</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/04/27/mac-sock-screen-setting/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/04/23/mac-commands/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

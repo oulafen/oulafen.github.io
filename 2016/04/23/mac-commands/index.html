@@ -1,0 +1,358 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>mac 常用命令速查 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="这篇博客将记录使用 mac 过程中常用的命令。">
+  
+  <meta name="keywords" content="mac命令">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="mac 常用命令速查">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-04-23T12:03:07.000Z"><a href="/2016/04/23/mac-commands/">2016-04-23</a></time>
+      
+      
+  
+    <h1 class="title">mac 常用命令速查</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇博客将记录使用 mac 过程中常用的命令。<br><a id="more"></a></p>
+<h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>在图形界面下，用finder 打开 应用程序 -&gt; 实用程序 -&gt; 终端</p>
+<ul>
+<li><p>基本命令</p>
+<ul>
+<li>列出文件，<code>ls 参数 目录名</code>（参数 <code>-w</code> 显示中文，<code>-l</code> 详细信息， <code>-a</code> 包括隐藏文件 ）</li>
+<li>转换目录，<code>cd</code></li>
+<li>建立新目录，<code>mkdir 目录名</code></li>
+<li>拷贝文件，<code>cp 参数 源文件 目标文件</code> (参数 <code>-R</code> 表示对目录进行递归操作)</li>
+<li>删除文件，<code>rm 参数 文件</code> (参数 <code>-rf</code> 表示递归和强制，千万要小心使用，如果执行了 <code>rm -rf /</code> 你的系统就全没了)</li>
+<li>移动文件，<code>mv 文件 目标目录</code></li>
+<li>文本编辑，<code>nano 文件名</code> 或者 <code>vi 文件名</code></li>
+</ul>
+</li>
+<li><p>目录操作</p>
+<ul>
+<li>创建一个目录，<code>mkdir</code>, 例：<code>mkdir dirname</code></li>
+<li>删除一个目录, <code>rmdir</code>, 例：<code>rmdir dirname</code></li>
+<li>移动或重命名一个目录, <code>mvdir</code>, 例：<code>mvdir dir1 dir2</code></li>
+<li>显示当前目录的路径名, <code>pwd</code></li>
+<li>显示当前目录的内容, <code>ls</code></li>
+</ul>
+</li>
+<li><p>文件操作</p>
+<ul>
+<li>显示或连接文件，<code>cat</code>, 例：<code>cat filename</code></li>
+<li>显示费文本文件的内容，<code>od</code>, 例：<code>od -c filename</code></li>
+<li>删除文件或目录，<code>rm</code>, 例：<code>rm fileneme</code> <code>rm -rf dirname</code></li>
+<li>改变文件名或所在目录, <code>mv</code>, 例：<code>mv file1 file2</code></li>
+<li>使用匹配表达式查找文件， <code>find</code>, 例：<code>find . -name &quot;*.c&quot; -print</code></li>
+<li>显示文件类型, <code>file</code>,例：<code>file filename</code></li>
+</ul>
+</li>
+<li><p>选择操作</p>
+<ul>
+<li>显示文件的最初几行，<code>head</code>, 例：<code>head -20 filename</code></li>
+<li>显示文件的最后几行, <code>tail</code>, 例：<code>tail -15 filename</code></li>
+<li>显示文件每行中的某些域, <code>cut</code>, 例：<code>cut -f1,7 -d: /etc/passwd</code></li>
+<li>从标准输入中删除若干列, <code>colrm</code>, 例：<code>colrm 8 20 file2</code></li>
+<li>比较并显示两个文件的差异, <code>diff</code>, 例：<code>diff file1 file2</code></li>
+<li>排序或归并文件, <code>sort</code>, 例：<code>sort -d -f -u file1</code></li>
+<li>去掉文件中的重复行, <code>uniq</code>, 例：<code>uniq file1 file2</code></li>
+<li>显示两有序文件的公共和非公共行, <code>comm</code>, 例：<code>comm file1 file2</code></li>
+<li>统计文件的字符数、词数和行数, <code>wc</code>, 例：<code>wc filename</code></li>
+<li>给文件加上行号, <code>nl</code>, 例：<code>nl file1 &gt;file2</code></li>
+</ul>
+</li>
+<li><p>进程操作</p>
+<ul>
+<li>显示进程当前状态，<code>ps</code>,例：<code>ps u</code></li>
+<li>终止进程，<code>kill</code>, 例：<code>kill -9 30142</code></li>
+</ul>
+</li>
+<li><p>时间操作</p>
+<ul>
+<li>显示系统的当前日期和时间，<code>date</code></li>
+<li>显示日历, <code>cal</code></li>
+<li>统计程序的执行时间, <code>time</code>, 例：<code>time a.out</code></li>
+</ul>
+</li>
+<li><p>网络与通信操作</p>
+<ul>
+<li>远程登录，<code>telnet</code>,例：<code>telnet hpc.sp.net.edu.cn</code></li>
+<li>远程登录, <code>rlogin</code>,例：<code>rlogin hostname -l username</code></li>
+<li>在远程主机执行指定命令, <code>rsh</code>, 例：<code>rsh f01n03 date</code></li>
+<li>在本地主机与远程主机之间传输文件, <code>ftp</code>, 例：<code>ftp ftp.sp.net.edu.cn</code></li>
+<li>在本地主机与远程主机之间复制文件, <code>rcp</code>, 例：<code>rcp file1 host1:file2</code></li>
+<li>给一个网络主机发送回应请求, <code>ping</code>, 例：<code>ping hpc.sp.net.edu.cn</code></li>
+<li>阅读和发送电子邮件, <code>mail</code>, 例：<code>mail</code></li>
+<li>给另一用户发送报文, <code>write</code>, 例：<code>write username pts/1</code></li>
+<li>允许或拒绝接收报文, <code>mesg</code>, 例：<code>mesg n</code></li>
+</ul>
+</li>
+<li><p>Korn Shell 命令</p>
+<ul>
+<li>列出最近执行过的几条命令及编号, <code>history</code></li>
+<li>重复执行最近执行过的某条命令, <code>r</code>, 例：<code>r -2</code></li>
+<li>给某个命令定义别名, <code>alias</code>, 例：<code>alias del=rm -i</code></li>
+<li>取消对某个别名的定义, <code>unalias</code>, 例：<code>unalias del</code></li>
+</ul>
+</li>
+<li><p>其他命令</p>
+<ul>
+<li>显示操作系统的有关信息，<code>uname</code>, 例：<code>uname -a</code></li>
+<li>清除屏幕或窗口内容, <code>clear</code></li>
+<li>显示当前所有设置过的环境变量, <code>env</code></li>
+<li>列出当前登录的所有用户, <code>who</code></li>
+<li>显示当前正进行操作的用户名, <code>whoami</code></li>
+<li>显示终端或伪终端的名称, <code>tty</code></li>
+<li>显示或重置控制键定义, <code>stty</code>, 例：<code>stty -a</code></li>
+<li>查询磁盘使用情况, <code>du</code>, 例：<code>du -k subdir</code></li>
+<li>显示文件系统的总空间和可用空间, <code>df /tmp</code></li>
+<li>显示当前系统活动的总信息, <code>w</code></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/mac/">mac</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/04/24/mac-apache-php-mysql/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/02/24/frontend-mac-installing/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>hexo 快速入门 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="oulafen&#39;s coding note">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="hexo 快速入门">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2015-12-29T09:56:19.000Z"><a href="/2015/12/29/hexo-quick-start/">2015-12-29</a></time>
+      
+      
+  
+    <h1 class="title">hexo 快速入门</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>一直想有个github的博客，今天终于得空整好了，都说hexo很好用，今日一试，果然爱不释手。<br><a id="more"></a><br>@Zippera对hexo的介绍已经相当详细，没看过的戳<a href="http://zipperary.com/categories/hexo/" target="_blank" rel="noopener">这里</a>。</p>
+<p><a href="https://hexo.io/docs/" target="_blank" rel="noopener">hexo官方文档戳这里</a></p>
+<p>这里只精简的总结一下，方便自己以后查阅。</p>
+<h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>hexo是一个基于Node.js的静态博客程序，可以方便的生成静态网页托管在github和Heroku上。作者是来自台湾的@tommy351。</p>
+<h2 id="优势"><a href="#优势" class="headerlink" title="优势"></a>优势</h2><p>快速、支持 Markdown、已移植 Octopress 插件、高扩展性、自订性、兼容于 Windows, Mac &amp; Linux、易用、轻、用户多。</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>1、安装nodejs；windows平台nodejs下载地址: <a href="https://nodejs.org/en/" target="_blank" rel="noopener">下载</a><br>2、用npm安装hexo<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g hexo</span><br></pre></td></tr></table></figure></p>
+<p>3、创建hexo文件，并在其文件下init初始化<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure></p>
+<p>4、安装依赖包<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure></p>
+<p>5、生成静态文件<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br></pre></td></tr></table></figure></p>
+<p>6、开启本地服务<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server</span><br></pre></td></tr></table></figure></p>
+<p>7、Install hexo-deployer-git.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure></p>
+<p>8、配置(前提是有自己的xxx.github.io仓库，若没有请参考 <a href="https://pages.github.com/" target="_blank" rel="noopener">这里-github-pages-link</a><br>编辑<code>\hexo\_config.yml</code>:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/oulafen/oulafen.github.io.git</span><br><span class="line">  branch: master</span><br></pre></td></tr></table></figure></p>
+<p>9、执行deploy，更新本地静态页面到自己的博客仓库<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo generate</span><br><span class="line">hexo deploy</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h2><p>站点配置用到两个文件，一个是对整站的配置..\hexo\_config.yml，另一个是对主题的配置..\hexo\themes\_config.yml，基本都是见文知意，就不多解释。</p>
+<h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>发表博客<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new "my new post"</span><br></pre></td></tr></table></figure></p>
+<p>在..\hexo\source\_posts中打开这个文件，配置开头。<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">title: my new post #可以改成中文的，如“新文章”</span><br><span class="line">date: 2013-05-29 07:56:29 #发表日期，一般不改动</span><br><span class="line">categories: blog #文章文类</span><br><span class="line">tags: [博客，文章] #文章标签，多于一项时用这种格式</span><br><span class="line">---</span><br></pre></td></tr></table></figure></p>
+<p>之后是正文，用markdown写，使用方法可参照博客<a href="http://zipperary.com/2013/05/22/introduction-to-markdown/" target="_blank" rel="noopener">Introduction to markdown</a></p>
+<h2 id="添加“多说”评论"><a href="#添加“多说”评论" class="headerlink" title="添加“多说”评论"></a>添加“多说”评论</h2><p>1、在<a href="http://duoshuo.com/" target="_blank" rel="noopener">多说</a>进行注册-创建站点后，在后台管理-（站点）-工具中获取通用代码。<br>2、将通用代码复制到<code>themes\light\layout\_partial\comment.ejs</code>里，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;% if ( page.comments)&#123; %&gt;</span><br><span class="line">&lt;section id=&quot;comment&quot;&gt;</span><br><span class="line">&lt;!-- 多说评论框 start --&gt;</span><br><span class="line">	&lt;div class=&quot;ds-thread&quot; data-thread-key=&quot;&lt;%- page.path %&gt;&quot; data-title=&quot;&lt;%- page.title %&gt;&quot; data-url=&quot;&lt;%- config.root %&gt;&lt;%- page.path %&gt;&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;!-- 多说评论框 end --&gt;</span><br><span class="line">&lt;!-- 多说公共JS代码 start (一个网页只需插入一次) --&gt;</span><br><span class="line">......</span><br><span class="line">&lt;!-- 多说公共JS代码 end --&gt;</span><br><span class="line">&lt;/section&gt;</span><br><span class="line">&lt;% &#125; %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>其中data-thread-key的值为<code>文章的唯一标识</code>即可，我这里是用的path，也可用其他，注意必须是唯一的，否则很可能会出现不同文章间的评论错乱。</p>
+<h2 id="添加页面导航"><a href="#添加页面导航" class="headerlink" title="添加页面导航"></a>添加页面导航</h2><p>先检查文件夹<code>themes\light\layout\_partial\</code>中是否有pagination.ejs文件，若有，直接在添加评论代码前加：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%- partial(&apos;pagination&apos;) %&gt;</span><br></pre></td></tr></table></figure></p>
+<p>且保证pagination.ejs中的内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;nav id=&quot;pagination&quot; &gt;</span><br><span class="line">    &lt;% if (page.prev) &#123; %&gt;</span><br><span class="line">    &lt;a href=&quot;&lt;%- config.root %&gt;&lt;%- page.prev.path %&gt;&quot; class=&quot;alignleft prev&quot; &gt;&lt;%= __(&apos;prev&apos;) %&gt;&lt;/a&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">    &lt;% if (page.next) &#123; %&gt;</span><br><span class="line">    &lt;a href=&quot;&lt;%- config.root %&gt;&lt;%- page.next.path %&gt;&quot; class=&quot;alignright next&quot; &gt;&lt;%= __(&apos;next&apos;) %&gt;&lt;/a&gt;</span><br><span class="line">    &lt;% &#125; %&gt;</span><br><span class="line">    &lt;div class=&quot;clearfix&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/nav&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="导航栏添加”关于”"><a href="#导航栏添加”关于”" class="headerlink" title="导航栏添加”关于”"></a>导航栏添加”关于”</h2><p>1、执行<code>hexo new page &quot;about&quot;</code><br>2、在themes/light/_config.yml中，添加如下：<br><figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">menu</span>:</span><br><span class="line">  关于: /<span class="keyword">about</span></span><br></pre></td></tr></table></figure></p>
+<p>3、到<code>source/about/index.md</code>中写关于你的内容。</p>
+<h2 id="导航栏添加”RSS”"><a href="#导航栏添加”RSS”" class="headerlink" title="导航栏添加”RSS”"></a>导航栏添加”RSS”</h2><p>1、安装RSS插件到本地：<code>npm install hexo-generator-feed</code><br>2、开启RSS功能：编辑hexo/_config.yml，添加如下代码：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line"><span class="bullet">- </span>hexo-generator-feed</span><br></pre></td></tr></table></figure></p>
+<p>3、在站点添加链接<br>在<code>themes/light/_config.yml</code>中，编辑 <code>rss: /atom.xml</code>;<br>在<code>themes/light/layout/_partial/header.ejs</code>中，<code>&lt;ul&gt;&lt;/ul&gt;</code>之间，添加代码<code>&lt;li&gt;&lt;a href=&quot;/atom.xml&quot;&gt;RSS&lt;/a&gt;&lt;/li&gt;</code>。</p>
+<h2 id="添加sitemap"><a href="#添加sitemap" class="headerlink" title="添加sitemap"></a>添加sitemap</h2><p>方法同rss类似。<br>1、安装sitemap到本地：<code>npm install hexo-generator-sitemap</code><br>2、开启sitemap功能：编辑<code>hexo/_config.yml</code>，添加如下代码：<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">plugins:</span><br><span class="line"><span class="bullet">- </span>hexo-generator-sitemap</span><br></pre></td></tr></table></figure></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>hexo命令简写<br><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">hexo clean #清除缓存 网页正常情况下可以忽略此条命令</span><br><span class="line">hexo generate  #可简写成 hexo g</span><br><span class="line">hexo deploy  #可简写成 hexo d</span><br><span class="line">hexo server  #可简写成 hexo s</span><br><span class="line">hexo new #可简写成 hexo n</span><br><span class="line"></span><br><span class="line">hexo new "postName" #新建文章</span><br><span class="line">hexo new page "pageName" #新建页面</span><br></pre></td></tr></table></figure></p>
+<p>由于hexo是基于nodejs的，所以若了解一些nodejs的用法，则有很多可以自由发挥的地方，甚至可以写一个自己的主题。<br>而作为web前端的妹子，自己的主题是一定会有的。</p>
+<p>还在不断更新中，敬请关注……    </p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/hexo/">hexo</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2015/12/30/markdown/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2015/12/29/hello-world/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

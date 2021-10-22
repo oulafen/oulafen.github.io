@@ -1,0 +1,308 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>nodejs之不可或缺的forever模块 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="nodejs 之不可或缺的 forever 模块">
+  
+  <meta name="keywords" content="forever">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="nodejs之不可或缺的forever模块">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-06-03T13:00:29.000Z"><a href="/2016/06/03/node-forever/">2016-06-03</a></time>
+      
+      
+  
+    <h1 class="title">nodejs之不可或缺的forever模块</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>官方说明<br>A simple CLI tool for ensuring that a given script runs continuously (i.e. forever).<br>一个用来持续运行一个给定脚本的简单的命令行工具<br>Github地址: <a href="https://github.com/nodejitsu/forever" target="_blank" rel="noopener">https://github.com/nodejitsu/forever</a><br><a id="more"></a></p>
+<h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><p>forever的用途就是帮我们更好的管理我们的node App服务,本质上就是在forever进程之下,创建一个node app的子进程,保证我们的服务能持续运行,帮我们自动重启服务而不需要手动重启.</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>forever 必须在全局环境下安装<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm <span class="keyword">install</span> forever -g</span><br></pre></td></tr></table></figure></p>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><ul>
+<li><p>启动</p>
+  <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="built_in">start</span> app.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定forever信息输出文件(默认它会放到<code>~/.forever/forever.log</code>)</p>
+ <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="built_in">start</span> -l <span class="keyword">forever</span>.<span class="built_in">log</span> app.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>指定app.js中的日志信息和错误日志输出文件</p>
+ <figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//  -o 就是console.log输出的信息，</span></span><br><span class="line"><span class="comment">//  -e 就是console.error输出的信息</span></span><br><span class="line">forever start -o <span class="keyword">out</span>.<span class="keyword">log</span> -<span class="keyword">e</span> <span class="keyword">err</span>.<span class="keyword">log</span> <span class="keyword">app</span>.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>追加日志，forever默认是不能覆盖上次的启动日志, 所以如果第二次启动不加-a，则会不让运行</p>
+  <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="built_in">start</span> -l <span class="keyword">forever</span>.<span class="built_in">log</span> -<span class="keyword">a</span> app.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>监听当前文件夹下的所有文件改动</p>
+  <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="built_in">start</span> -w app.js</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>显示所有运行的服务</p>
+  <figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forever <span class="built_in">list</span></span><br></pre></td></tr></table></figure>
+<p>  输出如下</p>
+  <figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@oura ~]# forever list</span><br><span class="line">info:    Forever processes running</span><br><span class="line">data:        uid  command            <span class="built_in"> script </span> forever pid   id logfile                 uptime       </span><br><span class="line">data:    [0] qnwC /usr/local/bin/node bin/www 26102   26321    /root/.forever/qnwC.log 0:1:26:10.30</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>停止守护进程</p>
+  <figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="built_in">stop</span> app.js</span><br><span class="line">//或者</span><br><span class="line"><span class="keyword">forever</span> <span class="built_in">stop</span> [uid]</span><br><span class="line">//[uid]就是<span class="keyword">forever</span> list对应查询到的启动服务里的uid(如上面的 qnwC )</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>停止所有守护进程</p>
+  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">forever stopall</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启某一个服务</p>
+  <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">forever</span> <span class="selector-tag">restart</span> <span class="selector-tag">app</span><span class="selector-class">.js</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>重启所有服务</p>
+  <figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">forever restartall</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="常见参数配置"><a href="#常见参数配置" class="headerlink" title="常见参数配置"></a>常见参数配置</h2><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">-m <span class="string">MAX:</span> 运行指定脚本的次数</span><br><span class="line">-l <span class="string">LOGFILE:</span> 输出日志到LOGFILE</span><br><span class="line">-o <span class="string">OUTFILE:</span> 输出控制台信息到OUTFILE</span><br><span class="line">-e <span class="string">ERRFILE:</span> 输出控制台错误在ERRFILE</span><br><span class="line">-p <span class="string">PATH:</span> 根目录</span><br><span class="line">-c <span class="string">COMMAND:</span> 执行命令，默认是node</span><br><span class="line">-a, –<span class="string">append:</span> 合并日志</span><br><span class="line">-f, –<span class="string">fifo:</span> 流式日志输出</span><br><span class="line">-n, –<span class="string">number:</span> 日志打印行数</span><br><span class="line">–<span class="string">pidFile:</span> pid文件</span><br><span class="line">–<span class="string">sourceDir:</span> 源代码目录</span><br><span class="line">–<span class="string">minUptime:</span> 最小spinn更新时间(ms)</span><br><span class="line">–<span class="string">spinSleepTime:</span> 两次spin间隔时间</span><br><span class="line">–<span class="string">colors:</span> 控制台输出着色</span><br><span class="line">–<span class="string">plain:</span> –no-colors的别名，控制台输出无色</span><br><span class="line">-d, –<span class="string">debug:</span> debug模式</span><br><span class="line">-v, –<span class="string">verbose:</span> 打印详细输出</span><br><span class="line">-s, –<span class="string">silent:</span> 不打印日志和错误信息</span><br><span class="line">-w, –<span class="string">watch:</span> 监控文件改变</span><br><span class="line">–<span class="string">watchDirectory:</span> 监控顶级目录</span><br><span class="line">–<span class="string">watchIgnore:</span> 通过模式匹配忽略监控</span><br><span class="line">-h, –<span class="string">help:</span> 命令行帮助信息</span><br></pre></td></tr></table></figure>
+<h2 id="forever-利用别名启动-node-服务"><a href="#forever-利用别名启动-node-服务" class="headerlink" title="forever 利用别名启动 node 服务"></a>forever 利用别名启动 node 服务</h2><h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><p>当我们所在的测试环境部署了好几个应用,前面用 nginx 做反向代理.<br>而我们的 node.js 服务器启动文件一般都喜欢用 app.js 或者 index.js.</p>
+<p>那么问题就快要出现了.<br>当如下所示, 有多个同名的启动文件, 并想要去掉其中的某一个node服务时,怎么办?<br>执行<code>forever stop app.js</code>? 这样只会全部关掉,死无全尸.<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@oura ~]<span class="meta"># forever list</span></span><br><span class="line"><span class="symbol">info:</span>    Forever processes running</span><br><span class="line"><span class="symbol">data:</span>        uid    command             script     forever pid  logfile                   uptime</span><br><span class="line"><span class="symbol">data:</span>    [<span class="number">0</span>] <span class="number">0</span>D4G   <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/bin/</span>node app.js   <span class="number">537</span>     <span class="number">3099</span> <span class="meta-keyword">/root/</span>.forever/a.log   <span class="number">3</span>:<span class="number">21</span>:<span class="number">28</span>:<span class="number">21.634</span></span><br><span class="line"><span class="symbol">data:</span>    [<span class="number">1</span>] FT5X   <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/bin/</span>node app.js <span class="number">1898</span>    <span class="number">1902</span> <span class="meta-keyword">/root/</span>.forever/b.log   <span class="number">90</span>:<span class="number">15</span>:<span class="number">23</span>:<span class="number">19.11</span></span><br><span class="line"><span class="symbol">data:</span>    [<span class="number">2</span>] Cr8D   <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/bin/</span>node app.js     <span class="number">2288</span>    <span class="number">4915</span> <span class="meta-keyword">/root/</span>.forever/c.log   <span class="number">2</span>:<span class="number">10</span>:<span class="number">2</span>:<span class="number">58.797</span></span><br><span class="line"><span class="symbol">data:</span>    [<span class="number">3</span>] itbilu <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/bin/</span>node app.js <span class="number">6893</span>    <span class="number">6895</span> <span class="meta-keyword">/root/</span>.forever/d.log <span class="number">61</span>:<span class="number">21</span>:<span class="number">5</span>:<span class="number">36.54</span></span><br></pre></td></tr></table></figure></p>
+<p>遇到如上的情况时最好的解决办法就是给每个服务起个独一无二的别名 (别名-其实就是linux下的一个软链接, 也就是给启动文件设置一个软链接).</p>
+<p>下面所示的软链接会按数字顺序排列,我们在生产环境中,最好起名和业务相关,便于一眼识别.<br>进入node服务1目录<br><figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ln</span> -s ./app.js node_noe</span><br></pre></td></tr></table></figure></p>
+<p>这时在目录下回多出来一个 软链接 node_noe ,然后用 forever 启动它<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="built_in">start</span> node_noe</span><br></pre></td></tr></table></figure></p>
+<p>依次进入 node 服务2目录 …..设置完后启动,最后你的 forever list 是这样的:<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@oura ~]<span class="meta"># forever list</span></span><br><span class="line"><span class="symbol">info:</span>    Forever processes running</span><br><span class="line"><span class="symbol">data:</span>        uid    command             script     forever pid  logfile                   uptime</span><br><span class="line"><span class="symbol">data:</span>    [<span class="number">0</span>] <span class="number">0</span>D4G   <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/bin/</span>node node_one   <span class="number">537</span>     <span class="number">3099</span> <span class="meta-keyword">/root/</span>.forever/a.log   <span class="number">3</span>:<span class="number">21</span>:<span class="number">28</span>:<span class="number">21.634</span></span><br><span class="line"><span class="symbol">data:</span>    [<span class="number">1</span>] FT5X   <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/bin/</span>node node_two <span class="number">1898</span>    <span class="number">1902</span> <span class="meta-keyword">/root/</span>.forever/b.log   <span class="number">90</span>:<span class="number">15</span>:<span class="number">23</span>:<span class="number">19.11</span></span><br><span class="line"><span class="symbol">data:</span>    [<span class="number">2</span>] Cr8D   <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/bin/</span>node node_three     <span class="number">2288</span>    <span class="number">4915</span> <span class="meta-keyword">/root/</span>.forever/c.log   <span class="number">2</span>:<span class="number">10</span>:<span class="number">2</span>:<span class="number">58.797</span></span><br><span class="line"><span class="symbol">data:</span>    [<span class="number">3</span>] itbilu <span class="meta-keyword">/usr/</span>local<span class="meta-keyword">/bin/</span>node node_four    <span class="number">6895</span> <span class="meta-keyword">/root/</span>.forever/d.log <span class="number">61</span>:<span class="number">21</span>:<span class="number">5</span>:<span class="number">36.54</span></span><br></pre></td></tr></table></figure></p>
+<p>这时Leader 再让我们去停止某个业务的 node 服务时,就不必手慌脚乱了.<br>通过别名一眼识别针对的是哪个服务.然后<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forever</span> <span class="built_in">stop</span> node_one</span><br></pre></td></tr></table></figure></p>
+<p>这样就万事大吉了, O(∩_∩)O哈哈~</p>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/node/">node</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/06/12/grunt/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2016/06/03/node-centos/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>

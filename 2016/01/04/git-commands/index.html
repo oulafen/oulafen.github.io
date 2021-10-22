@@ -1,0 +1,324 @@
+<!DOCTYPE HTML>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  <meta name="baidu-site-verification" content="ZE3XLdQP22">
+  
+  <title>git 命令速查 | Oulafen&#39;s blog</title>
+  <meta name="author" content="oulafen">
+  
+  <meta name="description" content="这篇博客将记录使用 git 过程中常用的命令，以及 git 出现问题时的解决方案。">
+  
+  <meta name="keywords" content="git命令">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="git 命令速查">
+  <meta property="og:site_name" content="Oulafen&#39;s blog">
+
+  
+    <meta property="og:image" content="undefined">
+  
+
+  <link href="/favicon.ico" rel="shortcut icon">
+  <link rel="alternate" href="/atom.xml" title="Oulafen&#39;s blog" type="application/atom+xml">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+  <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+  
+
+</head>
+</html>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Oulafen&#39;s blog</a></h1>
+  <h2><a href="/">Stay hungry, stay foolish...</a></h2>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+    <li> <a href="/atom.xml">RSS</a> </li>
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time datetime="2016-01-04T07:03:07.000Z"><a href="/2016/01/04/git-commands/">2016-01-04</a></time>
+      
+      
+  
+    <h1 class="title">git 命令速查</h1>
+  
+
+    </header>
+    <div class="entry">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>这篇博客将记录使用 git 过程中常用的命令，以及 git 出现问题时的解决方案。<br><a id="more"></a></p>
+<h2 id="速查表"><a href="#速查表" class="headerlink" title="速查表"></a>速查表</h2><p><img alt="git常用命令速查表" style="width:100%" src="http://statics.oulafen.com/gitblog-git-command.jpg"></p>
+<h2 id="常用"><a href="#常用" class="headerlink" title="常用"></a>常用</h2><h3 id="配置-git-账户："><a href="#配置-git-账户：" class="headerlink" title="配置 git 账户："></a><strong>配置 git 账户：</strong></h3><p>配置git 告诉其他开发者你是谁，怎么联系你。这些信息可以是全局的，也可以在单个项目中单独设置。<br>全局的配置文件位于<code>~/.gitconfig</code><br>项目的配置文件位于<code>&lt;project&gt;/.git/config</code></p>
+<ul>
+<li><p>全局配置</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name 'yourname'</span><br><span class="line">git config --global user.email 'name.email.com'</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>单个项目配置</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --local user.name 'yourname'</span><br><span class="line">git config --local user.email 'name.email.com'</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="密钥种种："><a href="#密钥种种：" class="headerlink" title="密钥种种："></a><strong>密钥种种：</strong></h3><ul>
+<li><p>1、查看是否有ssh key设置，进入.ssh目录，看是否有公钥和私钥文件。</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd ~/.ssh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>2、生成密钥</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C "oulafen.email.com"</span><br></pre></td></tr></table></figure>
+<p>连续三个回车，如果不需要密码的话。<br>最终得到两个文件：<code>id_rsa</code>和<code>id_rsa.pub</code>，其中<code>id_rsa.pub</code>是公钥，远程git服务器要求添加的ssh key就是这个文件里的内容。<br>windows下默认生成目录在<code>/c/Users/xxxx_000/.ssh/</code>或者<code>/c/Users/pc/.ssh/</code>中。<br>mac下默认生成目录在<code>~/.ssh/</code></p>
+</li>
+<li><p>3、测试ssh key是否配置成功</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="查看"><a href="#查看" class="headerlink" title="查看"></a><strong>查看</strong></h3><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">git status  #查看当前版本状态（是否修改） </span><br><span class="line"></span><br><span class="line">git log     # 显示提交日志 </span><br><span class="line">git log -1    # 显示1行日志  -n为n行</span><br><span class="line">git log --stat    # 显示提交日志及相关变动文件 </span><br><span class="line"></span><br><span class="line">git show dfb02    # 可只用commitid的前几位 </span><br><span class="line">git show HEAD     # 显示HEAD提交日志 </span><br><span class="line">git show HEAD^    # 显示HEAD的父（上一个版本）的提交日志 ^^为上两个版本 ^5为上5个版本</span><br></pre></td></tr></table></figure>
+<h3 id="分支"><a href="#分支" class="headerlink" title="分支"></a><strong>分支</strong></h3><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">git branch      #显示本地分支</span><br><span class="line">git branch -a   #显示所有分支</span><br><span class="line">git branch -r   #显示所有原创分支</span><br><span class="line">git branch --merged      #显示所有已合并到当前分支的分支 </span><br><span class="line">git branch --no-merged   #显示所有未合并到当前分支的分支 </span><br><span class="line">git branch -m master master<span class="emphasis">_copy   #本地分支master改名为master_</span>copy</span><br><span class="line"> </span><br><span class="line">git branch -d branchname    #branchname（本分支修改已合并到其他分支）</span><br><span class="line">git branch -D branchname    #强制删除分支branchname</span><br><span class="line"></span><br><span class="line">git checkout -b master<span class="emphasis">_copy   #从当前分支创建新分支master_</span>copy并检出 </span><br><span class="line">git merge branchname       #合并branchname分支至当前分支 </span><br><span class="line">git push origin master<span class="emphasis">_copy   #将当前分支push到远程master_</span>copy分支，若没有，则新建 </span><br><span class="line"></span><br><span class="line">git fetch            #获取所有远程分支（不更新本地分支，另需merge）</span><br><span class="line">git fetch --prune    #获取所有原创分支并清除服务器上已删掉的分支</span><br><span class="line">git pull origin master   #获取远程分支master并merge到当前分支</span><br></pre></td></tr></table></figure>
+<h3 id="图形化显示项目历史"><a href="#图形化显示项目历史" class="headerlink" title="图形化显示项目历史"></a><strong>图形化显示项目历史</strong></h3><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gitk</span><br></pre></td></tr></table></figure>
+<p><img style="width:100%" src="http://statics.oulafen.com/gitblog-git-gitk.jpg"></p>
+<h3 id="放弃修改-及-版本回退"><a href="#放弃修改-及-版本回退" class="headerlink" title="放弃修改 及 版本回退"></a><strong>放弃修改 及 版本回退</strong></h3><figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">git checkout bb.txt    #bb.txt文件修改了并被git管理，可恢复到上一次没被修改前的状态</span><br><span class="line">git checkout           #git放弃对当前文件夹的所有文件的修改</span><br><span class="line"></span><br><span class="line">git reset HEAD filename  #从暂存区中移除文件</span><br><span class="line">git reset --hard HEAD~3  #将最新的3次提交全部重置，就像没有提交过一样</span><br><span class="line">git reset --hard &#123;版本号&#125;  #彻底回退到指定版本</span><br></pre></td></tr></table></figure>
+<h3 id="对新建项目的123操作"><a href="#对新建项目的123操作" class="headerlink" title="对新建项目的123操作"></a><strong>对新建项目的123操作</strong></h3><ul>
+<li>1、在远程git库上新建项目test，以库<a href="http://git.oschina.net/" target="_blank" rel="noopener">git.oschina</a>为例</li>
+<li><p>2、复制项目链接 </p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone git@git.oschina.net:oulafen/test.git</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>3、本地执行</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cd test</span><br><span class="line">git init</span><br><span class="line"><span class="section">#然后新建 .gitignore 文件，写上自己想过滤的文件</span></span><br><span class="line">git add .</span><br><span class="line">git commit -m  'first commit and add gitignore'</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><ul>
+<li><p>常规的提交流程是什么？</p>
+<ul>
+<li><code>git push</code>之前进行<code>git pull</code>操作，意思就是将本地修改提交到线上之前先将线上别人已提交的修改同步到本地，这样一般不会有冲突，pull的位置如下：<figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span> .    <span class="comment">//添加所有修改文件（不包括删除操作），若有删除的文件需执行 git add -u</span></span><br><span class="line">git commit -m <span class="string">'balabala'</span></span><br><span class="line">git pull</span><br><span class="line">git push</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p><code>git pull</code>更新本地代码时出现冲突怎么办？</p>
+<p>使用git stash命令进行处理</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git stash   #先将本地修改存储起来</span><br><span class="line">git stash list     #查看保存的信息</span><br></pre></td></tr></table></figure>
+<p><img style="width:100%" src="http://statics.oulafen.com/gitblog-git-stash.jpg"><br>其中<code>stash@{0}</code>是刚才保存的标记。</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git pull       #更新代码</span><br><span class="line">git stash pop  #还原暂存的内容</span><br></pre></td></tr></table></figure>
+<p>此时，系统会有类似<code>Auto-merging ...balabala...</code>的提示，意思就是系统自动合并修改的内容，但是其中有冲突，需要解决其中的冲突。<br>打开冲突的文件，会看到如下类似的内容</p>
+<figure class="highlight md"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;&lt;&lt;&lt;&lt;&lt;&lt; <span class="attr">Updates</span> <span class="attr">upstream</span></span></span></span><br><span class="line"><span class="xml">   balabala</span></span><br><span class="line"><span class="xml">=======</span></span><br><span class="line"><span class="xml">   balabala</span></span><br><span class="line"><span class="xml">&gt;</span>&gt;&gt;&gt;&gt;&gt;&gt; Stashed changes</span><br></pre></td></tr></table></figure>
+<p>其中<code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream</code> 和<code>=======</code>之间的内容就是pull下来的内容，<br><code>=======</code>和<code>&gt;&gt;&gt;&gt;&gt;&gt;&gt; stashed changes</code>之间的内容就是本地修改的内容。<br>碰到这种情况，git也不知道哪行内容是需要的，所以要自行确定需要的内容。<br>将不需要的内容删掉，然后正常的提交就可以了。</p>
+</li>
+<li><p>执行完<code>git push</code>之后，报警<code>warning: push.default is unset; its implicit value has changed in Git 2.0 from &#39;matching&#39; to &#39;simple&#39;.</code>,具体如下：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">warning: push.default is unset; its implicit value has changed <span class="keyword">in</span></span><br><span class="line">Git 2.0 <span class="keyword">from</span> <span class="string">'matching'</span> <span class="keyword">to</span> <span class="string">'simple'</span>. <span class="keyword">To</span> squelch this message</span><br><span class="line"><span class="keyword">and</span> maintain the traditional behavior, use:</span><br><span class="line"></span><br><span class="line">  git<span class="built_in"> config </span>--global push.default matching</span><br><span class="line"></span><br><span class="line"><span class="keyword">To</span> squelch this message <span class="keyword">and</span> adopt the new behavior now, use:</span><br><span class="line"></span><br><span class="line">  git<span class="built_in"> config </span>--global push.default simple</span><br><span class="line"></span><br><span class="line">When push.default is <span class="builtin-name">set</span> <span class="keyword">to</span> <span class="string">'matching'</span>, git will push local branches</span><br><span class="line"><span class="keyword">to</span> the remote branches that already exist with the same name.</span><br><span class="line"></span><br><span class="line">Since Git 2.0, Git defaults <span class="keyword">to</span> the more conservative <span class="string">'simple'</span></span><br><span class="line">behavior, which only pushes the current branch <span class="keyword">to</span> the corresponding</span><br><span class="line">remote branch that <span class="string">'git pull'</span> uses <span class="keyword">to</span> update the current branch.</span><br><span class="line"></span><br><span class="line"><span class="built_in">..</span>.</span><br></pre></td></tr></table></figure>
+<p>  根据提示，可进行两个操作 <code>git config --global push.default matching</code> 或者 <code>git config --global push.default simple</code>，两者区别如下：</p>
+<ul>
+<li>前者<code>git push</code>会把你本地所有分支push到名称相对应的远程主机上。这意味着可能你会在不经意间push一些你原本没打算push的分支。</li>
+<li>后者<code>git push</code>仅仅把当前所在分支push到从当初<code>git pull</code> pull下来的那个对应分支上</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer>
+      
+        
+  
+  <div class="categories">
+    <a href="/categories/blog/">blog</a>
+  </div>
+
+        
+  
+  <div class="tags">
+    <a href="/tags/git/">git</a>
+  </div>
+
+        <div class="alignright">
+          <div class="bdsharebuttonbox">
+    <a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_weixin"  data-cmd="weixin" title="分享到微信"></a>
+</div>
+<script>window._bd_share_config = {
+        "common": {
+            "bdSnsKey": {},
+            "bdText": "",
+            "bdMini": "2",
+            "bdMiniList": false,
+            "bdPic": "",
+            "bdStyle": "0",
+            "bdSize": "24"
+        },
+        "share": {},
+        "image": {"viewList": ["sqq", "qzone", "tsina", "weixin"], "viewText": "分享到：", "viewSize": "16"},
+        "selectShare": {"bdContainerClass": null, "bdSelectMiniList": ["sqq", "qzone", "tsina", "weixin"]}
+    };
+    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];
+</script>
+
+        </div>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<nav id="pagination" >
+    
+    <a href="/2016/01/06/frontend-performance/" class="alignleft prev" >上一页</a>
+    
+    
+    <a href="/2015/12/31/hexo-gitcafe-page/" class="alignright next" >下一页</a>
+    
+    <div class="clearfix"></div>
+</nav>
+
+<!-- UY BEGIN -->
+<div id="uyan_frame"></div>
+<script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2146934"></script>
+<script type="text/javascript">
+    var uyan_config = {
+        'pic':'http://statics.oulafen.com/gitblog-xiaohuangren1.jpg'
+    };
+</script>
+<!-- UY END -->
+
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <h3 class="title">分类</h3>
+  <ul class="entry">
+  
+    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">标签</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
+  
+    <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/git/">git</a><small>3</small></li>
+  
+    <li><a href="/tags/hexo/">hexo</a><small>3</small></li>
+  
+    <li><a href="/tags/mac/">mac</a><small>3</small></li>
+  
+    <li><a href="/tags/node/">node</a><small>6</small></li>
+  
+    <li><a href="/tags/sql/">sql</a><small>1</small></li>
+  
+    <li><a href="/tags/vue/">vue</a><small>3</small></li>
+  
+    <li><a href="/tags/webpack/">webpack</a><small>1</small></li>
+  
+    <li><a href="/tags/前端/">前端</a><small>8</small></li>
+  
+    <li><a href="/tags/杂文/">杂文</a><small>1</small></li>
+  
+    <li><a href="/tags/构建工具/">构建工具</a><small>1</small></li>
+  
+    <li><a href="/tags/标记语言/">标记语言</a><small>1</small></li>
+  
+    <li><a href="/tags/正则/">正则</a><small>1</small></li>
+  
+    <li><a href="/tags/环境/">环境</a><small>2</small></li>
+  
+    <li><a href="/tags/笔记/">笔记</a><small>3</small></li>
+  
+  </ul>
+</div>
+
+
+  
+<div class="widget tag">
+  <h3 class="title">最新文章</h3>
+  <ul class="entry">
+    
+      <li>
+        <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/25/browser-url/">从输入URL到页面展示，这中间发生了什么</a>
+      </li>
+    
+      <li>
+        <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
+      </li>
+    
+      <li>
+        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
+      </li>
+    
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2015 - 2021 <span style="padding: 0 0 0 5px;">oulafen</span><span style="padding: 0 5px;">·</span> powered by hexo
+  
+</div>
+<div class="clearfix"></div>
+<script>
+
+    (function(){
+
+        var bp = document.createElement('script');
+
+        bp.src = '//push.zhanzhang.baidu.com/push.js';
+
+        var s = document.getElementsByTagName("script")[0];
+
+        s.parentNode.insertBefore(bp, s);
+
+    })();
+
+</script>
+</footer>
+  <script src="/js/jquery.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
+</script>
+
+</body>
+</html>
