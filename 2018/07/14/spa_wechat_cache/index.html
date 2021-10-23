@@ -65,7 +65,7 @@
     </header>
     <div class="entry">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>进行公众号开发的同学肯定遇到过这样的问题，新上线的功能，重新请求时，页面没有更新。<br>本人使用VUE开发的单页面应用，就是如此，问题虽小却棘手。<br>如何解决微信缓存问题，又不用手动更改版本号，实现自动化生成发布文件呢？</p>
+        <p>进行公众号开发的同学肯定遇到过这样的问题，新上线的功能，重新请求时，页面没有更新。<br>本人使用VUE开发的单页面应用，就是如此，问题虽小却棘手。<br>如何解决微信缓存问题，又不用手动更改版本号，实现自动化生成发布文件呢？</p>
 <a id="more"></a>
 <h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>项目背景：</p>
 <pre><code>基于vue-cli生成的webpack-sample项目
@@ -85,7 +85,7 @@
   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//...</span></span><br><span class="line">output: &#123;</span><br><span class="line">    path: path.resolve(__dirname, <span class="string">'./dist'</span>),</span><br><span class="line">    filename: <span class="string">`[name]-<span class="subst">$&#123;<span class="built_in">Date</span>.parse(<span class="keyword">new</span> <span class="built_in">Date</span>())&#125;</span>.build.js`</span>, <span class="comment">//在原来的名字后面加了时间戳，每次build时都会发生变化</span></span><br><span class="line">    chunkFilename: <span class="string">'chunts/[name]-[chunkhash:8].js'</span></span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">//...</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>针对第二点，可以通过<code>html-webpack-plugin</code>这个官方插件解决<br>  修改webpack配置</p>
-  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> HTMLWebpackPlugin = <span class="built_in">require</span>(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> HTMLWebpackPlugin(&#123;</span><br><span class="line">          filename: <span class="string">'index.html'</span>,            <span class="comment">//自动在dist目录下生成入口文件的名称（不能直接生成到项目根目录下）</span></span><br><span class="line">          template: <span class="string">'./index_template.html'</span>, <span class="comment">//以根目录下的`index_template.html`文件为模板</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> HTMLWebpackPlugin = require(<span class="string">'html-webpack-plugin'</span>);</span><br><span class="line"><span class="comment">//...</span></span><br><span class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">    plugins: [</span><br><span class="line">        <span class="keyword">new</span> HTMLWebpackPlugin(&#123;</span><br><span class="line">          filename: <span class="string">'index.html'</span>,            <span class="comment">//自动在dist目录下生成入口文件的名称（不能直接生成到项目根目录下）</span></span><br><span class="line">          template: <span class="string">'./index_template.html'</span>, <span class="comment">//以根目录下的`index_template.html`文件为模板</span></span><br><span class="line">        &#125;),</span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>针对第三点，下面稍微解释下为什么会有这个问题</p>
 <p>  本地<code>npm run dev</code>开发时，<code>webpack-dev-server</code>默认是以项目根目录下的<code>index.html</code>为项目入口文件，除了手动更改外，请求的静态文件是不变的；<br>  而之前的两点中重中之重是<strong>变化的文件名称</strong>，这样就找不到入口js文件了。</p>
@@ -186,7 +186,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+    <li><a href="/categories/blog/">blog</a><small>39</small></li>
   
   </ul>
 </div>
@@ -200,6 +200,8 @@
     <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
   
     <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/code/">code</a><small>2</small></li>
   
     <li><a href="/tags/git/">git</a><small>3</small></li>
   
@@ -239,6 +241,14 @@
   <ul class="entry">
     
       <li>
+        <a href="/2021/06/03/code-promise/">造轮子之Promise</a>
+      </li>
+    
+      <li>
+        <a href="/2021/06/01/code-vue3/">造轮子之Vue3</a>
+      </li>
+    
+      <li>
         <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
       </li>
     
@@ -248,14 +258,6 @@
     
       <li>
         <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
       </li>
     
   </ul>

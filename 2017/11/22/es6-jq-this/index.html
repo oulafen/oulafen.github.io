@@ -65,7 +65,7 @@
     </header>
     <div class="entry">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在es6里使用jquery时，习惯用es5中直接获取dom元素，如<code>$(&#39;selector&#39;)</code>, 绑定<code>click</code>或<code>hover</code>等事件; 若你也追求潮流，在选择器事件中使用箭头函数来定义，并用到<code>$(this)</code>的话， 那一定像我一样遇到了小小的困扰吧。<br><a id="more"></a></p>
+        <p>在es6里使用jquery时，习惯用es5中直接获取dom元素，如<code>$(&#39;selector&#39;)</code>, 绑定<code>click</code>或<code>hover</code>等事件; 若你也追求潮流，在选择器事件中使用箭头函数来定义，并用到<code>$(this)</code>的话， 那一定像我一样遇到了小小的困扰吧。<br><a id="more"></a></p>
 <h2 id="问题重现"><a href="#问题重现" class="headerlink" title="问题重现"></a>问题重现</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'[data-action="imgQRCodeCtrl"]'</span>).hover(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            !Base.browser.mobile &amp;&amp; $(<span class="keyword">this</span>).find(<span class="string">'.qr-code'</span>).css(&#123;</span><br><span class="line">                <span class="string">'height'</span>: ( $(<span class="keyword">this</span>).find(<span class="string">'.img'</span>).height() + <span class="number">2</span> ) + <span class="string">'px'</span>,</span><br><span class="line">                <span class="string">'opacity'</span>: <span class="number">1</span>,</span><br><span class="line">                <span class="string">'z-index'</span>: <span class="number">1</span></span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;, <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            $(<span class="keyword">this</span>).find(<span class="string">'.qr-code'</span>).css(&#123;<span class="string">'opacity'</span>: <span class="number">0</span>, <span class="string">'z-index'</span>: <span class="number">-1</span>&#125;);</span><br><span class="line">        &#125;)</span><br><span class="line">        .click(<span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">if</span>(Base.browser.mobile)&#123;</span><br><span class="line">                location.href = $(<span class="keyword">this</span>).data(<span class="string">'href'</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br></pre></td></tr></table></figure>
 <p>乍一看，这段代码没什么问题，逻辑也很简单，就是在所有属性有<code>data-action=&quot;imgQRCodeCtrl&quot;</code>的列表元素上绑定<code>hover</code>及<code>click</code>事件，实现pc端hover时能够使内部的一个块显示或隐藏，移动端点击时获取当前属性上的href并进行跳转；</p>
 <p>当然so easy，在过去的es5上按这种逻辑写完全么有问题；but ES6里解析后，会重新定义this，</p>
@@ -177,7 +177,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+    <li><a href="/categories/blog/">blog</a><small>39</small></li>
   
   </ul>
 </div>
@@ -191,6 +191,8 @@
     <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
   
     <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/code/">code</a><small>2</small></li>
   
     <li><a href="/tags/git/">git</a><small>3</small></li>
   
@@ -230,6 +232,14 @@
   <ul class="entry">
     
       <li>
+        <a href="/2021/06/03/code-promise/">造轮子之Promise</a>
+      </li>
+    
+      <li>
+        <a href="/2021/06/01/code-vue3/">造轮子之Vue3</a>
+      </li>
+    
+      <li>
         <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
       </li>
     
@@ -239,14 +249,6 @@
     
       <li>
         <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
       </li>
     
   </ul>

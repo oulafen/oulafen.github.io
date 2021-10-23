@@ -65,10 +65,10 @@
     </header>
     <div class="entry">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>canvas自身的api里没有绘制虚线的功能, 本片记录使用canvas绘制虚线的方法.<br><a id="more"></a></p>
+        <p>canvas自身的api里没有绘制虚线的功能, 本片记录使用canvas绘制虚线的方法.<br><a id="more"></a></p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>定义:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="built_in">window</span>.CanvasRenderingContext2D &amp;&amp; CanvasRenderingContext2D.prototype.lineTo) &#123;</span><br><span class="line">    CanvasRenderingContext2D.prototype.dashedLine = <span class="function"><span class="keyword">function</span> (<span class="params">x, y, x2, y2, dashArray</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (!dashArray) dashArray = [<span class="number">5</span>, <span class="number">5</span>];</span><br><span class="line">        <span class="keyword">var</span> dashCount = dashArray.length;</span><br><span class="line">        <span class="keyword">this</span>.moveTo(x, y);</span><br><span class="line">        <span class="keyword">var</span> dx = (x2 - x), dy = (y2 - y);</span><br><span class="line">        <span class="keyword">var</span> slope = dy / dx;</span><br><span class="line">        <span class="keyword">var</span> distRemaining = <span class="built_in">Math</span>.sqrt(dx * dx + dy * dy);</span><br><span class="line">        <span class="keyword">var</span> dashIndex = <span class="number">0</span>, draw = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">while</span> (distRemaining &gt;= <span class="number">0.1</span> &amp;&amp; dashIndex &lt; <span class="number">10000</span>) &#123;</span><br><span class="line">            <span class="keyword">var</span> dashLength = dashArray[dashIndex++ % dashCount];</span><br><span class="line">            <span class="keyword">if</span> (dashLength == <span class="number">0</span>) dashLength = <span class="number">0.001</span>; <span class="comment">// Hack for Safari</span></span><br><span class="line">            <span class="keyword">if</span> (dashLength &gt; distRemaining) dashLength = distRemaining;</span><br><span class="line">            <span class="keyword">var</span> xStep = <span class="built_in">Math</span>.sqrt(dashLength * dashLength / (<span class="number">1</span> + slope * slope));</span><br><span class="line">            x += xStep</span><br><span class="line">            y += slope * xStep;</span><br><span class="line">            <span class="keyword">this</span>[draw ? <span class="string">'lineTo'</span> : <span class="string">'moveTo'</span>](x, y);</span><br><span class="line">            distRemaining -= dashLength;</span><br><span class="line">            draw = !draw;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// Ensure that the last segment is closed for proper stroking</span></span><br><span class="line">        <span class="keyword">this</span>.moveTo(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>调用:<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">dashedLine</span>(<span class="params">context, startX, startY, endX, endY</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(canvasID);</span><br><span class="line">    <span class="keyword">var</span> cxt = context;</span><br><span class="line">    <span class="keyword">var</span> dashes = [<span class="number">5</span>,<span class="number">5</span>];</span><br><span class="line">    cxt.lineWidth = <span class="string">"3"</span>;</span><br><span class="line">    cxt.lineCap = <span class="string">"round"</span>;</span><br><span class="line">    cxt.beginPath();</span><br><span class="line">    cxt.strokeStyle = <span class="string">'blue'</span>;</span><br><span class="line">    <span class="comment">//开始画虚线。</span></span><br><span class="line">    cxt.dashedLine(startX, startY, endX, endY, dashes);</span><br><span class="line">    cxt.closePath();</span><br><span class="line">    cxt.stroke();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>示例:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">'canvas'</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> context = canvas.getContext(<span class="string">'2d'</span>);</span></span><br><span class="line">		dashedLine(context, 0 ,0, 200, 200);</span><br><span class="line">	&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>示例:<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">   <span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">'canvas'</span> <span class="attr">width</span>=<span class="string">"500"</span> <span class="attr">height</span>=<span class="string">"500"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">	<span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">		<span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</span></span><br><span class="line"><span class="actionscript">		<span class="keyword">var</span> context = canvas.getContext(<span class="string">'2d'</span>);</span></span><br><span class="line">		dashedLine(context, 0 ,0, 200, 200);</span><br><span class="line">	&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -147,7 +147,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+    <li><a href="/categories/blog/">blog</a><small>39</small></li>
   
   </ul>
 </div>
@@ -161,6 +161,8 @@
     <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
   
     <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/code/">code</a><small>2</small></li>
   
     <li><a href="/tags/git/">git</a><small>3</small></li>
   
@@ -200,6 +202,14 @@
   <ul class="entry">
     
       <li>
+        <a href="/2021/06/03/code-promise/">造轮子之Promise</a>
+      </li>
+    
+      <li>
+        <a href="/2021/06/01/code-vue3/">造轮子之Vue3</a>
+      </li>
+    
+      <li>
         <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
       </li>
     
@@ -209,14 +219,6 @@
     
       <li>
         <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
       </li>
     
   </ul>

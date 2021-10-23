@@ -65,7 +65,7 @@
     </header>
     <div class="entry">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>本文旨在解决js中插入dom时的html复用问题<br><a id="more"></a></p>
+        <p>本文旨在解决js中插入dom时的html复用问题<br><a id="more"></a></p>
 <h2 id="正文"><a href="#正文" class="headerlink" title="正文"></a>正文</h2><p>如下图这样：<br><img width="100%" src="http://statics.oulafen.com/gitblog-tpl-add-member.jpg"><br>点击添加新成员按钮时，在页面中再插入一块成员表单，一般的做法可能是这样的<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.box'</span>).append(<span class="string">'&lt;div class="row"&gt;&lt;div class="col-xs-2 form-label"&gt;成员姓名&lt;/div&gt;&lt;div class="col-xs-5"&gt;&lt;input class="form-control" type="text" name="" &gt;&lt;/div&gt;&lt;div class="col-xs-5 tip J-tip"&gt;&lt;div class="tip-box"&gt;&lt;p class="J-tip-content"&gt;&lt;/p&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;'</span>);</span><br></pre></td></tr></table></figure></p>
 <p>尤其是内容很长并且还有动态变化的内容时，想想都头疼吧。</p>
 <p><strong>重点 重点 重点：</strong><br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">window</span>.tpl = (<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> cache = &#123;&#125;;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">tmpl</span>(<span class="params">str, data</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> fn = !<span class="regexp">/\W/</span>.test(str) ?</span><br><span class="line">            cache[str] = cache[str] ||</span><br><span class="line">                tpl(<span class="built_in">document</span>.getElementById(str).innerHTML) :</span><br><span class="line">            <span class="keyword">new</span> <span class="built_in">Function</span>(<span class="string">"obj"</span>,</span><br><span class="line">                <span class="string">"var p=[],print=function()&#123;p.push.apply(p,arguments);&#125;;"</span> +</span><br><span class="line">                <span class="string">"with(obj)&#123;p.push('"</span> +</span><br><span class="line">                str</span><br><span class="line">                    .replace(<span class="regexp">/[\r\t\n]/g</span>, <span class="string">" "</span>)</span><br><span class="line">                    .split(<span class="string">"&lt;%"</span>).join(<span class="string">"\t"</span>)</span><br><span class="line">                    .replace(<span class="regexp">/((^|%&gt;)[^\t]*)'/g</span>, <span class="string">"$1\r"</span>)</span><br><span class="line">                    .replace(<span class="regexp">/\t=(.*?)%&gt;/g</span>, <span class="string">"',$1,'"</span>)</span><br><span class="line">                    .split(<span class="string">"\t"</span>).join(<span class="string">"');"</span>)</span><br><span class="line">                    .split(<span class="string">"%&gt;"</span>).join(<span class="string">"p.push('"</span>)</span><br><span class="line">                    .split(<span class="string">"\r"</span>).join(<span class="string">"\\'"</span>)</span><br><span class="line">                + <span class="string">"');&#125;return p.join('');"</span>);</span><br><span class="line">        <span class="keyword">return</span> data ? fn(data) : fn;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure></p>
@@ -166,7 +166,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+    <li><a href="/categories/blog/">blog</a><small>39</small></li>
   
   </ul>
 </div>
@@ -180,6 +180,8 @@
     <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
   
     <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/code/">code</a><small>2</small></li>
   
     <li><a href="/tags/git/">git</a><small>3</small></li>
   
@@ -219,6 +221,14 @@
   <ul class="entry">
     
       <li>
+        <a href="/2021/06/03/code-promise/">造轮子之Promise</a>
+      </li>
+    
+      <li>
+        <a href="/2021/06/01/code-vue3/">造轮子之Vue3</a>
+      </li>
+    
+      <li>
         <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
       </li>
     
@@ -228,14 +238,6 @@
     
       <li>
         <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
       </li>
     
   </ul>

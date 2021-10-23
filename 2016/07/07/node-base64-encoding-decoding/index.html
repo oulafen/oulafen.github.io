@@ -65,7 +65,7 @@
     </header>
     <div class="entry">
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在nodejs中怎么将字符串转化为base64呢? 是不是也像php中的<code>base64_encode()</code>一样简单呢?<br><a id="more"></a><br>作为<code>javascript</code>的nodejs, 对于编码字符串有个更合乎逻辑的方法, 而不是设置各种不一样的全局方法.</p>
+        <p>在nodejs中怎么将字符串转化为base64呢? 是不是也像php中的<code>base64_encode()</code>一样简单呢?<br><a id="more"></a><br>作为<code>javascript</code>的nodejs, 对于编码字符串有个更合乎逻辑的方法, 而不是设置各种不一样的全局方法.</p>
 <p>入题吧, 看如下的实现方法:</p>
 <h3 id="编码-encode-将正常的字符串转为base64串"><a href="#编码-encode-将正常的字符串转为base64串" class="headerlink" title="编码(encode)-将正常的字符串转为base64串"></a>编码(encode)-将正常的字符串转为base64串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="keyword">new</span> Buffer(<span class="string">'JavaScript'</span>);</span><br><span class="line"><span class="keyword">var</span> base_str = str.toString(<span class="string">'base64'</span>);</span><br><span class="line"><span class="comment">// base_str = SmF2YVNjcmlwdA==</span></span><br></pre></td></tr></table></figure>
 <h3 id="解码-decode-将base64串转为正常的字符串"><a href="#解码-decode-将base64串转为正常的字符串" class="headerlink" title="解码(decode)-将base64串转为正常的字符串"></a>解码(decode)-将base64串转为正常的字符串</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> base_str = <span class="keyword">new</span> Buffer(<span class="string">'SmF2YVNjcmlwdA=='</span>, <span class="string">'base64'</span>)</span><br><span class="line"><span class="keyword">var</span> str = base_str.toString();</span><br><span class="line"><span class="comment">// str = JavaScript</span></span><br></pre></td></tr></table></figure>
@@ -162,7 +162,7 @@
   <h3 class="title">分类</h3>
   <ul class="entry">
   
-    <li><a href="/categories/blog/">blog</a><small>37</small></li>
+    <li><a href="/categories/blog/">blog</a><small>39</small></li>
   
   </ul>
 </div>
@@ -176,6 +176,8 @@
     <li><a href="/tags/ES6/">ES6</a><small>1</small></li>
   
     <li><a href="/tags/browser/">browser</a><small>3</small></li>
+  
+    <li><a href="/tags/code/">code</a><small>2</small></li>
   
     <li><a href="/tags/git/">git</a><small>3</small></li>
   
@@ -215,6 +217,14 @@
   <ul class="entry">
     
       <li>
+        <a href="/2021/06/03/code-promise/">造轮子之Promise</a>
+      </li>
+    
+      <li>
+        <a href="/2021/06/01/code-vue3/">造轮子之Vue3</a>
+      </li>
+    
+      <li>
         <a href="/2020/07/30/browser-render/">浏览器渲染流程</a>
       </li>
     
@@ -224,14 +234,6 @@
     
       <li>
         <a href="/2020/07/23/browser-history/">chrome浏览器的架构演进</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/16/github-pages-link-https/">Github Pages博客域名如何设置HTTPS</a>
-      </li>
-    
-      <li>
-        <a href="/2018/07/14/spa_wechat_cache/">解决公众号SPA的微信缓存问题</a>
       </li>
     
   </ul>
